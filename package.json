@@ -14,6 +14,7 @@
     "server": "json-server dataBase/index.json --port 3001 --routes dataBase/routes.json"
   },
   "dependencies": {
+    "mobx-state-tree": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Observer } from 'mobx-react-lite';
 import './App.css'
 import UseStore from './hooks/useStore'
 
@@ -15,4 +15,4 @@ function App() {
   )
 }
 
-export default App
+export default Observer(App);
