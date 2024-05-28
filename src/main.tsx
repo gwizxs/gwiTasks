@@ -2,7 +2,7 @@ import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import RootStore from './store';
+import RootStore from './store/index-Store.ts';
 
 const store = RootStore.create({});
 
