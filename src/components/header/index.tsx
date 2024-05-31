@@ -1,5 +1,4 @@
-import React from "react";
-import { AppBar, FormControl, Grid, MenuItem, Toolbar, Typography, Box  } from "@material-ui/core"
+import { AppBar, FormControl, Grid, MenuItem, Select, Toolbar, Typography, Box } from "@material-ui/core";
 import UseStore from "../../hooks/useStore"
 import User from "../common/User";
 
@@ -45,3 +44,5 @@ const Header = () => {
         </AppBar>
     )
 }
+
+export default Header;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import Task from './Task';
 
@@ -8,12 +8,12 @@ import Task from './Task';
 
 interface ColumnProps {
     section: {
-      tasks: Task;
+      task: typeof Task;
     };
   }
 
 
-const Column: React.FC<ColumnProps> = observer(({ section }) => {
+const Column= ({ section }: ColumnProps) => {
     const getItemStyle = (draggableStyle: React.CSSProperties): React.CSSProperties => ({
       padding: 8,
       marginBottom: 8,
@@ -22,13 +22,13 @@ const Column: React.FC<ColumnProps> = observer(({ section }) => {
   
     return (
       <div>
-        {section?.tasks?.map((task, index) => {
+        {section?.tasks?.map((task) => {
           return (
             <Draggable draggableId={task.id} key={task.id} index={index}>
               {(provided) => (
                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                  <Card style={getItemStyle(provided.draggableProps.style)}>
-                    <task task={task} />
+                  <Card style={getItemStyle(provided.draggableProps.style )}>
+                    <Task task={task} />
                     <CardContent>
                       <Typography variant="body1" component="p">
                         {task.title}
@@ -42,7 +42,7 @@ const Column: React.FC<ColumnProps> = observer(({ section }) => {
         })}
       </div>
     );
-  });
+  };
   
 
-export default Column;
+export default observer(Column);
