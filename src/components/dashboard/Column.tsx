@@ -1,12 +1,13 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import Task from './Task';
 
 
 
 interface ColumnProps {
+  i
     section: {
       task: typeof Task;
     };
@@ -17,21 +18,21 @@ const Column= ({ section }: ColumnProps) => {
     const getItemStyle = (draggableStyle: React.CSSProperties): React.CSSProperties => ({
       padding: 8,
       marginBottom: 8,
-      ...draggableStyle
+      ...draggableStyle,
     });
   
     return (
       <div>
-        {section?.tasks?.map((task) => {
+        {section?.task?.map((tasks, index) => {
           return (
-            <Draggable draggableId={task.id} key={task.id} index={index}>
+            <Draggable draggableId={tasks.id} key={tasks.id} index={index}>
               {(provided) => (
                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                   <Card style={getItemStyle(provided.draggableProps.style )}>
-                    <Task task={task} />
+                    <Task task={tasks} />
                     <CardContent>
                       <Typography variant="body1" component="p">
-                        {task.title}
+                        {tasks.title}
                       </Typography>
                     </CardContent>
                   </Card>

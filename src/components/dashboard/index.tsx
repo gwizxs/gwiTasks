@@ -1,8 +1,10 @@
 import UseStore from "../../hooks/useStore";
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
-import { Droppable, DragDropContext } from "react-beautiful-dnd";
+import { Droppable, DragDropContext, DropResult } from "react-beautiful-dnd";
 import Column from "./Column";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
+
+
 
 const getListStyle = (isDraggingOver) => ({
     backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
@@ -11,15 +13,29 @@ const getListStyle = (isDraggingOver) => ({
 })
 
 const Dashboard = () => {
-    const { boards } = UseStore();
-    const onDragEnd = useCallback(() => {
-      const {source, destination, draggableId: taskId} = event;
-      if (destination) {
-        boards.active.moveTask(taskId, source, destination);
+  const { boards } = UseStore(); 
+
+  const onDragEnd = useCallback(
+    (result: DropResult) => {
+      if (!result.destination) return; 
+
+      const { source, destination, draggableId: taskId } = result;
+
+      if (source.droppableId === destination.droppableId) {
+        boards.active?.moveTaskInColumn(taskId, source.index, destination.index);
+      } 
+      else {
+        boards.active?.moveTaskBetweenColumns(
+          taskId,
+          source.droppableId,
+          destination.droppableId,
+          source.index,
+          destination.index
+        );
       }
     },
-    [boards]);
-
+    [boards] 
+  );
 
     return (
       <Box>
