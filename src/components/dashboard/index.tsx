@@ -2,11 +2,14 @@ import UseStore from "../../hooks/useStore";
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { Droppable, DragDropContext, DropResult } from "react-beautiful-dnd";
 import Column from "./Column";
-import React, { useCallback } from "react";
+import { observer } from 'mobx-react-lite';
+
+
+    
 
 
 
-const getListStyle = (isDraggingOver) => ({
+const getListStyle = (isDraggingOver: boolean) => ({
     backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
     padding: 8,
     minHeight: 500,
@@ -15,27 +18,26 @@ const getListStyle = (isDraggingOver) => ({
 const Dashboard = () => {
   const { boards } = UseStore(); 
 
-  const onDragEnd = useCallback(
+
+  const onDragEnd = 
     (result: DropResult) => {
       if (!result.destination) return; 
 
       const { source, destination, draggableId: taskId } = result;
 
-      if (source.droppableId === destination.droppableId) {
-        boards.active?.moveTaskInColumn(taskId, source.index, destination.index);
-      } 
-      else {
-        boards.active?.moveTaskBetweenColumns(
-          taskId,
-          source.droppableId,
-          destination.droppableId,
-          source.index,
-          destination.index
-        );
-      }
-    },
-    [boards] 
-  );
+      if (boards.active) {
+        if (source.droppableId === destination.droppableId) {
+            boards.active.moveTaskInCol(taskId, source.index, destination.index);
+        } else {
+            boards.active.moveTaskBetweenCol(
+                taskId,
+                source,
+                destination,
+            );
+        }
+    }
+};
+
 
     return (
       <Box>

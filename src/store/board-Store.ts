@@ -45,7 +45,15 @@ const Board = types.model('Board', {
     sections: types.array(BoardSection),
 }).actions((self) => {
     return {
-        moveTask(id: string, source: DroppableSource, destination: DroppableSource) { 
+        // перемещение внутри столбами
+        moveTaskInCol(taskId: string, sourceIndex: number, destinationIndex: number) {
+            const sectionIndex = self.sections.findIndex(section => section.tasks.some(task => task.id === taskId));
+            if (sectionIndex !== -1) {
+                self.sections[sectionIndex].tasks.splice(destinationIndex, 0, self.sections[sectionIndex].tasks.splice(sourceIndex, 1)[0]);
+            }
+        },
+        // перемещение между столбами
+        moveTaskBetweenCol(id: string, source: DroppableSource, destination: DroppableSource) { 
             const fromSection = self.sections.find((section) => section.id === source.droppableId);
             const toSection = self.sections.find((section) => section.id === destination.droppableId);
 
