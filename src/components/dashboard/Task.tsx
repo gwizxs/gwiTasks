@@ -1,9 +1,13 @@
 import { CardContent, Typography } from "@material-ui/core"
 import User from "../common/User";
+import me from "../../api";
 
-
-
-const Task = ({task}) => {
+interface props {
+ title: string,
+ description: string,
+ me: typeof me,
+}
+const Task = ({task}: {task: props}) => {
     return (
         <CardContent>
             <Typography color="textPrimary" gutterBottom style={{fontSize: 18}}>
