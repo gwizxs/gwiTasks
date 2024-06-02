@@ -5,10 +5,6 @@ import Column from "./Column";
 import { observer } from 'mobx-react-lite';
 
 
-    
-
-
-
 const getListStyle = (isDraggingOver: boolean) => ({
     backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
     padding: 8,

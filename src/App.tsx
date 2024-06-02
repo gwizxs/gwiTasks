@@ -16,4 +16,4 @@ function App() {
   )
 }
 
-export default Observer(App);
+export default App;

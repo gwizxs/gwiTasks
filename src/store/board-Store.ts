@@ -2,6 +2,7 @@ import { flow, getParent, types, onSnapshot} from "mobx-state-tree";
 import apiCall from '../api';
 import  User  from './users-Store'
 
+
 interface DroppableSource {
     droppableId: string;
     index: number;
@@ -27,11 +28,12 @@ const BoardSection = types.model('BoardSection', {
             const {tasks} = yield apiCall.get(`boards/${boardID}/tasks/${status}`)
             self.tasks = tasks;
             onSnapshot(self, self.save);
+            
         }),
         save: flow(function* () {
             const {id: boardID} = getParent(self, 2)
             const {id: status} = self;
-            yield apiCall.put(`boards/${boardID}/tasks/${status}`, {tasks})
+            yield apiCall.put(`boards/${boardID}/tasks/${status}`, {tasks: self.tasks})
         }),
         afterCreate() {
             self.load();
@@ -62,11 +64,8 @@ const Board = types.model('Board', {
                 const [task] = fromSection.tasks.splice(taskToMoveIndex, 1);
 
 
-            toSection.tasks = [
-                ...toSection.tasks.slice(0, destination.index),
-                task,
-                ...toSection.tasks.slice(destination.index),
-            ]; 
+                toSection.tasks.splice(destination.index, 0, task); 
+
         } 
     },
   };
@@ -74,7 +73,7 @@ const Board = types.model('Board', {
 
 
 const BoardStore = types.model('BoardsStore', {
-    active: types.safeReference(Board),
+    active: types.maybeNull(types.array(types.safeReference(Board))),
     boards: types.optional(types.array(Board), []),
 })
 .views((self) => ({
