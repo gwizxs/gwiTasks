@@ -20,7 +20,7 @@ const Header = () => {
                                 backgroundColor: '#fff',
                                 marginLeft: 10
                             }}
-                            value={boards?.active?.id || ''}
+                            value={boards.active}
                             onChange={() => {}}
                             >
                                 <MenuItem value='' disabled>
@@ -36,7 +36,7 @@ const Header = () => {
                         </Box>
                     </Grid>
                     <Grid item>
-                        <User user={users?.me} />
+                        <User user={users?.me || {}} />
                     </Grid>
 
                 </Grid>

@@ -1,31 +1,37 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggableProps } from 'react-beautiful-dnd';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import Task from './Task';
 
 
-
 interface ColumnProps {
-  i
     section: {
       task: typeof Task;
     };
   }
+  interface TasksProps {
+    id: string,
+    title: string,
+  }
 
 
-const Column= ({ section }: ColumnProps) => {
-    const getItemStyle = (draggableStyle: React.CSSProperties): React.CSSProperties => ({
+const Column = observer(({ section }: ColumnProps) => {
+  const getItemStyle = (style: DraggableProps): React.CSSProperties => {
+    return {
       padding: 8,
       marginBottom: 8,
-      ...draggableStyle,
-    });
-  
+      ...(style || {}),
+    };
+  };
+
+
     return (
       <div>
-        {section?.task?.map((tasks, index) => {
+        if (Array.isArray(section?.task)) {
+  section.task.map((tasks: TasksProps, index: number) => {
           return (
-            <Draggable draggableId={tasks.id} key={tasks.id} index={index}>
+            <Draggable draggableId={tasks.id} index={index} key={tasks.id}>
               {(provided) => (
                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                   <Card style={getItemStyle(provided.draggableProps.style )}>
@@ -43,7 +49,7 @@ const Column= ({ section }: ColumnProps) => {
         })}
       </div>
     );
-  };
+  });
   
 
-export default observer(Column);
+export default Column;

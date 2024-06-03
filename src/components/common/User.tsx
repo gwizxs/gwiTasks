@@ -2,13 +2,13 @@ import React from "react";
 import { Avatar, Box } from "@material-ui/core";
 
 
-interface BoxProps {
-  avatar: string,
-  name: string,
+interface UserProps {
+  avatar?: string,
+  name?: string,
 }
 
 
-const User = ({user}: {user: BoxProps}) => {
+const User = ({user}: {user: UserProps}) => {
   return (
     <Box display="flex" alignItems="center">
       <Avatar src={user?.avatar} alt={user?.name}/>
