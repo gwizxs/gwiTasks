@@ -1,11 +1,11 @@
-import { Observer } from 'mobx-react-lite';
+import {  observer } from 'mobx-react-lite';
 import './App.css'
 import Dashboard from './components/dashboard';
 import Header from './components/header'
 
 
 
-function App() {
+const App = observer(() => {
   return (
     <>
     <Header/>
@@ -13,7 +13,7 @@ function App() {
       <Dashboard/>
     </main>
     </>
-  )
-}
+  );
+})
 
 export default App;
