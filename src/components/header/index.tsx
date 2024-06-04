@@ -1,6 +1,7 @@
 import { AppBar, FormControl, Grid, MenuItem, Select, Toolbar, Typography, Box } from "@material-ui/core";
 import UseStore from "../../hooks/useStore"
 import User from "../common/User";
+import { observer } from "mobx-react-lite";
 
 
 const Header = () => {
@@ -45,4 +46,5 @@ const Header = () => {
     )
 }
 
-export default Header;
+// eslint-disable-next-line react-refresh/only-export-components
+export default observer(Header);

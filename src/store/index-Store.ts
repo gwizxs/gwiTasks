@@ -4,9 +4,14 @@ import BoardStore from "./board-Store";
 
 
 const RootStore = types.model('RootStore', {
-    users: UsersStore,
-    boards: BoardStore,
+    users: types.optional(UsersStore, {}),
+    boards: types.optional(BoardStore, {}),
 });
+
+export const store = RootStore.create({
+    users: {}, 
+    boards: {}, 
+  });
 
 export default RootStore;
 

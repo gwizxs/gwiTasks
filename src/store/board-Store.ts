@@ -9,7 +9,7 @@ interface DroppableSource {
   }
 
   
-const Task = types.model('Task', {
+export const Task = types.model('Task', {
     id: types.identifier,
     title: types.string,
     description: types.string,

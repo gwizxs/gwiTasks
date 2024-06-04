@@ -12,7 +12,7 @@ const User = ({user}: {user: UserProps}) => {
   return (
     <Box display="flex" alignItems="center">
       <Avatar src={user?.avatar} alt={user?.name}/>
-      <span>
+      <span style={{padding: 10}}>
         ({user?.name})
       </span>
     </Box>

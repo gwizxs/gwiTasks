@@ -2,26 +2,28 @@ import { CardContent, Typography } from "@material-ui/core"
 import User from "../common/User";
 import me from "../../api";
 import UseStore from "../../hooks/useStore"
+import { Observer, observer } from "mobx-react-lite";
 
 interface props {
+ assignee: string,
  title: string,
  description: string,
  me: typeof me,
 }
 
-const Task = ({task}: {task: props}) => {
+const Task = observer(({task}: {task: props}) => {
     const {users} = UseStore()
     return (
         <CardContent>
-            <Typography color="textPrimary" gutterBottom style={{fontSize: 10}}>
-                {task?.title}
+            <Typography color="textPrimary" gutterBottom style={{fontSize: 18}}>
+                {task.title}
             </Typography>
-            <Typography color="textPrimary" gutterBottom >
-                {task?.description}
+            <Typography color="textSecondary" gutterBottom >
+                {task.description}
             </Typography>
-            <User user={users?.me || {}}/>
+            <User user={task.assignee}/>
         </CardContent>
     )
-}
+})
 
 export default Task;
