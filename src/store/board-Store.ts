@@ -48,7 +48,7 @@ const Board = types.model('Board', {
 }).actions((self) => {
     return {
         // перемещение внутри столбами
-        moveTaskInCol(taskId: string, sourceIndex: number, destinationIndex: number) {
+        InCol(taskId: string, sourceIndex: number, destinationIndex: number) {
             const sectionIndex = self.sections.findIndex(section => section.tasks.some(task => task.id === taskId));
             if (sectionIndex !== -1) {
                 self.sections[sectionIndex].tasks.splice(destinationIndex, 0, self.sections[sectionIndex].tasks.splice(sourceIndex, 1)[0]);
