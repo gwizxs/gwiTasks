@@ -1,8 +1,7 @@
-import React from "react";
 import { Avatar, Box } from "@material-ui/core";
 
 
-interface UserProps {
+ export interface UserProps {
   avatar?: string,
   name?: string,
 }

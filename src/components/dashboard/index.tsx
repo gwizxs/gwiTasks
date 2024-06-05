@@ -1,11 +1,18 @@
+/* eslint-disable react-refresh/only-export-components */
 import UseStore from "../../hooks/useStore";
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { Droppable, DragDropContext,  } from "react-beautiful-dnd";
-import Column from "./Column";
+import Column, {TasksProps} from "./Column";
 import { observer } from 'mobx-react-lite';
 import { useCallback } from "react";
 
-
+interface Section {
+  tasks: TasksProps[],
+  task: ({ task: TasksProps });
+  id: string,
+  title: string,
+  description: string,
+}
 const getListStyle = (isDraggingOver: boolean) => ({
     backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
     padding: 8,
@@ -17,10 +24,11 @@ const Dashboard = () => {
 
 
 
-  const onDragEnd = useCallback(event => {
-    const {source, destination, draggableId: taskId} = event;
-
-    boards.active.moveTask(taskId, source, destination);
+  const onDragEnd = useCallback((event) => {
+    const {source, destination, draggableId: id} = event;
+    if (boards.active !== null) {
+    boards.active.moveTask(id, source, destination);
+    }
   }, [boards]);
 
 
@@ -28,7 +36,7 @@ const Dashboard = () => {
     <Box p={2}>
       <DragDropContext onDragEnd={onDragEnd}>
       <Grid container spacing={3}>
-      {boards.active?.sections.map(section => {
+      {boards.active?.sections?.map((section: Section) => {
         return (
         <Grid item key={section.id} xs>
          <Paper>
@@ -43,7 +51,7 @@ const Dashboard = () => {
                 style={getListStyle(snapshot.isDraggingOver)}
                 >
                 <Column section={section}/>
-                {provided.placeholder}
+                {provided.placeholder as React.ReactNode}
               </div>
             )}
           </Droppable>

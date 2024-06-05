@@ -1,18 +1,16 @@
 import { CardContent, Typography } from "@material-ui/core"
-import User from "../common/User";
 import me from "../../api";
-import UseStore from "../../hooks/useStore"
-import { Observer, observer } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
+import User, { UserProps } from "../common/User";
 
 interface props {
- assignee: string,
+ assignee: UserProps,
  title: string,
  description: string,
  me: typeof me,
 }
 
 const Task = observer(({task}: {task: props}) => {
-    const {users} = UseStore()
     return (
         <CardContent>
             <Typography color="textPrimary" gutterBottom style={{fontSize: 18}}>

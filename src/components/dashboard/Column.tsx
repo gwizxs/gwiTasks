@@ -1,23 +1,29 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Draggable,  } from 'react-beautiful-dnd';
+import {  DraggingStyle, NotDraggingStyle,  } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import { Card} from '@material-ui/core';
 import Task from './Task';
-
+import me from "../../api";
+import { UserProps } from '../common/User';
 
 interface ColumnProps {
     section: {
-      task: typeof Task;
+      tasks: TasksProps[],
+      task: ({ task: TasksProps });
     };
   }
-  interface TasksProps {
+  export interface TasksProps {
     id: string,
     title: string,
+    assignee: UserProps,
+    description: string,
+    me: typeof me,
   }
 
 
 
-  function getItemStyle(isDragging, draggableStyle): React.CSSProperties {
+  function getItemStyle(_isDragging: boolean, draggableStyle: React.CSSProperties | DraggingStyle | NotDraggingStyle | undefined): React.CSSProperties {
     return {
       padding: 8,
       marginBottom: 8,
@@ -29,7 +35,7 @@ const Column = observer(({ section }: ColumnProps) => {
 
   return (
     <div>
-      {section.tasks.map((task, index) => {
+      {section.tasks.map((task: TasksProps, index: number) => {
         return (
           <Draggable draggableId={task.id} key={task.id} index={index}>
             {(provided, snapshot) => (
