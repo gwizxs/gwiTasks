@@ -21,7 +21,7 @@ const Header = () => {
                                 backgroundColor: '#fff',
                                 marginLeft: 10
                             }}
-                            value={boards.active}
+                            value={boards.active || ''}
                             onChange={() => {}}
                             >
                                 <MenuItem value='' disabled>

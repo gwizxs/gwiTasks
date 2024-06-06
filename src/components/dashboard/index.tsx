@@ -1,10 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import UseStore from "../../hooks/useStore";
-import { Box, Grid, Paper, Typography } from "@material-ui/core";
-import { Droppable, DragDropContext,  } from "react-beautiful-dnd";
+import {  Grid, Paper, Typography } from "@material-ui/core";
+import Box from '@material-ui/core/Box';
+import { Droppable, DragDropContext, OnDragEndResponder, DropResult  } from "react-beautiful-dnd";
 import Column, {TasksProps} from "./Column";
 import { observer } from 'mobx-react-lite';
 import { useCallback } from "react";
+
 
 interface Section {
   tasks: TasksProps[],
@@ -13,6 +15,9 @@ interface Section {
   title: string,
   description: string,
 }
+
+
+
 const getListStyle = (isDraggingOver: boolean) => ({
     backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
     padding: 8,
@@ -23,11 +28,10 @@ const Dashboard = () => {
   const { boards } = UseStore(); 
 
 
-
-  const onDragEnd = useCallback((event) => {
+  const onDragEnd: OnDragEndResponder = useCallback((event: DropResult) => {
     const {source, destination, draggableId: id} = event;
-    if (boards.active !== null) {
-    boards.active.moveTask(id, source, destination);
+    if (boards.active) {
+      boards.active.moveTask(id, source, destination);
     }
   }, [boards]);
 
