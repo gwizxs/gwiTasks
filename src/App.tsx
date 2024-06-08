@@ -5,7 +5,7 @@ import Header from './components/header'
 
 
 
-const App = observer(() => {
+const App = () => {
   return (
     <>
     <Header/>
@@ -14,6 +14,7 @@ const App = observer(() => {
     </main>
     </>
   );
-})
+}
 
-export default App;
+// eslint-disable-next-line react-refresh/only-export-components
+export default observer(App);

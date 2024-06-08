@@ -15,36 +15,35 @@ interface DroppableSource {
     description: string,
     assignee?: string
   };
-
   
-export const Task = types.model('Task', {
+export const TaskModel = types.model('Task', {
     id: types.identifier,
     title: types.string,
     description: types.string,
-    assignee: types.safeReference(User),
+    assignee: types.maybe(types.safeReference(User)),
 })
 
 const BoardSection = types.model('BoardSection', {
     id: types.identifier,
     title: types.string,
-    tasks: types.array(Task),
+    tasks: types.array(TaskModel),
 }).actions(self => {
-    return {
-        load: flow(function* () {
-            const { id: boardID } = getParent(self, 2);
-            const { id: status } = self;
-            const { tasks } = yield apiCall.get(`boards/${boardID}/tasks/${status}`);
-            self.tasks = cast(tasks);
-            onSnapshot(self, self.save);
-            
-        }),
+  return {
+    load: flow(function* () {
+      const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
+      const {id: status} = self;
+      const { tasks } = yield apiCall.get(`boards/${boardID}/tasks/${status}`);
+      self.tasks = cast(tasks);
+      onSnapshot(self, self.save);
+    }),
         afterCreate() {
             self.load();
           },
-        save: flow(function* ({tasks}: {tasks: typeof Task[]}) {
-            const {id: boardID} = getParent(self, 2)
+        save: flow(function* ({tasks}: {tasks: typeof TaskModel[]}) {
+            const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
             const {id: status} = self;
-            yield apiCall.put(`boards/${boardID}/tasks/${status}`, { tasks })
+            const tasksJSON = JSON.stringify(self.tasks);
+            yield apiCall.put(`boards/${boardID}/tasks/${status}`,  {tasks: tasksJSON} )
         }),
         addTask(taskPayload: Task) {
             self.tasks.push(taskPayload);
@@ -58,16 +57,7 @@ export const Board = types.model('Board', {
     sections: types.array(BoardSection),
 }).actions(self => {
     return {
-        addTask(sectionId: string, taskPayload: Task) {
-            const section = self.sections.find(section => section.id === sectionId);
-            if (section) {
-                section.tasks.push({
-                    ...taskPayload,
-                    id: uuid(),
-                });
-            }
-        },  
-        moveTask(taskId: string, source:  { droppableId: string }, destination: DroppableSource) {
+      moveTask(taskId: string, source: DroppableSource, destination: DroppableSource) {
             const fromSection = self.sections?.find(section => section.id === source.droppableId);
             const toSection = self.sections?.find(section => section.id === destination.droppableId);
           
@@ -78,16 +68,23 @@ export const Board = types.model('Board', {
                     toSection.tasks.splice(destination.index, 0, task);
                 }
             }
-        }
+        },
+        addTask(sectionId: string, taskPayload: Task) {
+          const section = self.sections.find(section => section.id === sectionId);
+          if (section) {
+              section.tasks.push({
+                  ...taskPayload,
+                  id: uuid(),
+              });
+          }
+      },  
     };
 });
 
 
 const BoardStore = types
-  .model("BoardsStore", {
-    active: types.maybeNull(
-      types.array(types.maybe(types.reference(types.late(() => Board))))
-    ),
+.model("BoardsStore", {
+   active: types.maybeNull(types.late(() => types.reference(Board))),
     boards: types.optional(types.array(Board), []),
   })
   .views((self) => ({
@@ -99,14 +96,16 @@ const BoardStore = types
     return {
       load: flow(function* () {
         self.boards = yield apiCall.get("boards");
-        if (self.boards.length > 0) {
-          self.active = [self.boards[0]];
-        }
+        self.active = cast(self.boards.length > 0 ? self.boards[0].id : null); 
       }),
       afterCreate() {
         self.load();
       },
+      selectBoard(id: string | null) {
+        self.active = id;
+      }
     };
   });
 
 export default BoardStore;
+

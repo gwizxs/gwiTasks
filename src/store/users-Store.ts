@@ -14,7 +14,15 @@ const activeUser = User.named('activeUser');
 const UsersStore = types.model('UseStore', {
     users: types.maybe(types.array(User)),
     me: types.maybe(activeUser)
-}).actions(self => {
+})
+.views(self => {
+    return {
+        get list() {
+            return self.users?.map(({id, name}) => ({id, name}))
+        }
+    }
+})
+.actions(self => {
     return {
         load: flow(function* () {
             self.users = yield apiCall.get('users')

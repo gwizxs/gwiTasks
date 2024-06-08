@@ -1,11 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import UseStore from "../../hooks/useStore";
 import {  Grid, Paper, Typography } from "@material-ui/core";
-import Box from '@material-ui/core/Box';
+import {Box, Button} from "@material-ui/core";
 import { Droppable, DragDropContext, OnDragEndResponder, DropResult  } from "react-beautiful-dnd";
 import Column, {TasksProps} from "./Column";
 import { observer } from 'mobx-react-lite';
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import NewTask from './NewTask';
 
 
 interface Section {
@@ -17,7 +18,6 @@ interface Section {
 }
 
 
-
 const getListStyle = (isDraggingOver: boolean) => ({
     backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
     padding: 8,
@@ -26,26 +26,38 @@ const getListStyle = (isDraggingOver: boolean) => ({
 
 const Dashboard = () => {
   const { boards } = UseStore(); 
+  const [newTaskToSec, setNewTaskSec] = useState<string | boolean | null>(null);
+
+  
+  const closeDialog = useCallback(() => {
+  setNewTaskSec(null);
+  }, [setNewTaskSec])
 
 
   const onDragEnd: OnDragEndResponder = useCallback((event: DropResult) => {
-    const {source, destination, draggableId: id} = event;
-    if (boards.active) {
-      boards.active.moveTask(id, source, destination);
-    }
+    const {source, destination, draggableId: taskId} = event;
+    if (destination && boards?.active) { 
+       boards.active.moveTask(taskId, source, destination);
+     }
   }, [boards]);
 
 
     return (
-    <Box p={2}>
+    <Box component="div" p={2}>
       <DragDropContext onDragEnd={onDragEnd}>
       <Grid container spacing={3}>
       {boards.active?.sections?.map((section: Section) => {
         return (
         <Grid item key={section.id} xs>
          <Paper>
-          <Box p={1} display="flex" alignItems="center" justifyContent="space-between">
+          <Box component="div" p={1} display="flex" alignItems="center" justifyContent="space-between">
             <Typography variant="h5">{section?.title}</Typography>
+            <Button variant="outlined" color="primary" onClick={() => {
+              setNewTaskSec(section?.id)
+            }}>
+              Add
+
+            </Button>
           </Box>
           <Droppable droppableId={section.id}>
             {(provided, snapshot) => (
@@ -65,8 +77,9 @@ const Dashboard = () => {
       })}
       </Grid>
       </DragDropContext>
+      <NewTask open={!!newTaskToSec} handleClose={closeDialog} activeSection={setNewTaskSec}/>
     </Box>
-    )
+    );
   }
   
 

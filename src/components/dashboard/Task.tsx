@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { CardContent, Typography } from "@material-ui/core"
 import me from "../../api";
 import { observer } from "mobx-react-lite";
@@ -10,7 +11,7 @@ interface props {
  me: typeof me,
 }
 
-const Task = observer(({task}: {task: props}) => {
+const Task = ({task}: {task: props}) => {
     return (
         <CardContent>
             <Typography color="textPrimary" gutterBottom style={{fontSize: 18}}>
@@ -22,6 +23,6 @@ const Task = observer(({task}: {task: props}) => {
             <User user={task.assignee}/>
         </CardContent>
     )
-})
+}
 
-export default Task;
+export default observer(Task);

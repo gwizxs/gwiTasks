@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import {  DraggingStyle, NotDraggingStyle,  } from 'react-beautiful-dnd';
@@ -29,9 +30,9 @@ interface ColumnProps {
       marginBottom: 8,
       ...draggableStyle
     };
-  };
+  }
 
-const Column = observer(({ section }: ColumnProps) => {
+const Column = ({ section }: ColumnProps) => {
 
   return (
     <div>
@@ -56,7 +57,7 @@ const Column = observer(({ section }: ColumnProps) => {
       })}
     </div>
   )
-});
+};
   
 
-export default Column;
+export default observer(Column);

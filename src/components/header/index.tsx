@@ -1,4 +1,5 @@
-import { AppBar, FormControl, Grid, MenuItem, Select, Toolbar, Typography, Box } from "@material-ui/core";
+/* eslint-disable react-refresh/only-export-components */
+import { AppBar, FormControl, Grid, Select, Toolbar, Typography, Box } from "@material-ui/core";
 import UseStore from "../../hooks/useStore"
 import User from "../common/User";
 import { observer } from "mobx-react-lite";
@@ -21,15 +22,19 @@ const Header = () => {
                                 backgroundColor: '#fff',
                                 marginLeft: 10
                             }}
-                            value={boards.active || ''}
-                            onChange={() => {}}
+                            native
+                            value={boards?.active?.id || ''}
+                            onChange={(event) => {
+                                const value = event.target.value as string;
+                                boards.selectBoard(value)
+                            }}
                             >
-                                <MenuItem value='' disabled>
+                                <option value='' disabled>
 
-                                </MenuItem>
+                                </option>
                                 {boards?.list.map(b => {
                                     return (
-                                        <MenuItem key={b.id} value={b?.id}>{b?.title}</MenuItem>
+                                        <option key={b.id} value={b?.id}>{b?.title}</option>
                                     )
                                 })}
                             </Select>
@@ -46,5 +51,5 @@ const Header = () => {
     )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
+
 export default observer(Header);
