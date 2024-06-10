@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { flow, getParent, types, onSnapshot, cast} from "mobx-state-tree";
 import apiCall from '../api';
 import  User  from './users-Store'
@@ -23,13 +24,13 @@ export const TaskModel = types.model('Task', {
     assignee: types.maybe(types.safeReference(User)),
 })
 
-const BoardSection = types.model('BoardSection', {
+const BoardSection = types.model('BoardSection',  {
     id: types.identifier,
     title: types.string,
     tasks: types.array(TaskModel),
-}).actions(self => {
+}).actions((self) => {
   return {
-    load: flow(function* () {
+    load: flow(function* load() {
       const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
       const {id: status} = self;
       const { tasks } = yield apiCall.get(`boards/${boardID}/tasks/${status}`);
@@ -39,7 +40,7 @@ const BoardSection = types.model('BoardSection', {
         afterCreate() {
             self.load();
           },
-        save: flow(function* ({tasks}: {tasks: typeof TaskModel[]}) {
+        save: flow(function* load() {
             const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
             const {id: status} = self;
             const tasksJSON = JSON.stringify(self.tasks);
@@ -65,6 +66,7 @@ export const Board = types.model('Board', {
                 const taskToMoveIndex = fromSection.tasks.findIndex(task => task.id === taskId);
                 if (taskToMoveIndex !== -1) {
                     const [task] = fromSection.tasks.splice(taskToMoveIndex, 1);
+                    
                     toSection.tasks.splice(destination.index, 0, task);
                 }
             }
@@ -96,12 +98,12 @@ const BoardStore = types
     return {
       load: flow(function* () {
         self.boards = yield apiCall.get("boards");
-        self.active = cast(self.boards.length > 0 ? self.boards[0].id : null); 
+        self.active = cast(self.boards.length > 0 ? self.boards[0].id : 'MAIN'); 
       }),
       afterCreate() {
         self.load();
       },
-      selectBoard(id: string | null) {
+      selectBoard(id: string | undefined) {
         self.active = id;
       }
     };

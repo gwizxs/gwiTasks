@@ -8,7 +8,7 @@ import apiCall from '../api'
     avatar: types.string,
 })
 
-const activeUser = User.named('activeUser');
+const activeUser = User.named('ActiveUser');
 
 
 const UsersStore = types.model('UseStore', {
@@ -18,7 +18,10 @@ const UsersStore = types.model('UseStore', {
 .views(self => {
     return {
         get list() {
-            return self.users?.map(({id, name}) => ({id, name}))
+            if (self.users && self.users.length > 0) {
+            return self.users?.map(({id, name}) => ({id, name}));
+            }
+            return [];
         }
     }
 })
