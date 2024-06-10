@@ -1,14 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
 import { CardContent, Typography } from "@material-ui/core"
-import me from "../../api";
+import me from "../../dataBase/index.json";
 import { observer } from "mobx-react-lite";
 import User, { UserProps } from "../common/User";
 
 interface props {
- assignee: UserProps,
- title: string,
- description: string,
- me: typeof me,
+    id: string,
+    title: string,
+    assignee: UserProps,
+    description: string,
+    me: typeof me,
 }
 
 const Task = ({task}: {task: props}) => {

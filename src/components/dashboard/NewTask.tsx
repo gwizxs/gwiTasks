@@ -1,6 +1,7 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormLabel, Select, TextField} from "@material-ui/core";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useCallback, useState } from "react";
 import UseStore from "../../hooks/useStore";
+import { observer } from "mobx-react-lite";
 
 interface TaskState {
     title: string | undefined;
@@ -9,18 +10,19 @@ interface TaskState {
   }
   interface NewTaskProps {
     open: boolean;
-    handleClose: () => void;
-    activeSection: Dispatch<SetStateAction<string | boolean | null>>;
+    handleClose?: () => void;
+    onClick: () => void;
+    activeSection: string | null;
   }
 
 
-const NewTask = ({open, handleClose = () => { }}: NewTaskProps ) => {
+const NewTask = ({open, handleClose = () => {}, activeSection}: NewTaskProps ) => {
     const [taskState, setTaskState] = useState<TaskState>({
         title: undefined,
         description: undefined,
         assignee: undefined,
     });
-    const {users} = UseStore();
+    const {users, boards} = UseStore();
 
     function updateTask(event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>): void {
       const { name, value } = event.target;
@@ -34,11 +36,20 @@ const NewTask = ({open, handleClose = () => { }}: NewTaskProps ) => {
         console.error("Invalid name property:", name);
       }
     }
+
+    const addNewTask = useCallback((event) => {
+       event.preventDefault();
+
+       boards.active?.addTask(activeSection, taskState);
+       handleClose();
+       setTaskState({})
+    }, [taskState, boards, activeSection])
+
+
     return (
-      <div>
-        <Dialog open={open} onClick={handleClose}>
+        <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create A New Task</DialogTitle>
-        <form onSubmit={() => {}}>
+        <form onSubmit={addNewTask}>
           <DialogContent style={{ minWidth: 500 }}>
           <Box component="div" p={1}>
                <TextField
@@ -71,10 +82,10 @@ const NewTask = ({open, handleClose = () => { }}: NewTaskProps ) => {
                   value={taskState.assignee || ''}
                   onChange={updateTask}
                 >
-                  <option value='' disabled>- </option>
-                  {users?.list?.map((user) => {
+                  <option value='' disabled>-</option>
+                  {users?.list?.map(user => {
                     return (
-                      <option key={user?.id} value={user?.id}>{user?.name}</option>
+                      <option key={user.id} value={user.id}>{user?.name}</option>
                     );
                   })}
                 </Select>
@@ -82,7 +93,7 @@ const NewTask = ({open, handleClose = () => { }}: NewTaskProps ) => {
             </Box>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} color="secondary">
               close
             </Button>
             <Button type="submit" color="secondary">
@@ -91,9 +102,9 @@ const NewTask = ({open, handleClose = () => { }}: NewTaskProps ) => {
           </DialogActions>
         </form>
       </Dialog>
-      </div>
     );
   };
   
 
-export default NewTask;
+// eslint-disable-next-line react-refresh/only-export-components
+export default observer(NewTask);

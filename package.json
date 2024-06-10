@@ -14,8 +14,10 @@
     "server": "json-server src/dataBase/index.json --watch --port 5000 src/dataBase/routes.json"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@mui/types": "^7.2.14",
     "@types/react-beautiful-dnd": "^13.1.8",
+    "antd": "^5.18.0",
     "json-server": "^1.0.0-beta.0",
     "mobx-state-tree": "^6.0.0",
     "react": "^18.3.1",

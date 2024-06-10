@@ -1,26 +1,32 @@
 /* eslint-disable react-refresh/only-export-components */
-import { AppBar, FormControl, Grid, Select, Toolbar, Typography, Box } from "@material-ui/core";
+import {  FormControl, Grid, Select, Typography, Box } from "@material-ui/core";
 import UseStore from "../../hooks/useStore"
 import User from "../common/User";
 import { observer } from "mobx-react-lite";
+import './header.css'
+
+import { TinyColor } from '@ctrl/tinycolor';
 
 
 const Header = () => {
     const {boards, users} = UseStore();
     return (
-        <AppBar position="static">
-            <Toolbar variant="dense">
+        <nav>
                 <Grid container justifyContent="space-between" alignItems="center">
                     <Grid item>
                         <Box display="flex" alignItems="center">
+                            <nav>
+                                 
+                            </nav>
                         <Typography variant="h6">
-                            Dashboard: 
+                            gwask 
                         </Typography>
-                        <FormControl variant="outlined">
+                        <FormControl style={{marginBottom: 15}}>
                             <Select
                             style={{
-                                backgroundColor: '#fff',
-                                marginLeft: 10
+                                backgroundColor: '#adc6ff',
+                                marginTop: 10
+                                
                             }}
                             native
                             value={boards?.active?.id || ''}
@@ -46,8 +52,7 @@ const Header = () => {
                     </Grid>
 
                 </Grid>
-            </Toolbar>
-        </AppBar>
+                </nav>
     )
 }
 

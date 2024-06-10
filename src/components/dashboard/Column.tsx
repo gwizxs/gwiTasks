@@ -5,13 +5,12 @@ import {  DraggingStyle, NotDraggingStyle,  } from 'react-beautiful-dnd';
 import { Draggable } from 'react-beautiful-dnd';
 import { Card} from '@material-ui/core';
 import Task from './Task';
-import me from "../../api";
+import me from "../../dataBase/index.json";
 import { UserProps } from '../common/User';
 
 interface ColumnProps {
     section: {
       tasks: TasksProps[],
-      task: ({ task: TasksProps });
     };
   }
   export interface TasksProps {
