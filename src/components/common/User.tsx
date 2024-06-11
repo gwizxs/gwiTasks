@@ -1,4 +1,5 @@
-import { Avatar, Box } from "@material-ui/core";
+import { Space, Avatar } from "antd";
+import './Avatar.css'
 
 
  export interface UserProps {
@@ -9,12 +10,12 @@ import { Avatar, Box } from "@material-ui/core";
 
 const User = ({user}: {user: UserProps}) => {
   return (
-    <Box display="flex" alignItems="center">
-      <Avatar src={user?.avatar} alt={user?.name}/>
-      <span style={{padding: 5}}>
-        ({user?.name})
+    <Space className="spaceAvatar"  size={13}>
+      <Avatar size="large" src={user?.avatar} alt={user?.name}/>
+      <span className="spanAvatar" >
+       <h4>{user?.name}</h4>
       </span>
-    </Box>
+    </Space>
   )
 }
 

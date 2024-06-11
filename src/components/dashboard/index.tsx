@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-import PlusCircleOutlined from '@ant-design/icons'
 import UseStore from "../../hooks/useStore";
 import {  Grid, Paper, Typography } from "@material-ui/core";
 import {Box} from "@material-ui/core";
@@ -74,7 +73,7 @@ const Dashboard = () => {
         },
       }}
     >
-            <Button type="primary" icon={<PlusCircleOutlined/>} onClick={() => {
+            <Button type="primary"  onClick={() => {
               setNewTaskSec(section?.id)
             }}>add</Button>
     </ConfigProvider>
@@ -99,7 +98,9 @@ const Dashboard = () => {
       })}
       </Grid>
       </DragDropContext>
-      <NewTask open={!!newTaskToSec} handleClose={closeDialog} activeSection={newTaskToSec}/>
+      <NewTask open={!!newTaskToSec} handleClose={closeDialog} activeSection={newTaskToSec} onClick={function (): void {
+          throw new Error('Function not implemented.');
+        } }/>
     </Box>
     );
   }

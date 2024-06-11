@@ -10,18 +10,20 @@ interface DroppableSource {
     index: number;
   }
 
-  type Task = {
-    id: string,
-    title: string,
-    description: string,
-    assignee?: string
-  };
+  interface Task {
+    id?: string;
+    title: string | undefined;
+    description: string | undefined;
+    assignee: string | undefined;
+    date: null;
+  }
+  
   
 export const TaskModel = types.model('Task', {
     id: types.identifier,
     title: types.string,
     description: types.string,
-    assignee: types.maybe(types.safeReference(User)),
+    assignee: types.safeReference(User),
 })
 
 const BoardSection = types.model('BoardSection',  {
@@ -40,11 +42,10 @@ const BoardSection = types.model('BoardSection',  {
         afterCreate() {
             self.load();
           },
-        save: flow(function* load() {
+        save: flow(function* save(tasks) {
             const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
             const {id: status} = self;
-            const tasksJSON = JSON.stringify(self.tasks);
-            yield apiCall.put(`boards/${boardID}/tasks/${status}`,  {tasks: tasksJSON} )
+            yield apiCall.put(`boards/${boardID}/tasks/${status}`,  {tasks} )
         }),
         addTask(taskPayload: Task) {
             self.tasks.push(taskPayload);
@@ -66,7 +67,6 @@ export const Board = types.model('Board', {
                 const taskToMoveIndex = fromSection.tasks.findIndex(task => task.id === taskId);
                 if (taskToMoveIndex !== -1) {
                     const [task] = fromSection.tasks.splice(taskToMoveIndex, 1);
-                    
                     toSection.tasks.splice(destination.index, 0, task);
                 }
             }
@@ -75,8 +75,10 @@ export const Board = types.model('Board', {
           const section = self.sections.find(section => section.id === sectionId);
           if (section) {
               section.tasks.push({
-                  ...taskPayload,
                   id: uuid(),
+                  ...taskPayload,
+                   date: taskPayload.date,  
+                   assignee: taskPayload.assignee,
               });
           }
       },  
@@ -100,10 +102,10 @@ const BoardStore = types
         self.boards = yield apiCall.get("boards");
         self.active = cast(self.boards.length > 0 ? self.boards[0].id : 'MAIN'); 
       }),
-      afterCreate() {
+      afterCreate(): void {
         self.load();
       },
-      selectBoard(id: string | undefined) {
+      selectBoard(id: string | undefined): void {
         self.active = id;
       }
     };
