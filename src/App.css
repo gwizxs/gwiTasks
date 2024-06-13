@@ -14,3 +14,38 @@ body {
   text-align: center;
   min-height: 100vh;
 }
+
+h5 {
+  margin-top: 10px;
+}
+.socials {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+}
+
+.socials li {
+  margin: 0 10px;
+  display: flex; 
+  align-items: center;   
+}
+
+.socials a {
+  text-decoration: none;
+  color: #8a8a8a;
+}
+
+.socials a i {
+  font-size: 1.1rem;
+  transition: color .4s ease;
+}
+
+.socials a:hover i {
+  color: rgb(4, 8, 20);
+}
+
+.socials li a {
+  font-size:150%;
+}

@@ -4,21 +4,41 @@ import App from './App.tsx'
 import './index.css'
 import RootStore from './store/index-Store.ts';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
-import { Button, Result } from 'antd';
+import Me from './pages/Me/index.tsx';
+import ErrorPage from './pages/ErrorPage.tsx';
+import Team from './pages/Team/Team.tsx';
+import About from './pages/About/index.tsx';
+import Setting from './pages/Setting/index.tsx';
 
 const store = RootStore.create({});
 const router = createBrowserRouter([
   {
   path: '/vite-project/',
   element: <App />,
-  errorElement: <Result
-  status="404"
-  title="404"
-  subTitle="Sorry, the page you visited does not exist."
-  extra={<Button type="primary" href='/vite-project/' >Back Home</Button>}
-/>
+  errorElement: <ErrorPage />
   },
+  {
+    path: '/vite-project/Me',
+    element: <Me />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/vite-project/Team',
+    element: <Team/>,
+    errorElement: <ErrorPage/>
+  },
+  {
+    path: '/vite-project/About',
+    element: <About/>,
+    errorElement: <ErrorPage/>
+  },
+  {
+    path: '/vite-project/Setting',
+    element: <Setting/>,
+    errorElement: <ErrorPage/>
+  }
 ]);
+
 export const StoreContext = createContext(store)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
