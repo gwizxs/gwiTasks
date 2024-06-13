@@ -3,6 +3,7 @@ import React, { useCallback, useState } from "react";
 import UseStore from "../../hooks/useStore";
 import { observer } from "mobx-react-lite";
 import { Modal, Form, Input, DatePicker, Select, Button } from 'antd';
+import { Typography } from 'antd';
 
 interface TaskState {
     title: string | undefined;
@@ -29,6 +30,7 @@ const NewTask = ({open, handleClose = () => {}, activeSection}: NewTaskProps ) =
         date: null,
     });
     const {users, boards} = UseStore();
+    const { Title } = Typography;
 
     function updateTask(event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>): void {
       const { name, value } = event.target;
@@ -65,8 +67,8 @@ const NewTask = ({open, handleClose = () => {}, activeSection}: NewTaskProps ) =
 
 
     return (
-      <Modal open={open} onCancel={handleClose} footer={null}>
-        <h1 style={{marginBottom: 40}}>Create A New Task</h1>
+      <Modal open={open} onCancel={handleClose} footer={null} >
+        <Title level={3} style={{marginBottom: 40}}>Create A New Task</Title>
       <Form onClick={addNewTask}>
 
         <Form.Item label="Title" name="title" rules={[{ required: true, message: 'Please add the title!' }]}>
@@ -107,12 +109,16 @@ const NewTask = ({open, handleClose = () => {}, activeSection}: NewTaskProps ) =
                   })}
           </Select>
         </Form.Item>
-        <Form.Item >
-          <Button onClick={handleClose}>Close</Button>
-          <Button type="primary" htmlType="submit">
-            Create
-          </Button>
-        </Form.Item>
+        <Form.Item style={{ position: "relative", marginBottom: 0 }}>
+        <div style={{ position: "absolute", bottom: 10, right: 10 }}>
+    <Button onClick={handleClose}>Close</Button>
+    <Button style={{ marginLeft: 10 }} type="primary" htmlType="submit">
+      Create
+    </Button>
+       </div>
+       </Form.Item>
+
+
       </Form>
     </Modal>
   );

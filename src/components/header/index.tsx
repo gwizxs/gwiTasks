@@ -4,21 +4,18 @@ import UseStore from "../../hooks/useStore"
 import User from "../common/User";
 import { observer } from "mobx-react-lite";
 import './header.css'
-
-import { TinyColor } from '@ctrl/tinycolor';
+import { Card } from "antd";
+import Meta from "antd/es/card/Meta";
 
 
 const Header = () => {
     const {boards, users} = UseStore();
     return (
-        <nav>
-                <Grid container justifyContent="space-between" alignItems="center">
+        <nav style={{borderStyle: "double"}}>
+                <Grid container justifyContent="space-between" alignItems="center" >
                     <Grid item>
                         <Box display="flex" alignItems="center">
-                            <nav>
-                                 
-                            </nav>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             gwask 
                         </Typography>
                         <FormControl style={{marginBottom: 15}}>
@@ -47,9 +44,12 @@ const Header = () => {
                         </FormControl>
                         </Box>
                     </Grid>
+                    <Card>
                     <Grid item>
                         <User user={users?.me || {}} />
+                        <Meta style={{marginBottom: 2}}   />
                     </Grid>
+                    </Card>
 
                 </Grid>
                 </nav>

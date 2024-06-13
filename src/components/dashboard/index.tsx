@@ -7,9 +7,8 @@ import Column, {TasksProps} from "./Column";
 import { observer } from 'mobx-react-lite';
 import { useCallback, useState } from "react";
 import NewTask from './NewTask';
-import { Button, ConfigProvider, Space } from "antd";
+import ButtonComponent from '../common/Btn-Component'
 import me from '../../dataBase/index.json'
-import { TinyColor } from '@ctrl/tinycolor';
 
 interface Section {
   tasks: TasksProps[],
@@ -19,11 +18,6 @@ interface Section {
   me?: typeof me
 }
 
-const colors1 = ['#1677ff', '#e6fffb'];
-const getHoverColors = (colors: string[]) =>
-  colors.map((color) => new TinyColor(color).lighten(5).toString());
-const getActiveColors = (colors: string[]) =>
-  colors.map((color) => new TinyColor(color).darken(5).toString());
 
 const getListStyle = (isDraggingOver: boolean) => ({
     backgroundColor: isDraggingOver ? '#e6f4ff' : '#e6f4ff',
@@ -59,26 +53,8 @@ const Dashboard = () => {
          <Paper>
           <Box component="div" p={3} display="flex" alignItems="center" justifyContent="space-between">
             <Typography variant="h6">{section?.title}</Typography>
-            {/* antd  */}
-            <Space>
-    <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: `linear-gradient(135deg, ${colors1.join(', ')})`,
-            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(colors1).join(', ')})`,
-            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(colors1).join(', ')})`,
-            lineWidth: 0,
-          },
-        },
-      }}
-    >
-            <Button type="primary"  onClick={() => {
-              setNewTaskSec(section?.id)
-            }}>add</Button>
-    </ConfigProvider>
-  </Space>
-   {/* antd  */}
+            <ButtonComponent  onClick={() => setNewTaskSec(section?.id)} />
+              
           </Box>
           <Droppable droppableId={section.id}>
             {(provided, snapshot) => (
