@@ -9,6 +9,7 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import Team from './pages/Team/Team.tsx';
 import About from './pages/About/index.tsx';
 import Setting from './pages/Setting/index.tsx';
+import Auth from './pages/auth/Auth.tsx';
 
 const store = RootStore.create({});
 const router = createBrowserRouter([
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: '/vite-project/Setting',
     element: <Setting/>,
+    errorElement: <ErrorPage/>
+  },
+  {
+    path: '/vite-project/Auth',
+    element: <Auth/>,
     errorElement: <ErrorPage/>
   }
 ]);

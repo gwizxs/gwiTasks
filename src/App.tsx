@@ -35,7 +35,7 @@ const App: React.FC = () => {
             <Layout>
               <Content style={{ margin: '0 16px' }}>
                 <Breadcrumb style={{ margin: '16px 0', backgroundColor: "#f0f0f0" }}>
-                  <Breadcrumb.Item>User</Breadcrumb.Item>
+                  <Breadcrumb.Item>Home</Breadcrumb.Item>
                 </Breadcrumb>
                 <div
                   style={{
