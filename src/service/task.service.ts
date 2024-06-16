@@ -2,6 +2,9 @@ import type { ITaskResponse, TypeTaskFormState } from "../types/task.types";
 import { axiosWithAuth } from "../api/interceptors";
 
 class TaskService {
+    static createTask(data: Partial<Omit<ITaskResponse, "id" | "updatedAt">>): Promise<unknown> {
+        throw new Error("Method not implemented.");
+    }
     private BASE_URL = '/user/tasks';
 
     async getTasks() {

@@ -1,11 +1,10 @@
-
 import { useQuery } from 'react-query';
-import UserService from '../service/user.service';
+import userService from '../service/user.service';
 
 export function useProfile() {
     const {data, isLoading} = useQuery({
         queryKey: ['profile'],
-        queryFn: () => UserService.getProfile(UserService)
+        queryFn: () => userService.getProfile()
     })
     return {data, isLoading}
 }
