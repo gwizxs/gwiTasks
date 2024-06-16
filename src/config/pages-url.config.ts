@@ -1,12 +1,16 @@
 class DASHBOARD {
-    private root = '/i'
+    private root = '/vite-project';
 
-    HOME = this.root
-    TASKS = `${this.root}/tasks`
-    HABITS = `${this.root}/habits`
-    TIMER = `${this.root}/timer`
-    TIME_BLOCKING = `${this.root}/time-blocking`
-    SETTINGS = `${this.root}/settings`
-}
-
-export const DASHBOARD_PAGES = new DASHBOARD
+    AUTH = this.root;
+    HOME = `${this.root}/Home`;
+    ME = `${this.root}/Me`;
+    TEAM = `${this.root}/Team`;
+    ABOUT = `${this.root}/About`;
+    TASKS = `${this.root}/tasks`;
+    HABITS = `${this.root}/habits`;
+    TIMER = `${this.root}/timer`;
+    TIME_BLOCKING = `${this.root}/time-blocking`;
+    SETTINGS = `${this.root}/settings`;
+  }
+  
+  export const DASHBOARD_PAGES = new DASHBOARD();

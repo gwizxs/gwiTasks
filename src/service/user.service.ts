@@ -11,6 +11,8 @@ export interface IProfileResponse {
 
 class UserService {
     private BASE_URL = '/user/profile';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static getProfile: any;
 
     async getProfile() {
         const response = await axiosWithAuth.get<IProfileResponse>(this.BASE_URL);
@@ -22,5 +24,6 @@ class UserService {
         return response.data;
     }
 }
+
 
 export default UserService;

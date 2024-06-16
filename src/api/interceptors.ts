@@ -6,7 +6,7 @@ import { authService } from "../service/auth.service";
 
 
 const options:CreateAxiosDefaults = {
-    baseURL: 'http://localhost:5173/vite-project/',
+    baseURL: 'http://localhost:3000/api',
     headers: {
         'Content-Type' : 'application/json'
     },

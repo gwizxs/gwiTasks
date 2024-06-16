@@ -6,7 +6,6 @@ import { Draggable } from 'react-beautiful-dnd';
 import { Card} from '@material-ui/core';
 import Task from './Task';
 import me from "../../dataBase/index.json";
-import { UserProps } from '../common/User';
 
 interface ColumnProps {
     section: {
@@ -16,7 +15,6 @@ interface ColumnProps {
   export interface TasksProps {
     id: string,
     title: string,
-    assignee: UserProps,
     description: string,
     me: typeof me,
   }

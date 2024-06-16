@@ -6,10 +6,12 @@ import { observer } from "mobx-react-lite";
 import './header.css'
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
+import LogoutBtn from "../Logout/LogoutBtn";
+import Statistic from "../Statistic";
 
 
 const Header = () => {
-    const {boards, users} = UseStore();
+    const {boards} = UseStore();
     return (
         <nav style={{borderStyle: "double"}}>
                 <Grid container justifyContent="space-between" alignItems="center" >
@@ -43,10 +45,12 @@ const Header = () => {
                             </Select>
                         </FormControl>
                         </Box>
+                        <LogoutBtn/>
+                        <Statistic/>
                     </Grid>
                     <Card>
                     <Grid item>
-                        <User user={users?.me || {}} />
+                        <User  />
                         <Meta style={{marginBottom: 2}}   />
                     </Grid>
                     </Card>
