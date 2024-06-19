@@ -28,7 +28,7 @@ const UsersStore = types.model('UseStore', {
 .actions(self => {
     return {
         load: flow(function* () {
-            self.users = yield apiCall('users')
+            self.users = yield apiCall.get('users')
             self.me = yield apiCall.get('me');
         }),
         afterCreate() {

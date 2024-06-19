@@ -1,8 +1,8 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-import { observer } from 'mobx-react-lite';
+import { imageFile } from '../../service/image.service'; // Import the service
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
@@ -14,7 +14,7 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const Uploads = () => {
+const Uploads: React.FC = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -37,14 +37,34 @@ const Uploads = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
+
+  const handleUpload = async (file: File) => {
+    try {
+      const uploadedFile = await imageFile.uploadFile(file);
+      // Update fileList with the uploaded file information
+      setFileList([
+        ...fileList,
+        {
+          uid: uploadedFile.fileName, 
+          name: uploadedFile.originalName,
+          status: 'done',
+          url: 'http://localhost:3000/api/image/upload', 
+        },
+      ]);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
   return (
     <>
       <Upload
-        listType="picture-circle"
+        action="http://localhost:3000/api/image/Upload" 
+        listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
-        beforeUpload={() => false}
+        beforeUpload={handleUpload} 
       >
         {fileList.length >= 1 ? null : uploadButton}
       </Upload>
@@ -63,4 +83,4 @@ const Uploads = () => {
   );
 };
 
-export default observer(Uploads);
+export default Uploads;

@@ -3,7 +3,7 @@ import { authService } from "../../service/auth.service";
 import { useNavigate } from "react-router";
 import { DASHBOARD_PAGES } from "../../config/pages-url.config";
 import { LogoutOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { observer } from "mobx-react-lite";
 
 function LogoutBtn() {
@@ -19,7 +19,11 @@ function LogoutBtn() {
     mutate();
   };
 
-  return <Button onClick={handleLogout} type="primary" icon={<LogoutOutlined />} />;
+  return (
+  <Tooltip>
+    <Button onClick={handleLogout} type="primary" icon={<LogoutOutlined />} />
+  </Tooltip>
+  )
 }
 
 export default observer(LogoutBtn);

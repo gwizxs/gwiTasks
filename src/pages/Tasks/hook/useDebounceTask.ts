@@ -1,49 +1,48 @@
-import { debounce } from "@material-ui/core";
+/* eslint-disable react-hooks/exhaustive-deps */
+import debounce from 'lodash.debounce';
 import { useCallback, useEffect } from "react";
 import { TypeTaskFormState } from "../../../types/task.types";
 import { useUpdateTask } from "./useUpdateTask";
 import { UseCreateTask } from "./useCreateTask";
-
+import { UseFormWatch } from 'react-hook-form';
 
 interface IUseDeb {
-    watch: UseForWatch<TypeTaskFormState>
-    itemsId: string
+  watch: UseFormWatch<TypeTaskFormState>;
+  itemsId: string; 
 }
 
-export function useDebounceTask({watch, itemsId}: IUseDeb) {
+export function useDebounceTask({ watch, itemsId }: IUseDeb) {
+  const { updateTask } = useUpdateTask();
+  const { createTask } = UseCreateTask()
 
-    const {createTask} = UseCreateTask()
-    const {updateTask} = useUpdateTask()
+  const debouncedCreateTask = useCallback(
+    debounce((formData: TypeTaskFormState) => {
+      createTask(formData);
+    }, 5000), 
+    []
+  );
 
+  const debounceUpdateTask = useCallback(
+    debounce((formData: TypeTaskFormState) => {
+      updateTask(itemsId, formData); 
+    }, 500),
+    [itemsId]
+  );
 
-    const debouncedCreateTask = useCallback(
-        debounce((FormData: TypeTaskFormState) => {
-            createTask(FormData)
-        }, 500),
-        []
-    )
-
-    const debounceUpdateTask = useCallback(
-        debounce((FormData: TypeTaskFormState) => {
-            updateTask(id: itemsId, data: FormData)
-        }, 500),
-        []
-    )
-
-    useEffect(() => {
-        const {unsubscribe} = (FormData => {
-            if (itemsId) {
-                debounceUpdateTask({
-                    ...formData,
-                    priority: FormData.priority || undefined
-                })
-            } else {
-                debounceCreateTask(FormData)
-            }
+  useEffect(() => {
+    const { unsubscribe } = watch((formData) => {
+      if (itemsId) { 
+        debounceUpdateTask({
+          ...formData,
+          priority: formData.priority || undefined
         })
+      } else { 
+        debouncedCreateTask(formData);
+      }
+    });
 
-        return () => {
-            unsubscribe()
-        }
-    }, [watch(), debounceUpdateTask, debounceCreateTask])
+    return () => {
+      unsubscribe();
+    };
+  }, [watch, debounceUpdateTask, debouncedCreateTask]); 
 }

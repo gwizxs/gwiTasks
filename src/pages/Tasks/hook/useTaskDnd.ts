@@ -1,4 +1,4 @@
-import { DropResult } from "react-beautiful-dnd";
+import { DropResult } from "@hello-pangea/dnd";
 import { useUpdateTask } from "./useUpdateTask";
 import { FILTERS } from "../list/columns.data";
 
@@ -17,7 +17,7 @@ export function useTaskDnd() {
             updateTask({
                 id: result.draggableId,
                 data: {
-                    isComputed: true
+                    isCompleted: true
                 }
             })
             return
@@ -28,7 +28,7 @@ export function useTaskDnd() {
             id: result.draggableId,
             data: {
                 createdAt: newCreatedAt,
-                isComputed: false
+                isCompleted: false
             }
         })
     }

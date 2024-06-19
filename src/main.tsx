@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Me from './pages/Me/index.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Team from './pages/Team/Team.tsx';
-import About from './pages/About/index.tsx';
+import About from './pages/About/time-blocking/form/index.tsx';
 import Setting from './pages/Setting/index.tsx';
 import Auth from './pages/auth/Auth.tsx';
 import {DASHBOARD_PAGES }from './config/pages-url.config.ts';

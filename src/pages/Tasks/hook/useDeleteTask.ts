@@ -1,18 +1,18 @@
 import {  useMutation, useQueryClient } from "react-query";
-import TaskService from "../../../service/task.service";
+import {taskService} from "../../../service/task.service";
 
 
 export default function useDeleteTask() {
-    const queryClient = useQueryClient(),
+    const queryClient = useQueryClient()
 
-    const { mutate: deleteTask, isPending: isDeletePending} = useMutation({
+    const { mutate: deleteTask} = useMutation({
         mutationKey: ['delete task'],
-        mutationFn: (id: string) => TaskService.deleteTask(id),
+        mutationFn: (id: string) => taskService.deleteTask(id),
         onSuccess() {
             queryClient.invalidateQueries({
                 queryKey: ['tasks']
             })
         }
     })
-    return {deleteTask, isDeletePending}
+    return {deleteTask}
 }

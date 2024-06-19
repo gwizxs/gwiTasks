@@ -1,0 +1,76 @@
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #e8e8e8;
+    
+  }
+  
+  .column {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+  }
+  
+  .grip {
+    margin-right: 10px;
+  }
+  
+  .completed {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+  
+  .animation-opacity {
+    transition: opacity 0.3s ease;
+  }
+  
+  .table {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.table div {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid #ccc;
+}
+
+.table div:last-child {
+    border-right: none;
+}
+
+.parentsWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.row div {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid #ccc;
+}
+
+.row div:last-child {
+    border-right: none;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+}

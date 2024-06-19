@@ -12,8 +12,7 @@ export const FILTERS: Record<string, Dayjs> = {
     today: dayjs().startOf('day'),
     tommorrow: dayjs().add(1, 'day').startOf('day'),
     'on-this-week': dayjs().endOf('isoWeek'),
-    'on-next-week': dayjs().add(1, 'week').startOf('day'),
-    later: dayjs().add(6, 'week').startOf('day')
+    'on-next-week': dayjs().add(1, 'week').startOf('isoWeek'),
 }
 
 export const COLUMNS = [
@@ -31,7 +30,7 @@ export const COLUMNS = [
     },
     {
         label: 'On next week',
-        value: 'On-next-week'
+        value: 'on-next-week'
     },
     {
         label: 'Later',

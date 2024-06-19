@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import './App.css';
 import './style/reset.css'
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import Dashboard from './components/dashboard';
+
 import Header from './components/header'
 import {  observer } from 'mobx-react-lite';
 import Footers from './components/footer';
 import items from './pages/MenuItem';
+import ListView from './pages/Tasks/list/ListView';
+
+
 
 
 
@@ -45,9 +48,8 @@ const App: React.FC = () => {
                     borderRadius: borderRadiusLG,
                   }}
                 >
-                  <main>
-                    <Dashboard />
-                  </main>
+                    <ListView/>
+                  
                 </div>
               </Content>
               <Footers/>

@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import {  FormControl, Grid, Select, Typography, Box } from "@material-ui/core";
+import {  FormControl, Grid,  Typography, Box } from "@material-ui/core";
 import UseStore from "../../hooks/useStore"
 import User from "../common/User";
 import { observer } from "mobx-react-lite";
@@ -20,34 +20,21 @@ const Header = () => {
                         <Typography variant="h5">
                             gwask 
                         </Typography>
-                        <FormControl style={{marginBottom: 15}}>
-                            <Select
-                            style={{
-                                backgroundColor: '#adc6ff',
-                                marginTop: 10
-                                
-                            }}
-                            native
-                            value={boards?.active?.id || ''}
-                            onChange={(event) => {
-                                const value = event.target.value as string;
-                                boards.selectBoard(value)
-                            }}
-                            >
-                                <option value='' disabled>
+                        <FormControl style={{marginBottom: 50}}>
 
-                                </option>
                                 {boards?.list.map(b => {
                                     return (
                                         <option key={b.id} value={b?.id}>{b?.title}</option>
                                     )
                                 })}
-                            </Select>
                         </FormControl>
+                        
                         </Box>
                         <LogoutBtn/>
-                        <Statistic/>
                     </Grid>
+                    <Grid>
+                        <Statistic/>
+                        </Grid>
                     <Card>
                     <Grid item>
                         <User  />
