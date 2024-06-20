@@ -59,7 +59,7 @@ function ListParent({
                         ))}
                         {provided.placeholder}
 
-                        {value === 'completed' && !items?.some(item => !item.id) && (
+                        {value !== 'completed' && !items?.some(item => !item.id) && (
                             <RowInput
                             setItems={setItems}
                             filterDate={FILTERS[value] ? FILTERS[value].format() : undefined}

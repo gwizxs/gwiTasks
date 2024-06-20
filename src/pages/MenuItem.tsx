@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import {
-  FileOutlined,
-  TeamOutlined,
   UserOutlined,
   HomeOutlined,
   SettingOutlined,
+  BuildOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
@@ -28,8 +27,7 @@ function getItem(
 const items: MenuItem[] = [
   getItem(<Link to="/vite-project/Home">Home</Link>, 'sub0', <HomeOutlined />),
   getItem(<Link to="/vite-project/Me">Me</Link>, 'sub1', <UserOutlined />),
-getItem(<Link to="/vite-project/Team">Team</Link>, 'sub2', <TeamOutlined />),
-getItem(<Link to="/vite-project/About">About</Link>, 'sub3', <FileOutlined />),
+getItem(<Link to="/vite-project/time-blocking">Time-block</Link>, 'sub3', <BuildOutlined />),
 getItem(<Link to="/vite-project/Settings">Setting</Link>, 'sub4', <SettingOutlined />),
 ];
 

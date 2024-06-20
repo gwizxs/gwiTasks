@@ -5,7 +5,7 @@ import { timeBlockService } from "../../service/time-block.service";
 
 
 
-export function useUpdateTimeBl() {
+export function useUpdateTimeBl(key?: string) {
     const queryClient = useQueryClient()
 
     const {mutate: UpdateTimeBl} = useMutation({

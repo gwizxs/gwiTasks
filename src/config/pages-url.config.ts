@@ -5,7 +5,6 @@ class DASHBOARD {
     HOME = `${this.root}/Home`;
     ME = `${this.root}/Me`;
     TEAM = `${this.root}/Team`;
-    ABOUT = `${this.root}/About`;
     TASKS = `${this.root}/tasks`;
     HABITS = `${this.root}/habits`;
     TIMER = `${this.root}/timer`;

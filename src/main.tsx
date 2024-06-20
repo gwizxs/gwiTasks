@@ -6,8 +6,7 @@ import RootStore from './store/index-Store.ts';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Me from './pages/Me/index.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
-import Team from './pages/Team/Team.tsx';
-import About from './pages/About/time-blocking/form/index.tsx';
+import TimeBlocking from './pages/About/TimeBlocking.tsx';
 import Setting from './pages/Setting/index.tsx';
 import Auth from './pages/auth/Auth.tsx';
 import {DASHBOARD_PAGES }from './config/pages-url.config.ts';
@@ -34,13 +33,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: DASHBOARD_PAGES.TEAM,
-    element: <Team/>,
-    errorElement: <ErrorPage/>
-  },
-  {
-    path: DASHBOARD_PAGES.ABOUT,
-    element: <About/>,
+    path: DASHBOARD_PAGES.TIME_BLOCKING,
+    element: <TimeBlocking/>,
     errorElement: <ErrorPage/>
   },
   {

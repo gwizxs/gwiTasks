@@ -5,7 +5,7 @@ import {useSortable} from '@dnd-kit/sortable'
 
 
 export function useSortBl(id: UniqueIdentifier) {
-    const {attributes, listeners, setNodoRef, transform, transition} =
+    const {attributes, listeners, setNodeRef, transform, transition} =
     useSortable({id})
 
     const style: CSSProperties = {
@@ -13,5 +13,5 @@ export function useSortBl(id: UniqueIdentifier) {
         transition
     }
 
-    return {attributes, listeners, setNodoRef, style}
+    return {attributes, listeners, setNodeRef, style}
 }

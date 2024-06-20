@@ -1,12 +1,10 @@
-
-
 export const COLORS = [
     'tomato',
-    'orchid',
+    'sandybrown',
     'coral',
-    'seagreen',
-    'orange',
-    'royalblue',
-    'lightslategray'
-    
-]
+    'gold',
+    'khaki',
+    'yellowgreen',
+    'gainsboro'
+  ];
+  
