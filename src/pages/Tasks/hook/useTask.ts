@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { ITaskResponse } from "../../../types/task.types";
 
 
-export function useTask() {
+export function useTasks() {
     const {data} = useQuery({
         queryKey: ['tasks'],
         queryFn: () => taskService.getTasks()

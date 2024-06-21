@@ -39,7 +39,7 @@ function ListParent({
                         {filterTasks(items, value)?.map((item, index) => (
                             <Draggable
                             key={item.id}
-                            draggableId={item.id.toString()}
+                            draggableId={item.id}
                             index={index}
                             >
                                 {(provided) => (

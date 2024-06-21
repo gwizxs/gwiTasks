@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useEffect } from "react"
 import type { ITaskResponse } from "../../../types/task.types"
 import { observer } from "mobx-react-lite"
+import styles from './List.module.scss'
 
 
 interface IRowIput {
@@ -13,27 +14,33 @@ interface IRowIput {
 export function RowInput({ setItems, filterDate}: IRowIput) {
     const addRow = () => {
         setItems(prev => {
-          const newTask: ITaskResponse = {
+          if (!prev) return 
+
+
+          return [
+            ...prev,
+          {
             id: '',
             name: '',
             isCompleted: false,
             createdAt: filterDate,
-          };
-      
-          if (!prev) {
-            return [newTask];
           }
-      
-          return [...prev, newTask];
-        });
-      };
+        ]
+        })
+      }
       
       useEffect(() => {
         addRow();
       }, [addRow]);
 
     return (
-        <div>
+        <div className={styles.addRow}>
+          <button
+          onClick={addRow}
+          className={styles.BtnRow}
+          >
+            add task...
+          </button>
         </div>
     )
 } 

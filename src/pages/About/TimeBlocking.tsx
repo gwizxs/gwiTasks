@@ -10,7 +10,7 @@ import items from "../MenuItem";
 import { TimeBlList } from "./TimeBlList";
 import { FormProvider, useForm } from "react-hook-form";
 import type { TypeTimeBlockFormState } from "../../types/time-block.types";
-import TimeBlForm from "./TimeBlForm";
+import TimeBlForm from "./Time-Form/TimeBlForm";
 
 
 const TimeBlocking = () => {
@@ -24,7 +24,7 @@ const TimeBlocking = () => {
 
 
       return (
-            <>
+            <FormProvider {...methods}>
               <Header />
               <Layout style={{ minHeight: '100vh' }}>
                 <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
@@ -55,7 +55,7 @@ const TimeBlocking = () => {
                   <Footers/>
                 </Layout>
               </Layout>
-        </>
+        </FormProvider>
       );
     };
       

@@ -49,19 +49,23 @@ export function TimeBlock({item}: {item: ITimeBlockResponse}) {
               {item.name}
             </div>
             <div style={{ display: 'flex' }}>
-              <Button
-                type="text"
-                icon={<EditOutlined />}
-                onClick={() => {
-                  reset({
-                    id: item.id,
-                    color: item.color,
-                    duration: item.duration,
-                    name: item.name,
-                    order: item.order,
-                  });
-                }}
-              ></Button>
+            <Button
+  type="text"
+  icon={<EditOutlined />}
+  onClick={() => {
+    console.log("Resetting with values:", item);
+    reset({
+      id: item.id,
+      color: item.color,
+      duration: item.duration,
+      name: item.name,
+      order: item.order,
+    });
+  }}
+>
+
+</Button>
+
               <Button type="text" onClick={() => DeleteTimeBl()} >
               {isDeletePending ? <Spin/> : <DeleteOutlined />}
               </Button>

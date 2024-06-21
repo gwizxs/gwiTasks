@@ -4,14 +4,19 @@ import { useTimeBlocks } from "./hook/useTimeBlocks";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { TimeBlock } from "./TimeBlock";
 import {CalcTime} from './calc-time'
+import { Spin } from "antd";
 
 
 
 export function TimeBlList() {
-    const { items, setItems} = useTimeBlocks()
+    const { items, setItems, isLoading} = useTimeBlocks()
     const { handleDragEnd, sensors } = useTimeBlockDnd(items, setItems)
     
     const {hoursTime} = CalcTime(items)
+
+    if (isLoading) {
+        return <Spin/>
+    }
 
 
     return (

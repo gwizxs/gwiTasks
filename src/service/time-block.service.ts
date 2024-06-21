@@ -1,5 +1,5 @@
 import { axiosWithAuth } from "../api/interceptors";
-import { TypeTimeBlockFormState, ITimeBlockResponse } from "../types/time-block.types";
+import type { TypeTimeBlockFormState, ITimeBlockResponse } from "../types/time-block.types";
 
 class TimeBlockService {
     private BASE_URL = '/user/time-blocks';

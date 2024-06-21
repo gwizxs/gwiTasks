@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { TypeTimeBlockFormState } from "../../types/time-block.types";
+import type { TypeTimeBlockFormState } from "../../types/time-block.types";
 import { timeBlockService } from "../../service/time-block.service";
 
 
@@ -7,7 +7,7 @@ import { timeBlockService } from "../../service/time-block.service";
 export function useCreateTimeBl() {
     const queryClient = useQueryClient()
 
-    const {mutate: CreateTimeBl, isPending} = useMutation({
+    const {mutate: CreateTimeBl} = useMutation({
         mutationKey: ['create time-block'],
         mutationFn: (data: TypeTimeBlockFormState) => 
             timeBlockService.createTimeBlock(data),
@@ -20,6 +20,5 @@ export function useCreateTimeBl() {
 
     return {
         CreateTimeBl,
-        isPending
     }
 }

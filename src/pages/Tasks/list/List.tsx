@@ -3,7 +3,7 @@ import type { Dispatch, SetStateAction } from "react";
 import type { ITaskResponse, TypeTaskFormState } from "../../../types/task.types";
 import { useDebounceTask } from "../hook/useDebounceTask";
 import { Controller, useForm } from 'react-hook-form';
-import { Checkbox, DatePicker, Select, Input, Button } from "antd";
+import { Checkbox, DatePicker, Select, Spin} from "antd";
 import useDeleteTask from "../hook/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
@@ -27,7 +27,7 @@ function List({ item, setItems }: IListRow) {
 
   useDebounceTask({ watch, itemsId: item.id });
 
-  const { deleteTask } = useDeleteTask;
+  const { deleteTask, isDeletePending } = useDeleteTask;
 
   return (
     <div className={cn(styles.row, watch('isCompleted') ? styles.completed : '', 'animation-opacity')}>
@@ -44,7 +44,11 @@ function List({ item, setItems }: IListRow) {
               <Checkbox onChange={onChange} checked={value} />
             )}
           />
-          <Input placeholder="add new task" variant="borderless" {...register('name')} />
+          <input
+          className={styles.InputTask}
+           placeholder="add new task"
+          {...register('name')}>
+          </input>
         </span>
       </div>
       <div className={styles.column}>
@@ -52,7 +56,8 @@ function List({ item, setItems }: IListRow) {
           control={control}
           name='createdAt'
           render={({ field: { value, onChange } }) => (
-            <DatePicker onChange={onChange} value={value || ''} />
+            <DatePicker onChange={onChange}
+             value={value || ''} />
           )}
         />
       </div>
@@ -73,13 +78,14 @@ function List({ item, setItems }: IListRow) {
         />
       </div>
       <div className={styles.column}>
-        <Button
+        <button
+        className={styles.Btn}
           onClick={() => {
             item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))
           }}
         >
-          <DeleteOutlined />
-        </Button>
+          {isDeletePending ? <Spin/> : <DeleteOutlined />}
+        </button>
       </div>
     </div>
   );
