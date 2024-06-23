@@ -6,6 +6,7 @@ import { Content } from "antd/es/layout/layout";
 import Footers from "../../components/footer";
 import {  useState } from "react";
 import items from "../MenuItem";
+import Settings from "./Settings";
 
 
 const Setting = () => {
@@ -35,6 +36,7 @@ const Setting = () => {
                         borderRadius: borderRadiusLG,
                       }}
                     >
+                      <Settings/>
 
                     </div>
                   </Content>

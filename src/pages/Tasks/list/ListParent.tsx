@@ -8,7 +8,7 @@ import { filterTasks } from "./filter-tasks"
 import styles from './List.module.scss'
 import { RowInput } from "./RowInput"
 import List from "./List"
-
+import { Typography } from "antd"
 
 
 
@@ -19,6 +19,7 @@ interface IListParent {
     setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>
 }
 
+const { Title } = Typography;
 
 function ListParent({
     value,
@@ -34,7 +35,7 @@ function ListParent({
                     {...provided.droppableProps}
                     >
                         <div className={styles.colHeading}>
-                            <div>{label}</div>
+                            <Title level={4}>{label}</Title>
                         </div>
                         {filterTasks(items, value)?.map((item, index) => (
                             <Draggable
@@ -59,11 +60,14 @@ function ListParent({
                         ))}
                         {provided.placeholder}
 
+
                         {value !== 'completed' && !items?.some(item => !item.id) && (
+
                             <RowInput
                             setItems={setItems}
                             filterDate={FILTERS[value] ? FILTERS[value].format() : undefined}
                             />
+
                         )}
                 </div>
             )}

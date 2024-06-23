@@ -3,7 +3,7 @@ import {  FormControl, Grid,  Typography, Box } from "@material-ui/core";
 import UseStore from "../../hooks/useStore"
 import User from "../common/User";
 import { observer } from "mobx-react-lite";
-import './header.css'
+import './header.module.scss'
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import LogoutBtn from "../Logout/LogoutBtn";

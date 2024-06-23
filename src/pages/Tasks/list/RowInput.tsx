@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
-import { Dispatch, SetStateAction, useEffect } from "react"
+import { Dispatch, SetStateAction,  } from "react"
 import type { ITaskResponse } from "../../../types/task.types"
-import { observer } from "mobx-react-lite"
 import styles from './List.module.scss'
+import { Button } from "antd"
 
 
-interface IRowIput {
+interface IRowInput {
     filterDate?: string
     setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>
 }
 
-export function RowInput({ setItems, filterDate}: IRowIput) {
+export function RowInput({ setItems, filterDate}: IRowInput) {
     const addRow = () => {
         setItems(prev => {
           if (!prev) return 
@@ -28,21 +28,20 @@ export function RowInput({ setItems, filterDate}: IRowIput) {
         ]
         })
       }
+
+
       
-      useEffect(() => {
-        addRow();
-      }, [addRow]);
+
 
     return (
         <div className={styles.addRow}>
-          <button
+          <Button
+          type="text"
           onClick={addRow}
           className={styles.BtnRow}
           >
             add task...
-          </button>
+          </Button>
         </div>
     )
 } 
-
-export default observer(RowInput);

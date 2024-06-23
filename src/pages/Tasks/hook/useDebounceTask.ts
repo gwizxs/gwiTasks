@@ -8,7 +8,7 @@ import { UseFormWatch } from 'react-hook-form';
 
 interface IUseDeb {
   watch: UseFormWatch<TypeTaskFormState>;
-  itemsId: string | undefined; 
+  itemsId: string; 
 }
 
 export function useDebounceTask({ watch, itemsId }: IUseDeb) {

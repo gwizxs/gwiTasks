@@ -7,7 +7,7 @@ import { Input } from 'antd';
 import Uploads from './Uploads';
 import Footers from '../../components/footer';
 import CardMe from './CardMe';
-import ButtonComponent from '../../components/common/Btn-Component'
+import Btn from '../../components/UI/Btn';
 import items from '../MenuItem';
 
 
@@ -56,7 +56,7 @@ const { TextArea } = Input;
       <TextArea showCount maxLength={100} placeholder="введите новое описание" style={{ resize: 'none', width: '100%' }} />
       <div>
       <div style={{   marginTop: 40, float: 'right' }}> 
-        <ButtonComponent onClick={() => onclick} />
+        <Btn onClick={() => onclick} />
       </div>
       </div>
     </Card>

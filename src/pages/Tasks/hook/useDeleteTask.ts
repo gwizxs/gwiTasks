@@ -5,7 +5,7 @@ import {taskService} from "../../../service/task.service";
 export default function useDeleteTask() {
     const queryClient = useQueryClient()
 
-    const { mutate: deleteTask, isPending: isDeletePending} = useMutation({
+    const { mutate: deleteTask} = useMutation({
         mutationKey: ['delete task'],
         mutationFn: (id: string) => taskService.deleteTask(id),
         onSuccess() {
@@ -14,5 +14,5 @@ export default function useDeleteTask() {
             })
         }
     })
-    return {deleteTask, isDeletePending}
+    return {deleteTask}
 }

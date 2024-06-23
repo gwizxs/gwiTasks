@@ -3,12 +3,15 @@ import type { Dispatch, SetStateAction } from "react";
 import type { ITaskResponse, TypeTaskFormState } from "../../../types/task.types";
 import { useDebounceTask } from "../hook/useDebounceTask";
 import { Controller, useForm } from 'react-hook-form';
-import { Checkbox, DatePicker, Select, Spin} from "antd";
+import {   Input, Select} from "antd";
 import useDeleteTask from "../hook/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
 import styles from './List.module.scss';
 import { observer } from "mobx-react-lite";
+import CheckboxComponent from "../../../components/UI/Checkbox";
+import DatePickerComponent from "../../../components/UI/DatePick";
+
 
 interface IListRow {
   item: ITaskResponse;
@@ -27,7 +30,7 @@ function List({ item, setItems }: IListRow) {
 
   useDebounceTask({ watch, itemsId: item.id });
 
-  const { deleteTask, isDeletePending } = useDeleteTask;
+  const { deleteTask } = useDeleteTask();
 
   return (
     <div className={cn(styles.row, watch('isCompleted') ? styles.completed : '', 'animation-opacity')}>
@@ -41,14 +44,15 @@ function List({ item, setItems }: IListRow) {
             control={control}
             name='isCompleted'
             render={({ field: { value, onChange } }) => (
-              <Checkbox onChange={onChange} checked={value} />
+              <CheckboxComponent onChange={onChange} checked={value}/>
             )}
           />
-          <input
+          <Input
+          variant="borderless"
           className={styles.InputTask}
            placeholder="add new task"
           {...register('name')}>
-          </input>
+          </Input>
         </span>
       </div>
       <div className={styles.column}>
@@ -56,7 +60,7 @@ function List({ item, setItems }: IListRow) {
           control={control}
           name='createdAt'
           render={({ field: { value, onChange } }) => (
-            <DatePicker onChange={onChange}
+            <DatePickerComponent onChange={onChange}
              value={value || ''} />
           )}
         />
@@ -84,7 +88,7 @@ function List({ item, setItems }: IListRow) {
             item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))
           }}
         >
-          {isDeletePending ? <Spin/> : <DeleteOutlined />}
+          { <DeleteOutlined />}
         </button>
       </div>
     </div>
