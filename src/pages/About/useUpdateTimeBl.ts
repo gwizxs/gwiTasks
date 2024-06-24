@@ -8,7 +8,7 @@ import { timeBlockService } from "../../service/time-block.service";
 export function useUpdateTimeBl(key?: string) {
     const queryClient = useQueryClient()
 
-    const {mutate: UpdateTimeBl} = useMutation({
+    const {mutate: UpdateTimeBl, isLoading} = useMutation({
         mutationKey: ['create time-block', key],
         mutationFn: ({id, data}: {id: string, data: TypeTimeBlockFormState}) => 
             timeBlockService.updateTimeBlock(id,data),
@@ -20,6 +20,7 @@ export function useUpdateTimeBl(key?: string) {
     })
 
     return {
-        UpdateTimeBl
+        UpdateTimeBl,
+        isLoading
     }
 }

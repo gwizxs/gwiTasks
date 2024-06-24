@@ -17,6 +17,7 @@ const { Title } = Typography;
 const Auth = observer(() => {
     const [isLoginForm, setIsLoginForm] = useState(true);
     const [formData, setFormData] = useState<IAuthForm>({ email: '', password: '' });
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const { mutate } = useMutation({
@@ -26,6 +27,10 @@ const Auth = observer(() => {
             toast.success("Successfully logged in!");
             navigate(DASHBOARD_PAGES.ME);
         },
+        onError: (error) => {
+          setError("неправильный логин или пароль. Попробуйте снова");
+          toast.error("неправильный логин или пароль. Попробуйте снова");
+      }
     });
 
     const toggleForm = () => setIsLoginForm(!isLoginForm);
@@ -39,9 +44,11 @@ const Auth = observer(() => {
         setFormData(allValues);
     };
 
+
     return (
       <div className="login-form-container">
       <Title level={2}>{isLoginForm ? 'Login' : 'Register'}</Title>
+      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       <Form
         name="authForm"
         initialValues={{ remember: true }}
@@ -57,7 +64,10 @@ const Auth = observer(() => {
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: 'Введите пароль' }]}
+          rules={[
+            { required: true, message: 'Введите пароль' },
+          { min: 8, message: 'Пароль должен быть не менее 8 символов' }
+        ]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -66,7 +76,7 @@ const Auth = observer(() => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="login-form-button" >
             {isLoginForm ? 'Login' : 'Register'}
           </Button>
           <span className="auth-toggle" onClick={toggleForm}>

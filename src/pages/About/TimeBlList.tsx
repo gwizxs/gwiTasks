@@ -4,7 +4,7 @@ import { useTimeBlocks } from "./hook/useTimeBlocks";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { TimeBlock } from "./TimeBlock";
 import {CalcTime} from './calc-time'
-import { Spin } from "antd";
+import Skeleton from "react-loading-skeleton";
 
 
 
@@ -14,13 +14,14 @@ export function TimeBlList() {
     
     const {hoursTime} = CalcTime(items)
 
-    if (isLoading) {
-        return <Spin/>
-    }
-
 
     return (
-        <div style={{border: '1px solid #e6f7ff'}}>
+        <div style={{marginBottom: '100px'}}>
+          {isLoading ? (
+        <Skeleton width={500} height={400} baseColor="#d6e4ff" />
+
+    ) : (
+      <>
             <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -56,11 +57,15 @@ export function TimeBlList() {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    height: '10%'
+    
   }}>
                 {hoursTime > 0
                 ? `${hoursTime} hours of 24 left for sleep`
             : 'No hours left for sleep'}
             </div>
+            </>
+    )}
         </div>
     )
 }

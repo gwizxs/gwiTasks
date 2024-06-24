@@ -1,22 +1,32 @@
 import { Card } from "antd";
 import User from "../../components/common/User";
-import Meta from "antd/es/card/Meta";
 import { observer } from "mobx-react-lite";
-
-
-
+import Skeleton from "react-loading-skeleton";
+import { useEffect, useState } from "react";
 
 const CardMe = () => {
-    const { Meta } = Card;
-    return (
-        <div style={{ marginRight: 20 }}>
-        <Card style={{ width: 340, boxSizing: 'border-box', height: 340 }}>
-          <User />
-          <Meta style={{ marginTop: 20 }} title="описание:" description="https://t.me/gwizxs" />
-        </Card>
-      </div>
-    )
-}
+  const [isLoading, setIsLoading] = useState(true);
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default observer(CardMe)
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 200); 
+  }, []);
+
+  return (
+    <div style={{ marginRight: 20 }}>
+      {isLoading ? (
+        <Skeleton width={400} height={350} baseColor="#d6e4ff" />
+      ) : (
+        <>
+          <Card style={{ width: 340, boxSizing: 'border-box', height: 340 }}>
+            <User />
+            <Card.Meta style={{ marginTop: 20 }} title="описание:" description="https://t.me/gwizxs" />
+          </Card>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default observer(CardMe);

@@ -1,4 +1,4 @@
-import { ITimeBlockResponse } from "../../../types/time-block.types"
+import type { ITimeBlockResponse } from "../../types/time-block.types"
 
 
 export function CalcTime(items: ITimeBlockResponse[] | undefined) {

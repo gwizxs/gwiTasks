@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
-import { imageFile } from '../service/image.service';
+import { imageFile } from '../../../service/image.service';
 
 export function useFileQuery(fileName: string) {
-  return useQuery(['image', fileName], () => getFile(fileName), {
+  return useQuery(['image', fileName],  () => getFile(fileName), {
     enabled: !!fileName, 
   });
 }
@@ -10,5 +10,7 @@ export function useFileQuery(fileName: string) {
 async function getFile(fileName: string) {
   const imageBlob = await imageFile.getFile(fileName);
   const imageUrl = URL.createObjectURL(imageBlob);
-  return imageUrl;
+  return {
+    imageUrl
+  }
 }

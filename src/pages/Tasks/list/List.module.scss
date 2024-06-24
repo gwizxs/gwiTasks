@@ -188,3 +188,13 @@ input[type="date"]:focus {
   border-color: #40a9ff;
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
+
+
+.skeletonContainer {
+  margin-bottom: 20px; 
+
+  & > span { 
+    margin-bottom: 10px;
+    display: block;
+  }
+}

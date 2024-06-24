@@ -6,33 +6,48 @@ import { COLUMNS } from "./columns.data";
 import ListParent from './ListParent';
 import { observer } from "mobx-react-lite";
 import styles from './List.module.scss';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function ListView() {
-    const { items, setItems } = useTasks();
-    const { onDragEnd } = useTaskDnd();
+  const { items, setItems, isLoading } = useTasks(); 
+  
+  const { onDragEnd } = useTaskDnd();
 
-    return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <div className={styles.table}>
-                <div>Task name</div>
-                <div>Due date</div>
-                <div>Priority</div>
-                <div>delete task</div>
-            </div>
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className={styles.table}>
+        <div>Task name</div>
+        <div>Due date</div>
+        <div>Priority</div>
+        <div>delete task</div>
+      </div>
 
-            <div className={styles.parentsWrapper}>
-                {COLUMNS.map(column => (
-                    <ListParent
-                        items={items}
-                        label={column.label}
-                        value={column.value}
-                        setItems={setItems}
-                        key={column.value}
-                    />
-                ))}
-            </div>
-        </DragDropContext>
-    );
+      <div className={styles.parentsWrapper}>
+        {isLoading ? (
+          <>
+            {[...Array(COLUMNS.length)].map((_, index) => (
+              <div key={index} className={styles.skeletonContainer}>
+                <Skeleton height={50} />
+                <Skeleton height={50} />
+                <Skeleton height={50} />
+              </div>
+            ))}
+          </>
+        ) : (
+          COLUMNS.map(column => (
+            <ListParent
+              items={items}
+              label={column.label}
+              value={column.value}
+              setItems={setItems}
+              key={column.value}
+            />
+          ))
+        )}
+      </div>
+    </DragDropContext>
+  );
 }
 
 export default observer(ListView);

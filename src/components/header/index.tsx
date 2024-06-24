@@ -22,11 +22,6 @@ const Header = () => {
                         </Typography>
                         <FormControl style={{marginBottom: 50}}>
 
-                                {boards?.list.map(b => {
-                                    return (
-                                        <option key={b.id} value={b?.id}>{b?.title}</option>
-                                    )
-                                })}
                         </FormControl>
                         
                         </Box>
