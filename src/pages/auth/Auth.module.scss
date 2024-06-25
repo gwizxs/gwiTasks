@@ -1,4 +1,4 @@
-.login-form-container {
+.loginFormContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-.login-form {
+.loginForm {
   width: 400px;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -16,16 +16,16 @@
 }
 
 
-.login-form h1 {
+.loginForm h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.login-form-button {
+.loginFormButton {
   width: 100%;
 }
 
-.auth-toggle {
+.authToggle {
   cursor: pointer;
   text-decoration: underline;
 }

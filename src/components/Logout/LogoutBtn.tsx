@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import { authService } from "../../service/auth.service";
 import { useNavigate } from "react-router";
 import { DASHBOARD_PAGES } from "../../config/pages-url.config";
-import { LogoutOutlined } from "@ant-design/icons";
+import { RxExit } from "react-icons/rx";
 import { Button, Tooltip } from "antd";
 import { observer } from "mobx-react-lite";
 
@@ -21,7 +21,7 @@ function LogoutBtn() {
 
   return (
   <Tooltip>
-    <Button onClick={handleLogout} type="primary" icon={<LogoutOutlined />} />
+    <Button onClick={handleLogout} type="dashed" ghost icon={<RxExit />} ></Button>
   </Tooltip>
   )
 }

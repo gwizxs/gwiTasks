@@ -9,6 +9,8 @@ import styles from './List.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+
+
 function ListView() {
   const { items, setItems, isLoading } = useTasks(); 
   
@@ -28,9 +30,9 @@ function ListView() {
           <>
             {[...Array(COLUMNS.length)].map((_, index) => (
               <div key={index} className={styles.skeletonContainer}>
-                <Skeleton height={50} />
-                <Skeleton height={50} />
-                <Skeleton height={50} />
+                <Skeleton height={70} />
+                <Skeleton height={70} />
+                <Skeleton height={70}/>
               </div>
             ))}
           </>

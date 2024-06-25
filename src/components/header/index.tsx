@@ -1,46 +1,36 @@
-/* eslint-disable react-refresh/only-export-components */
-import {  FormControl, Grid,  Typography, Box } from "@material-ui/core";
-import UseStore from "../../hooks/useStore"
-import User from "../common/User";
-import { observer } from "mobx-react-lite";
-import './header.module.scss'
-import { Card } from "antd";
-import Meta from "antd/es/card/Meta";
+import { Typography, Row, Col, Space,  Card } from "antd"
+import './header.module.scss';
 import LogoutBtn from "../Logout/LogoutBtn";
 import Statistic from "../Statistic";
+import { observer } from "mobx-react-lite";
+import User from "../common/User";
+import logo from './assets/Avatar.jpg';
 
+const { Title } = Typography;
 
-const Header = () => {
-    const {boards} = UseStore();
+const Header = observer(() => {
     return (
-        <nav style={{borderStyle: "double"}}>
-                <Grid container justifyContent="space-between" alignItems="center" >
-                    <Grid item>
-                        <Box display="flex" alignItems="center">
-                        <Typography variant="h5">
-                            gwask 
-                        </Typography>
-                        <FormControl style={{marginBottom: 50}}>
-
-                        </FormControl>
-                        
-                        </Box>
-                        <LogoutBtn/>
-                    </Grid>
-                    <Grid>
-                        <Statistic/>
-                        </Grid>
+        <nav style={{ borderStyle: "double" }}>
+            <Row justify="space-between" align="middle" style={{ padding: '10px' }}>
+                <Col>
+                    <Space align="center">
+                    <img src={logo} style={{ width: 60, height: 60 }} />
+                        <Title  level={3}>Blockify <LogoutBtn/></Title>
+                    </Space>
+                </Col>
+                <Col>
+                    <Statistic />
+                </Col>
+                <Col>
                     <Card>
-                    <Grid item>
-                        <User  />
-                        <Meta style={{marginBottom: 2}}   />
-                    </Grid>
+                        <Space direction="vertical" size="small" align="center">
+                            <User/>
+                        </Space>
                     </Card>
+                </Col>
+            </Row>
+        </nav>
+    );
+});
 
-                </Grid>
-                </nav>
-    )
-}
-
-
-export default observer(Header);
+export default Header;

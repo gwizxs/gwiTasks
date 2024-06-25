@@ -1,10 +1,10 @@
 import { useFormContext } from "react-hook-form";
-import type { ITimeBlockResponse, TypeTimeBlockFormState } from "../../types/time-block.types";
-import { useSortBl } from "./hook/useSortBl";
-import { useDelete } from "./hook/useDelete";
+import type { ITimeBlockResponse, TypeTimeBlockFormState } from "../../../types/time-block.types";
+import { useSortBl } from "../hook/useSortBl";
+import { useDelete } from "../hook/useDelete";
 import { Button, Spin } from "antd";
 import { DeleteOutlined, EditOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
-import styles from "./TimeBlocking.module.scss";
+import styles from "./TimeBlock.module.scss";
 
 export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
   const { attributes, listeners, setNodeRef, style } = useSortBl(item.id);
@@ -30,41 +30,13 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
             {...listeners}
             aria-describedby="time-block"
           ></Button>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'white',
-                borderRadius: '10px',
-                width: '70%',
-                marginTop: '-10px',
-                padding: '10px',
-                wordWrap: 'break-word',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  width: '100%',
-                  minHeight: '40px',
-                }}
-              >
-                <div style={{ marginLeft: '10px' }}>
-                  <span style={{ wordWrap: 'break-word', width: '100%' }}>{item.name}</span>
+          <div className={styles.blockContent}> 
+            <div className={styles.blockInfo}> 
+              <div className={styles.blockHeader}> 
+                <div className={styles.blockName}> 
+                  <span>{item.name}</span>
                 </div>
-                <div style={{ display: 'flex' }}>
+                <div className={styles.blockActions}> 
                   <Button
                     type="text"
                     icon={<EditOutlined />}
@@ -85,7 +57,7 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
                   </Button>
                 </div>
               </div>
-              <div style={{ backgroundColor: '#e6f7ff', marginTop: '5px', padding: '2px' }}>
+              <div className={styles.blockDuration}> 
                 {item.duration} min
               </div>
             </div>

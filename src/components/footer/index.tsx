@@ -7,8 +7,7 @@ const Footers = () => {
     const Footer = Layout
     return (
         <Footer style={{ textAlign: 'center', bottom: 0 }}>
-        gwask ©{new Date().getFullYear()} 
-        <h5>соц-сети владельца:</h5>
+        Blockify ©{new Date().getFullYear()} 
         <hr />
         <ul className="socials">
   <li><a href="https://github.com/gwizxs"> <GithubFilled  /></a></li>

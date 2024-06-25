@@ -7,13 +7,15 @@ import { Content } from "antd/es/layout/layout";
 import Footers from "../../components/footer";
 import {  useState } from "react";
 import items from "../MenuItem";
-import { TimeBlList } from "./TimeBlList";
+import { TimeBlList } from "./Form/Timelist";
 import { FormProvider, useForm } from "react-hook-form";
 import type { TypeTimeBlockFormState } from "../../types/time-block.types";
-import TimeBlForm from "./Time-Form/TimeBlForm";
+import TimeBlForm from "./Form/TimeForm";
+import styles from './TimeBlocking.module.scss'
 
 
-const TimeBlocking = () => {
+
+const TimeBlocking = observer(() => {
     const [collapsed, setCollapsed] = useState(false);
     const {
       token: { colorBgContainer, borderRadiusLG },
@@ -34,7 +36,7 @@ const TimeBlocking = () => {
                 <Layout>
                   <Content style={{ margin: '0 16px' }}>
                     <Breadcrumb style={{ margin: '16px 0', backgroundColor: "#f0f0f0" }}>
-                      <Breadcrumb.Item>Team</Breadcrumb.Item>
+                      <Breadcrumb.Item>Time block</Breadcrumb.Item>
                     </Breadcrumb>
                     <div
                       style={{
@@ -45,7 +47,7 @@ const TimeBlocking = () => {
                       }}
                     >
                      <FormProvider {...methods}>
-                     <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12}}>
+                     <div className={styles.DivBlock}>
                          <TimeBlList/>
                          <TimeBlForm/>
                      </div>
@@ -57,7 +59,6 @@ const TimeBlocking = () => {
               </Layout>
         </FormProvider>
       );
-    };
+    })
       
-// eslint-disable-next-line react-refresh/only-export-components
-export default observer(TimeBlocking);
+export default TimeBlocking;

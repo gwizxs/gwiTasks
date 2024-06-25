@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TypeUserForm } from "../../types/auth.types";
-import { useInitDate } from "./hook/UseInitDate";
-import { useUpdateSettings } from "./hook/useUpdateSettings";
-import {  Form } from "antd";
-import ButtonComponent from '../../components/UI/Btn'
+import { useInitDate } from "../Me/hook/UseInitDate";
+import { useUpdateSettings } from "../Me/hook/useUpdateSettings";
+import {  Button, Form } from "antd";
 import InputComponent from "../../components/UI/Input";
+import { observer } from "mobx-react-lite";
 
-const Settings = () => {
+const Settings = observer(() => {
     const { register, handleSubmit, reset } = useForm<TypeUserForm>({
         mode: 'onChange'
     })
@@ -25,6 +25,7 @@ const Settings = () => {
     }
 
     return (
+        <div>
         <Form onFinish={handleSubmit(onSubmit)}> 
             <Form.Item label="Email" name="email" >
                 <InputComponent
@@ -47,13 +48,14 @@ const Settings = () => {
                 {...register('password')} />
             </Form.Item>
             <Form.Item> 
-                <ButtonComponent
+                <Button
                 disabled={isPending}
-                >Save</ButtonComponent>
+                >Save</Button>
             </Form.Item>
         </Form>
+        </div>
     )
-}
+})
 
 
 export default Settings;

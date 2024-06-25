@@ -1,7 +1,7 @@
 
 import { useMutation, useQueryClient } from "react-query";
-import type { TypeTimeBlockFormState } from "../../types/time-block.types";
-import { timeBlockService } from "../../service/time-block.service";
+import type { TypeTimeBlockFormState } from "../../../types/time-block.types";
+import { timeBlockService } from "../../../service/time-block.service";
 
 
 

@@ -1,13 +1,12 @@
 import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
-import type { TypeTimeBlockFormState } from "../../../types/time-block.types";
-import { useUpdateTimeBl } from "../useUpdateTimeBl";
-import { useCreateTimeBl } from "../useCreateTimeBl";
-import { COLORS } from "../colors.date";
+import type { TypeTimeBlockFormState } from "../../../../types/time-block.types";
+import { useUpdateTimeBl } from "../../hook/useUpdateTimeBl";
+import { useCreateTimeBl } from "../../hook/useCreateTimeBl";
+import { COLORS } from "../../colors.date";
 import { Select } from "antd";
 import styles from './TimeBl.module.scss'
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
-import Skeleton from "react-loading-skeleton";
+import {  useState } from "react";
 
 function TimeBlForm() {
   const { register, control, watch, reset, handleSubmit, formState: { errors } } =
@@ -39,6 +38,8 @@ function TimeBlForm() {
       order: 1,
     });
   };
+    // ----------убираем красный текст если пользователь сделал все правильно ------------------
+  // --------------------------------------------------------------------------------------------
 
   // Validation logic
   const handleError = (errors) => {
@@ -46,9 +47,11 @@ function TimeBlForm() {
       setErrorBl("Пожалуйста, введите название задачи");
     } else if (errors.duration?.type === 'required') {
       setErrorBl("Пожалуйста, введите время");
+    }  else if (!existsId && !isPending) { 
+      setErrorBl('');
     } if (errors.name?.type === 'required' && errors.duration?.type === 'required') {
       setErrorBl("Пожалуйста, введите время и название задачи");
-    } 
+    }
   };
 
   return (

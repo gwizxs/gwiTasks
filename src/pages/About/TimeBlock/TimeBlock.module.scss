@@ -1,0 +1,48 @@
+.block {
+    // ... ваши стили для блока
+  
+    .blockContent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      .blockInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 10px;
+        width: 70%;
+        margin-top: -10px;
+        padding: 10px;
+        word-wrap: break-word;
+        text-align: center;
+  
+        .blockHeader {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          min-height: 40px;
+  
+          .blockName {
+            margin-left: 10px;
+            width: 100%;
+            word-wrap: break-word;
+          }
+  
+          .blockActions {
+            display: flex;
+          }
+        }
+  
+        .blockDuration {
+          background-color: #e6f7ff;
+          margin-top: 5px;
+          padding: 2px;
+        }
+      }
+    }
+  }
+  

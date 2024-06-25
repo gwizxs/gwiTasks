@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import Skeleton from "react-loading-skeleton";
 import { useEffect, useState } from "react";
 
-const CardMe = () => {
+const CardMe = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const CardMe = () => {
   return (
     <div style={{ marginRight: 20 }}>
       {isLoading ? (
-        <Skeleton width={400} height={350} baseColor="#d6e4ff" />
+        <Skeleton width={400} height={350} baseColor="#d9d9d9" />
       ) : (
         <>
           <Card style={{ width: 340, boxSizing: 'border-box', height: 340 }}>
@@ -27,6 +27,6 @@ const CardMe = () => {
       )}
     </div>
   );
-};
+})
 
-export default observer(CardMe);
+export default CardMe;

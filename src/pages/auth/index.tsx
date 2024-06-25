@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import './Auth.scss'
+import styles from './Auth.module.scss'
 import { Typography } from 'antd';
 
 const { Title } = Typography;
@@ -25,7 +25,7 @@ const Auth = observer(() => {
         mutationFn: (data: IAuthForm) => authService.main(isLoginForm ? 'login' : 'register', data),
         onSuccess: () => {
             toast.success("Successfully logged in!");
-            navigate(DASHBOARD_PAGES.ME);
+            navigate(DASHBOARD_PAGES.HOME);
         },
         onError: (error) => {
           setError("неправильный логин или пароль. Попробуйте снова");
@@ -46,7 +46,7 @@ const Auth = observer(() => {
 
 
     return (
-      <div className="login-form-container">
+      <div className={styles.loginFormContainer}>
       <Title level={2}>{isLoginForm ? 'Login' : 'Register'}</Title>
       {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       <Form
@@ -54,32 +54,37 @@ const Auth = observer(() => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onValuesChange={handleChange}
-        className="login-form"
+        className={styles.loginForm}
       >
         <Form.Item
+          validateFirst
+          hasFeedback
+          validateDebounce={1500}
           name="email"
           rules={[{ required: true, message: 'Введите email' }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+          <Input prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="Email" />
         </Form.Item>
         <Form.Item
+                  validateFirst
+                  hasFeedback
           name="password"
           rules={[
             { required: true, message: 'Введите пароль' },
           { min: 8, message: 'Пароль должен быть не менее 8 символов' }
         ]}
         >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
+          <Input.Password
+            prefix={<LockOutlined className={styles.siteFormItemIcon} />}
             type="password"
             placeholder="Password"
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button" >
+          <Button type="primary" htmlType="submit" className={styles.loginFormButton} >
             {isLoginForm ? 'Login' : 'Register'}
           </Button>
-          <span className="auth-toggle" onClick={toggleForm}>
+          <span className={styles.authToggle} onClick={toggleForm}>
             {isLoginForm ? 'register now!' : 'login now!'}
           </span>
         </Form.Item>

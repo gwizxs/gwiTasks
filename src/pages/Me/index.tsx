@@ -9,7 +9,7 @@ import items from '../MenuItem';
 
 const { Content, Sider } = Layout;
 
-const Me = () => {
+const Me = observer(() => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -48,6 +48,6 @@ const Me = () => {
       </Layout>
     </>
   );
-};
+})
 
-export default observer(Me);
+export default Me;

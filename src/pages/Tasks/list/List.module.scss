@@ -34,17 +34,18 @@
     padding: 8px;
     background-color: #f0f0f0;
     border-bottom: 1px solid #ccc;
-}
-
-.table div {
-    flex: 1;
-    text-align: center;
-    border-right: 1px solid #ccc;
-}
-
-.table div:last-child {
-    border-right: none;
-}
+  
+    td {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid #ccc;
+    }
+  
+    td:last-child {
+      border-right: none;
+    }
+  }
+  
 
 .parentsWrapper {
     display: flex;

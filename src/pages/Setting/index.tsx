@@ -9,7 +9,7 @@ import items from "../MenuItem";
 import Settings from "./Settings";
 
 
-const Setting = () => {
+const Setting = observer(() => {
     const [collapsed, setCollapsed] = useState(false);
     const {
       token: { colorBgContainer, borderRadiusLG },
@@ -45,7 +45,7 @@ const Setting = () => {
               </Layout>
         </>
       );
-    };
+    })
       
 // eslint-disable-next-line react-refresh/only-export-components
-export default observer(Setting)
+export default Setting

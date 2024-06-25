@@ -8,7 +8,7 @@ import Me from './pages/Me/index.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import TimeBlocking from './pages/About/TimeBlocking.tsx';
 import Setting from './pages/Setting/index.tsx';
-import Auth from './pages/auth/Auth.tsx';
+import Auth from './pages/auth/index.tsx';
 import {DASHBOARD_PAGES }from './config/pages-url.config.ts';
 import{ QueryClient, QueryClientProvider } from 'react-query';
 
