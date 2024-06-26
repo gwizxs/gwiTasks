@@ -1,63 +1,13 @@
-/* eslint-disable no-unexpected-multiline */
-import React, { useState } from 'react';
-import './App.css';
-import './style/reset.css'
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-
-import Header from './components/header'
-import {  observer } from 'mobx-react-lite';
-import Footers from './components/footer';
-import items from './pages/MenuItem';
-import ListView from './pages/Tasks/list/ListView';
+import Body from "./components/Body"
+import ListView from "./pages/Tasks/list/ListView"
 
 
-
-
-
-
-const { Content, Sider } = Layout;
-
-
-
-const App: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
-  
-
+const App = () => {
   return (
-        <>
-          <Header />
-          <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-              <div className="demo-logo-vertical" />
-              <Menu theme="dark" defaultSelectedKeys={['sub0']} mode="inline" items={items} />
-            </Sider>
-            <Layout>
-              <Content style={{ margin: '0 16px' }}>
-                <Breadcrumb style={{ margin: '16px 0', backgroundColor: "#f0f0f0" }}>
-                  <Breadcrumb.Item>Home</Breadcrumb.Item>
-                </Breadcrumb>
-                <div
-                  style={{
-                    padding: 24,
-                    minHeight: 360,
-                    background: colorBgContainer,
-                    borderRadius: borderRadiusLG,
-                  }}
-                >
-                    <ListView/>
-                  
-                </div>
-              </Content>
-              <Footers/>
-            </Layout>
-          </Layout>
-    </>
-  );
-};
+    <Body selectedKey="sub0" BreadName={'Home'}>
+       <ListView/>
+    </Body>
+  )
+}
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default observer(App);
+export default App;

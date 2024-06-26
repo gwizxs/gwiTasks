@@ -1,5 +1,4 @@
 import { Card } from "antd";
-import User from "../../components/common/User";
 import { observer } from "mobx-react-lite";
 import Skeleton from "react-loading-skeleton";
 import { useEffect, useState } from "react";
@@ -20,7 +19,7 @@ const CardMe = observer(() => {
       ) : (
         <>
           <Card style={{ width: 340, boxSizing: 'border-box', height: 340 }}>
-            <User />
+
             <Card.Meta style={{ marginTop: 20 }} title="описание:" description="https://t.me/gwizxs" />
           </Card>
         </>

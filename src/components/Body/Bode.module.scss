@@ -1,0 +1,23 @@
+.body-layout {
+    min-height: '100vh';
+  }
+  
+  .body-sider {
+
+  }
+  
+  .body-content {
+    margin: '0 16px';
+  }
+  
+  .body-breadcrumb {
+    margin: '16px 0';
+  }
+  
+  .body-children {
+    padding: 24px;
+    min-height: 360px;
+    background: var(--colorBgContainer); 
+    border-radius: var(--borderRadiusLG); 
+  }
+  

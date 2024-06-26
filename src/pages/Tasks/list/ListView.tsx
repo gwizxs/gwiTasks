@@ -5,7 +5,7 @@ import { useTaskDnd } from "../hook/useTaskDnd";
 import { COLUMNS } from "./columns.data";
 import ListParent from './ListParent';
 import { observer } from "mobx-react-lite";
-import styles from './List.module.scss';
+import styles from './List.module.scss'
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 

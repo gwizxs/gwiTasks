@@ -6,7 +6,7 @@ import type { TypeUserForm } from "../../../types/auth.types";
 
 
 export function useInitDate(reset: UseFormReset<TypeUserForm>) {
-    const {isSuccess, data} = useProfile()
+    const { data, isSuccess} = useProfile()
 
     useEffect(() => {
         if(isSuccess && data)

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-import { imageFile } from '../../service/image.service'; // Import the service
+import { imageFile } from '../../service/image.service'; 
+import { observer } from 'mobx-react-lite';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
@@ -14,7 +15,7 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const Uploads: React.FC = () => {
+const Uploads= observer(() => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -41,7 +42,6 @@ const Uploads: React.FC = () => {
   const handleUpload = async (file: File) => {
     try {
       const uploadedFile = await imageFile.uploadFile(file);
-      // Update fileList with the uploaded file information
       setFileList([
         ...fileList,
         {
@@ -81,6 +81,6 @@ const Uploads: React.FC = () => {
       )}
     </>
   );
-};
+})
 
 export default Uploads;

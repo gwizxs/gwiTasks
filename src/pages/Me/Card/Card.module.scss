@@ -1,0 +1,30 @@
+.cardDetailsForm {
+    // Стили для формы
+  }
+  
+  .cardDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  
+    .uploadContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+  
+      .nameInput {
+        margin-left: 10px;
+      }
+    }
+  
+    .passwordInput {
+      margin-top: 20px;
+    }
+  
+    .saveButtonContainer {
+      margin-top: 40px;
+      text-align: right; 
+    }
+  }
+  

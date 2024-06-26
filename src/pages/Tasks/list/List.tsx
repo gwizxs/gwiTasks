@@ -3,14 +3,14 @@ import type { Dispatch, SetStateAction } from "react";
 import type { ITaskResponse, TypeTaskFormState } from "../../../types/task.types";
 import { useDebounceTask } from "../hook/useDebounceTask";
 import { Controller, useForm } from 'react-hook-form';
-import {   Input, Select} from "antd";
+import {   Button, Input, Select} from "antd";
 import useDeleteTask from "../hook/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
-import styles from './List.module.scss';
 import { observer } from "mobx-react-lite";
 import CheckboxComponent from "../../../components/UI/Checkbox";
 import DatePickerComponent from "../../../components/UI/DatePick";
+import styles from './List.module.scss'
 
 
 interface IListRow {
@@ -36,9 +36,9 @@ function List({ item, setItems }: IListRow) {
     <div className={cn(styles.row, watch('isCompleted') ? styles.completed : '', 'animation-opacity')}>
       <div className={styles.column}>
         <span className={styles.inputRow}>
-          <button>
+          <Button>
             <VerticalAlignMiddleOutlined className={styles.grip} />
-          </button>
+          </Button>
 
           <Controller
             control={control}

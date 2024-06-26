@@ -16,7 +16,10 @@
   }
   
   .grip {
-    margin-right: 10px;
+    margin-right: 1px;
+    cursor: pointer; 
+    color: #e8e8e8;
+    outline: none;
   }
   
   .completed {
@@ -35,13 +38,13 @@
     background-color: #f0f0f0;
     border-bottom: 1px solid #ccc;
   
-    td {
+    div {
       flex: 1;
       text-align: center;
       border-right: 1px solid #ccc;
     }
   
-    td:last-child {
+    div:last-child {
       border-right: none;
     }
   }
