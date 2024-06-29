@@ -25,7 +25,7 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
         <div>
           <Button
             type="text"
-            icon={<VerticalAlignMiddleOutlined />}
+            icon={<VerticalAlignMiddleOutlined style={{ color: 'black' }} />}
             {...attributes}
             {...listeners}
             aria-describedby="time-block"
@@ -39,7 +39,7 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
                 <div className={styles.blockActions}> 
                   <Button
                     type="text"
-                    icon={<EditOutlined />}
+                    icon={<EditOutlined style={{ color: 'black' }} />}
                     onClick={() => {
                       console.log('Resetting with values:', item);
                       reset({
@@ -53,7 +53,7 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
                   ></Button>
 
                   <Button type="text" onClick={() => DeleteTimeBl()}>
-                    {isDeletePending ? <Spin /> : <DeleteOutlined />}
+                    {isDeletePending ? <Spin/> : <DeleteOutlined style={{ color: 'black' }} />}
                   </Button>
                 </div>
               </div>

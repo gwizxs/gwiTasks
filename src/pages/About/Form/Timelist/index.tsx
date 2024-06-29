@@ -6,6 +6,7 @@ import { TimeBlock } from "../../TimeBlock";
 import {CalcTime} from '../../calc-time'
 import Skeleton from "react-loading-skeleton";
 import styles from './TimeList.module.scss'
+import { Flex, Progress } from "antd";
 
 export function TimeBlList() {
   const { items, setItems, isLoading } = useTimeBlocks();
@@ -34,19 +35,23 @@ export function TimeBlList() {
                     <TimeBlock key={item.id} item={item} />
                   ))
                 ) : (
-                  <h1 className={styles.emptyState}> 
+                  <h3 className={styles.emptyState}> 
                     add first time-block
-                  </h1>
+                  </h3>
                 )}
               </SortableContext>
             </div>
           </DndContext>
-          <div className={styles.sleepTime}> 
+          <Flex  align="center" gap="small" style={{ padding: 20, width: '100%' }}>
+          <Progress  percent={Math.round((24 - hoursTime) * 100 / 24)}
+           format={(number) => `hours for sleep:  ${hoursTime > 0 ? hoursTime : 'time to sleep'}`}
+          size={['100%', 20]}>
+</Progress>
 
-            {hoursTime > 0
-              ? `${hoursTime} hours of 24 left for sleep`
-              : 'No hours left for sleep'}
-          </div>
+</Flex>
+
+
+
         </>
       )}
     </div>

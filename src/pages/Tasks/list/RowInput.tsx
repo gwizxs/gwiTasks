@@ -36,7 +36,6 @@ export function RowInput({ setItems, filterDate}: IRowInput) {
     return (
         <div className={styles.addRow}>
           <Button
-          type="text"
           onClick={addRow}
           className={styles.BtnRow}
           >

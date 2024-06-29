@@ -1,115 +1,53 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { flow, getParent, types, onSnapshot, cast} from "mobx-state-tree";
-import apiCall from '../api';
-import  User  from './users-Store'
-import {v1 as uuid} from "uuid"; 
+import { types, flow, cast } from "mobx-state-tree";
+import { axiosWithAuth } from "../api/interceptors";
 
+const TaskModel = types.model("Task", {
+  id: types.identifier,
+  title: types.string,
+  description: types.string,
+  assignee: types.string,
+  date: types.Date,
+});
 
-interface DroppableSource {
-    droppableId: string;
-    index: number;
-  }
-
-  interface Task {
-    id?: string;
-    title: string | undefined;
-    description: string | undefined;
-    assignee: string | undefined;
-    date: null;
-  }
-  
-  
-export const TaskModel = types.model('Task', {
-    id: types.identifier,
-    title: types.string,
-    description: types.string,
-    assignee: types.safeReference(User),
+const TaskStore = types.model("TaskStore", {
+  tasks: types.array(TaskModel),
 })
-
-const BoardSection = types.model('BoardSection',  {
-    id: types.identifier,
-    title: types.string,
-    tasks: types.array(TaskModel),
-}).actions((self) => {
-  return {
-    load: flow(function* load() {
-      const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
-      const {id: status} = self;
-      const { tasks } = yield apiCall.get(`boards/${boardID}/tasks/${status}`);
-      self.tasks = cast(tasks);
-      onSnapshot(self, self.save);
-    }),
-        afterCreate() {
-            self.load();
-          },
-        save: flow(function* save(tasks) {
-            const {id: boardID} = (getParent<typeof Board>(self, 2) as { id: string });
-            const {id: status} = self;
-            yield apiCall.put(`boards/${boardID}/tasks/${status}`,  {tasks} )
-        }),
-        addTask(taskPayload: Task) {
-            self.tasks.push(taskPayload);
-        },
-    };
-});
-
-export const Board = types.model('Board', {
-    id: types.identifier,
-    title: types.string,
-    sections: types.array(BoardSection),
-}).actions(self => {
-    return {
-      moveTask(taskId: string, source: DroppableSource, destination: DroppableSource) {
-            const fromSection = self.sections?.find(section => section.id === source.droppableId);
-            const toSection = self.sections?.find(section => section.id === destination.droppableId);
-          
-            if (fromSection && toSection) {
-                const taskToMoveIndex = fromSection.tasks.findIndex(task => task.id === taskId);
-                if (taskToMoveIndex !== -1) {
-                    const [task] = fromSection.tasks.splice(taskToMoveIndex, 1);
-                    toSection.tasks.splice(destination.index, 0, task);
-                }
-            }
-        },
-        addTask(sectionId: string, taskPayload: Task) {
-          const section = self.sections.find(section => section.id === sectionId);
-          if (section) {
-              section.tasks.push({
-                  id: uuid(),
-                  ...taskPayload,
-                   date: taskPayload.date,  
-                   assignee: taskPayload.assignee,
-              });
-          }
-      },  
-    };
-});
-
-
-const BoardStore = types
-.model("BoardsStore", {
-   active: types.maybeNull(types.late(() => types.reference(Board))),
-    boards: types.optional(types.array(Board), []),
-  })
-  .views((self) => ({
-    get list() {
-      return self.boards.map(({ id, title }) => ({ id, title }));
-    },
-  }))
-  .actions((self) => {
-    return {
-      load: flow(function* () {
-        self.boards = yield apiCall.get("boards");
-        self.active = cast(self.boards.length > 0 ? self.boards[0].id : 'MAIN'); 
-      }),
-      afterCreate(): void {
-        self.load();
-      },
-      selectBoard(id: string | undefined): void {
-        self.active = id;
+.actions(self => ({
+  loadTasks: flow(function* () {
+    try {
+      const response = yield axiosWithAuth.get("/user/tasks");
+      self.tasks = cast(response.data);
+    } catch (error) {
+      console.error("Failed to fetch tasks", error);
+    }
+  }),
+  addTask: flow(function* (taskData) {
+    try {
+      const response = yield axiosWithAuth.post("/user/tasks", taskData);
+      self.tasks.push(response.data);
+    } catch (error) {
+      console.error("Failed to add task", error);
+    }
+  }),
+  updateTask: flow(function* (taskId, taskData) {
+    try {
+      yield axiosWithAuth.put(`/user/tasks/${taskId}`, taskData);
+      const index = self.tasks.findIndex(task => task.id === taskId);
+      if (index !== -1) {
+        self.tasks[index] = cast({ ...self.tasks[index], ...taskData });
       }
-    };
-  });
+    } catch (error) {
+      console.error("Failed to update task", error);
+    }
+  }),
+  deleteTask: flow(function* (taskId) {
+    try {
+      yield axiosWithAuth.delete(`/user/tasks/${taskId}`);
+      self.tasks.replace(self.tasks.filter(task => task.id !== taskId));
+    } catch (error) {
+      console.error("Failed to delete task", error);
+    }
+  }),
+}));
 
-export default BoardStore;
-
+export default TaskStore;

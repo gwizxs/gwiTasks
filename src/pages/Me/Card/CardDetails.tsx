@@ -1,103 +1,88 @@
-import { Card, Form, Input } from 'antd';
 import Uploads from '../Uploads';
 import Skeleton from 'react-loading-skeleton';
-import { useInitDate } from "../hook/UseInitDate";
-import { useUpdateSettings } from "../hook/useUpdateSettings";
-import { TypeUserForm } from '../../../types/auth.types';
+import { useInitDate } from '../hook/UseInitDate';
+import { useUpdateSettings } from '../hook/useUpdateSettings';
+import type { TypeUserForm } from '../../../types/auth.types';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { observer } from 'mobx-react-lite';
 import styles from './Card.module.scss';
+import { Button, Input } from 'antd';
+import { observer } from 'mobx-react-lite';
 
 const CardDetails = observer(() => {
   const { register, handleSubmit, reset } = useForm<TypeUserForm>({
-    mode: 'onChange'
+    mode: 'onChange',
   });
 
   useInitDate(reset);
 
   const { isPending, mutate } = useUpdateSettings();
 
-  const onSubmit: SubmitHandler<TypeUserForm> = data => {
+  const onSubmit: SubmitHandler<TypeUserForm> = async (data) => {
     const { password, ...rest } = data;
-
-    mutate({
-      ...rest,
-      password: password 
-    });
+    try {
+      await mutate({
+        ...rest,
+        password: password || undefined,
+      });
+    } catch (error) {
+      console.error('Ошибка обновления настроек:', error);
+    }
   };
 
   return (
-    <Form
-      layout="vertical"
-      className={styles.carDetailsForm}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.cardDetailsForm}>
       {isPending ? (
         <Skeleton width={400} height={350} baseColor="#d9d9d9" />
       ) : (
         <>
-          <Card className={styles.cardDetails}>
+          <div className={styles.cardDetails}>
             <div className={styles.uploadContainer}>
               <Uploads />
               <div className={styles.nameInput}>
-                <Form.Item
-                  label="имя"
+                <label htmlFor="name">Name</label>
+                <Input
+                  {...register('name', { required: 'Enter a new name' })}
+                  type="text"
                   id="name"
-                  validateFirst
-                  hasFeedback
-                  rules={[
-                    { required: true, message: 'введите новое имя' }
-                  ]}
-                >
-                  <Input
-                    {...register('name')}
-                  ></Input>
-                </Form.Item>
+                  disabled={isPending}
+                />
               </div>
             </div>
-            <Form.Item
-              label="почта"
-              id="email"
-              validateFirst
-              hasFeedback
-              rules={[
-                { required: true, message: 'введите новую почту' }
-              ]}
-            >
+            <div>
+              <label htmlFor="email">Email</label>
               <Input
-                {...register('email', {
-                  required: true
-                })}
-              ></Input>
-            </Form.Item>
-            <Form.Item
-              label="пароль"
-              id="password"
-              validateFirst
-              hasFeedback
-              rules={[
-                { min: 8, message: 'пароль не может быть меньше 8 символов' },
-                { required: true, message: 'введите новый пароль' }
-              ]}
-              className={styles.passwordInput}
-            >
-              <Input.Password
-                {...register('password')}
-              ></Input.Password>
-            </Form.Item>
-            <div className={styles.saveButtonContainer}>
-              <button
-                type='submit'
+                {...register('email', { required: 'Enter a new email' })}
+                type="email"
+                id="email"
                 disabled={isPending}
-                onChange={() => handleSubmit(onSubmit)}
-              >
-                Save
-              </button>
+              />
             </div>
-          </Card>
+            <div className={styles.passwordInput}>
+              <label htmlFor="password">Password</label>
+              <Input
+                {...register('password', {
+                  required: 'Enter a new password',
+                  minLength: {
+                    value: 8,
+                    message: 'The password cannot be less than 8 characters',
+                  },
+                })}
+                type="password"
+                id="password"
+                disabled={isPending}
+              />
+            </div>
+            <div className={styles.saveButtonContainer}>
+              <Button type="primary" htmlType="submit" disabled={isPending}>
+                Save
+              </Button>
+            </div>
+          </div>
         </>
       )}
-    </Form>
+    </form>
   );
-});
+})
 
 export default CardDetails;
+

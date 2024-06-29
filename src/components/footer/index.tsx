@@ -8,7 +8,6 @@ const Footers = () => {
     return (
         <Footer style={{ textAlign: 'center', bottom: 0 }}>
         Blockify ©{new Date().getFullYear()} 
-        <hr />
         <ul className="socials">
   <li><a href="https://github.com/gwizxs"> <GithubFilled  /></a></li>
   <li><a href="https://gitlab.com/gwizxs"> <GitlabOutlined /> </a></li>

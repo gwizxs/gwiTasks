@@ -3,13 +3,11 @@ import type { Dispatch, SetStateAction } from "react";
 import type { ITaskResponse, TypeTaskFormState } from "../../../types/task.types";
 import { useDebounceTask } from "../hook/useDebounceTask";
 import { Controller, useForm } from 'react-hook-form';
-import {   Button, Input, Select} from "antd";
+import {   Button, Input, Select, Checkbox, DatePicker } from "antd";
 import useDeleteTask from "../hook/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
 import { observer } from "mobx-react-lite";
-import CheckboxComponent from "../../../components/UI/Checkbox";
-import DatePickerComponent from "../../../components/UI/DatePick";
 import styles from './List.module.scss'
 
 
@@ -44,7 +42,7 @@ function List({ item, setItems }: IListRow) {
             control={control}
             name='isCompleted'
             render={({ field: { value, onChange } }) => (
-              <CheckboxComponent onChange={onChange} checked={value}/>
+              <Checkbox onChange={onChange} checked={value} />
             )}
           />
           <Input
@@ -60,8 +58,8 @@ function List({ item, setItems }: IListRow) {
           control={control}
           name='createdAt'
           render={({ field: { value, onChange } }) => (
-            <DatePickerComponent onChange={onChange}
-             value={value || ''} />
+            <DatePicker onChange={onChange}
+            value={value || ''}  />
           )}
         />
       </div>
@@ -82,14 +80,14 @@ function List({ item, setItems }: IListRow) {
         />
       </div>
       <div className={styles.column}>
-        <button
+        <Button
         className={styles.Btn}
           onClick={() => {
             item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))
           }}
         >
           { <DeleteOutlined />}
-        </button>
+        </Button>
       </div>
     </div>
   );

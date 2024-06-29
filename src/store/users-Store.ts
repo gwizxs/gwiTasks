@@ -1,40 +1,47 @@
-import { types, flow } from "mobx-state-tree";
-import apiCall from '../api'
+import { types, flow, cast } from "mobx-state-tree";
+import { axiosWithAuth } from "../api/interceptors";
 
- export const User = types.model('User', {
-    id: types.identifier,
-    createdAt: types.string,
-    name: types.string,
-    avatar: types.string,
-})
-
-const activeUser = User.named('ActiveUser');
-
-
-const UsersStore = types.model('UseStore', {
-    users: types.maybe(types.array(User)),
-    me: types.maybe(activeUser)
-})
-.views(self => {
-    return {
-        get list() {
-            if (self.users && self.users.length > 0) {
-            return self.users?.map(({id, name}) => ({id, name}));
-            }
-            return [];
-        }
-    }
-})
-.actions(self => {
-    return {
-        load: flow(function* () {
-            self.users = yield apiCall.get('users')
-            self.me = yield apiCall.get('me');
-        }),
-        afterCreate() {
-            self.load();
-        }
-    }
+const Statistics = types.model("Statistics", {
+    label: types.string,
+    value: types.string,
 });
 
-export default UsersStore;
+const UserProfile = types.model("UserProfile", {
+    user: types.model({
+        id: types.identifier,
+        createdAt: types.string,
+        name: types.string,
+        email: types.string,
+        avatar: types.string,
+    }),
+    statistics: types.array(Statistics),
+});
+
+const ProfileStore = types.model("ProfileStore", {
+    profile: types.maybe(UserProfile),
+})
+.actions(self => ({
+    loadProfile: flow(function* () {
+        try {
+            const response = yield axiosWithAuth.get('/user/profile');
+            self.profile = cast(response.data);
+        } catch (error) {
+            console.error("Failed to load profile", error);
+        }
+    }),
+    updateProfile: flow(function* (data) {
+        try {
+            const response = yield axiosWithAuth.put('/user/profile', data);
+            self.profile = cast(response.data);
+        } catch (error) {
+            console.error("Failed to update profile", error);
+        }
+    }),
+    afterCreate() {
+        this.loadProfile();
+    }
+}));
+
+const profileStore = ProfileStore.create({});
+
+export default profileStore;

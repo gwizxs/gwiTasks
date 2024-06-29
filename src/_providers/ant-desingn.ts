@@ -3,11 +3,11 @@
 const Button =  {
     fontWeight: 500,
     defaultColor: '#69b1ff',
-    colorPrimary: 'linear-gradient(135deg, #061178 35%, #d3adf7 100% )',
-    colorPrimaryActive: 'linear-gradient(135deg, #10239e 35%, #531dab 100% )',
+    colorPrimary: 'linear-gradient(135deg, #d3adf7 35%, #ffadd2 100% )',
+    colorPrimaryActive: 'linear-gradient(135deg, #b37feb 35%, #ff85c0 100% )',
     colorPrimaryHover: 'linear-gradient(135deg, #efdbff 35%, #adc6ff 100% )',
     colorText: '#FDFDFD1F',
-    borderRadius: '5',
+    borderRadius: 5,
 }
 
 const Checkbox = {
@@ -16,7 +16,7 @@ const Checkbox = {
     colorPrimaryActive: 'linear-gradient(135deg, #10239e 35%, #531dab 100% )',
     colorPrimaryHover: 'linear-gradient(135deg, #efdbff 35%, #adc6ff 100% )',
     colorText: '#FDFDFD1F',
-    borderRadius: '5',
+    borderRadius: 5,
 }
 
 const DatePicker = {
@@ -40,9 +40,23 @@ const DatePicker = {
  
 }
 
+const Input = {
+    colorText: '#000000',
+    colorTextPlaceholder: '000000',
+    hoverBorderColor: '#597ef7',
+    activeBorderColor: '#b37feb',
+    colorBgContainer: '#ffffff',
+    colorBorder: '#722ed1',
+    borderRadius: 5,
+ 
+}
 
-export const config = {
+
+ const config = {
     Button,
     Checkbox,
-    DatePicker
+    DatePicker,
+    Input,
 }
+
+export {config}

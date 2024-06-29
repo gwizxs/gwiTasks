@@ -10,6 +10,9 @@ import TimeBlocking from './pages/About/TimeBlocking.tsx';
 import Auth from './pages/auth/index.tsx';
 import { DASHBOARD_PAGES } from './config/pages-url.config.ts';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ConfigProvider } from 'antd';
+import { config } from './_providers/ant-desingn.ts';
+
 
 const queryClient = new QueryClient();
 const store = RootStore.create({});
@@ -41,10 +44,12 @@ export const StoreContext = createContext(store);
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
+    <ConfigProvider theme={{ components: config}}>
     <QueryClientProvider client={queryClient}>
       <StoreContext.Provider value={store}>
         <RouterProvider router={router} />
       </StoreContext.Provider>
     </QueryClientProvider>
+    </ConfigProvider>
   </React.StrictMode>
 );

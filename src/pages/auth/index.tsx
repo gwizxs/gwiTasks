@@ -28,8 +28,8 @@ const Auth = observer(() => {
             navigate(DASHBOARD_PAGES.HOME);
         },
         onError: (error) => {
-          setError("неправильный логин или пароль. Попробуйте снова");
-          toast.error("неправильный логин или пароль. Попробуйте снова");
+          setError("Incorrect email or password. Try again");
+          toast.error("Incorrect email or password. Try again");
       }
     });
 
@@ -70,8 +70,8 @@ const Auth = observer(() => {
                   hasFeedback
           name="password"
           rules={[
-            { required: true, message: 'Введите пароль' },
-          { min: 8, message: 'Пароль должен быть не менее 8 символов' }
+            { required: true, message: 'enter password' },
+          { min: 8, message: 'The password must be at least 8 characters' }
         ]}
         >
           <Input.Password

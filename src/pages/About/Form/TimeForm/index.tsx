@@ -5,7 +5,6 @@ import { useCreateTimeBl } from "../../hook/useCreateTimeBl";
 import { COLORS } from "../../colors.date";
 import { Select } from "antd";
 import styles from './TimeBl.module.scss'
-import { PlusCircleOutlined } from "@ant-design/icons";
 import {  useState } from "react";
 
 function TimeBlForm() {
@@ -41,21 +40,21 @@ function TimeBlForm() {
     // ----------убираем красный текст если пользователь сделал все правильно ------------------
   // --------------------------------------------------------------------------------------------
 
-  // Validation logic
+  
   const handleError = (errors) => {
      if (errors.name?.type === 'required') {
-      setErrorBl("Пожалуйста, введите название задачи");
+      setErrorBl("Please enter a task name");
     } else if (errors.duration?.type === 'required') {
-      setErrorBl("Пожалуйста, введите время");
+      setErrorBl("Please enter time");
     }  else if (!existsId && !isPending) { 
       setErrorBl('');
     } if (errors.name?.type === 'required' && errors.duration?.type === 'required') {
-      setErrorBl("Пожалуйста, введите время и название задачи");
+      setErrorBl("Please enter time and task name");
     }
   };
 
   return (
-    <form style={{ border: '1px solid #e6f7ff' }}>
+    <form >
           {errorBl && <div style={{ color: 'red', marginBottom: '10px' }}>{errorBl}</div>} 
       <input
         className={styles.timeBlInput}
@@ -78,10 +77,10 @@ function TimeBlForm() {
         placeholder="Enter time"
         disabled={isLoading}
       />
-      {errors.duration && <div style={{ color: 'red', marginBottom: '10px' }} className={styles.error}>{errors.duration.message}</div>}
+      {errors.duration && <h3 style={{ color: 'red', marginBottom: '10px' }} className={styles.error}>{errors.duration.message}</h3>}
 
       <div style={{ marginTop: 30 }}>
-        <span style={{ marginBottom: 15, marginRight: 9 }}>color:</span>
+        <span style={{  marginRight: 9 }}>color:</span>
 
         
         <Controller
@@ -106,7 +105,6 @@ function TimeBlForm() {
         disabled={isPending}
       >
         {existsId ? 'Update' : 'Create'}
-        <PlusCircleOutlined style={{ marginLeft: '5px' }} />
       </button>
     </form>
   );
