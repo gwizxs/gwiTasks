@@ -1,47 +1,62 @@
-import { types, flow, cast } from "mobx-state-tree";
+import { types, flow, Instance } from "mobx-state-tree";
 import { axiosWithAuth } from "../api/interceptors";
+import { IUser, TypeUserForm } from "../types/auth.types";
 
-const Statistics = types.model("Statistics", {
-    label: types.string,
-    value: types.string,
-});
-
-const UserProfile = types.model("UserProfile", {
+const UserProfile = types.model({
     user: types.model({
-        id: types.identifier,
+        id: types.string,
         createdAt: types.string,
-        name: types.string,
+        updatedAt: types.string,
         email: types.string,
-        avatar: types.string,
+        name: types.string,
+        workInterval: types.number,
+        breakInterval: types.number,
+        IntervalsCount: types.number,
+        tasks: types.array(types.frozen())  // Assuming tasks is an array of some type
     }),
-    statistics: types.array(Statistics),
+    statistics: types.array(types.model({
+        label: types.string,
+        value: types.number  // Changed from string to number
+    }))
 });
 
 const ProfileStore = types.model("ProfileStore", {
     profile: types.maybe(UserProfile),
+    isLoading: types.optional(types.boolean, false),
+    isSuccess: types.optional(types.boolean, false)
 })
 .actions(self => ({
-    loadProfile: flow(function* () {
+    getProfile: flow(function* () {
+        self.isLoading = true;
+        self.isSuccess = false;
         try {
             const response = yield axiosWithAuth.get('/user/profile');
-            self.profile = cast(response.data);
+            self.profile = response.data;
+            self.isLoading = false;
+            self.isSuccess = true;
         } catch (error) {
             console.error("Failed to load profile", error);
+            self.isLoading = false;
+            self.isSuccess = false;
         }
     }),
-    updateProfile: flow(function* (data) {
+    update: flow(function* (data: TypeUserForm) {
+        self.isLoading = true;
+        self.isSuccess = false;
         try {
             const response = yield axiosWithAuth.put('/user/profile', data);
-            self.profile = cast(response.data);
+            self.profile = response.data;
+            self.isLoading = false;
+            self.isSuccess = true;
         } catch (error) {
             console.error("Failed to update profile", error);
+            self.isLoading = false;
+            self.isSuccess = false;
         }
     }),
     afterCreate() {
-        this.loadProfile();
+        this.getProfile();
     }
 }));
 
-const profileStore = ProfileStore.create({});
-
-export default profileStore;
+export default ProfileStore;

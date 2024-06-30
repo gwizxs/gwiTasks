@@ -19,7 +19,7 @@ class UserService {
     
 
     async update(data: TypeUserForm) {
-        const response = await axiosWithAuth.put<IProfileResponse>(this.BASE_URL, data);
+        const response = await axiosWithAuth.put(this.BASE_URL, data);
         return response.data;
     }
 }
