@@ -11,9 +11,8 @@ export function useInitDate(reset: UseFormReset<TypeUserForm>) {
     useEffect(() => {
         if(isSuccess && data)
         reset({
-            email: data?.user.email,
-            name: data?.user.name,
+            email: data.user.email,
+            name: data.user.name,
         })
-    }, [isSuccess])
-
+    }, [data, isSuccess, reset])
 }

@@ -8,7 +8,6 @@ const Me = observer(() => {
 
   return (
       <Body selectedKey="sub1" BreadName={'Me'}>
-        
         <div style={{ display: 'flex' }}>
           <CardMe />
           <CardDetails />
