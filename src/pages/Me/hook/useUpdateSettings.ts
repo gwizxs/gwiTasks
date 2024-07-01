@@ -3,7 +3,6 @@ import { TypeUserForm } from "../../../types/auth.types";
 import { userService } from "../../../service/user.service";
 import { toast } from "sonner";
 
-
 export function useUpdateSettings() {
     const queryClient =  useQueryClient()
     const {mutate, isPending} = useMutation({
@@ -12,6 +11,10 @@ export function useUpdateSettings() {
         onSuccess() {
             toast.success('success')
             queryClient.invalidateQueries({ queryKey: ['profile']})
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (error: any) => {
+            toast.error(`update failed: ${error.message}`)
         }
     })
 

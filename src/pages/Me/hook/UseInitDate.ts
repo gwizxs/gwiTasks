@@ -14,5 +14,5 @@ export function useInitDate(reset: UseFormReset<TypeUserForm>) {
             email: data.user.email,
             name: data.user.name,
         })
-    }, [data, isSuccess, reset])
+    }, [isSuccess])
 }

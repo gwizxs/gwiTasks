@@ -1,28 +1,64 @@
+.submitButton {
+  font-weight: 500;
+  background: linear-gradient(135deg, #d3adf7 35%, #ffadd2 100%);
+  color: #FDFDFD;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
-  
-  .cardDetails {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  
-    .uploadContainer {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-  
-      .nameInput {
-        margin-left: 10px;
-      }
-    }
-  
-    .passwordInput {
-      margin-top: 20px;
-    }
-  
-    .saveButtonContainer {
-      margin-top: 40px;
-      text-align: right; 
-    }
-  }
-  
+.submitButton:hover {
+  background: linear-gradient(135deg, #efdbff 35%, #adc6ff 100%);
+}
+
+.submitButton:active {
+  background: linear-gradient(135deg, #b37feb 35%, #ff85c0 100%);
+}
+
+.InputMe {
+  background-color: #ffffff;
+  border: 1px solid #722ed1;
+  border-radius: 5px;
+  padding: 8px 10px;
+  width: 100%;
+  outline: none; 
+}
+
+.InputMe:hover {
+  border-color: #597ef7;
+}
+
+.InputMe:focus {
+  border-color: #b37feb;
+  box-shadow: 0 0 0 2px rgba(179, 126, 235, 0.5); 
+}
+
+.cards {
+  border-radius: 5px;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.uploadContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.nameInput {
+  margin-left: 20px;
+}
+
+.emailInput, .passwordInput {
+  width: 100%;
+  margin-top: 20px; 
+}
+
+.saveButtonContainer {
+  display: flex;
+  justify-content: flex-end; 
+  margin-top: 20px; 
+}

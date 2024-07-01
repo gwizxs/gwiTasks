@@ -1,107 +1,107 @@
-
-import Skeleton from 'react-loading-skeleton';
+import { useForm } from 'react-hook-form';
+import { observer } from 'mobx-react-lite';
 import { useInitDate } from '../hook/UseInitDate';
 import { useUpdateSettings } from '../hook/useUpdateSettings';
 import type { TypeUserForm } from '../../../types/auth.types';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Card} from 'antd';
 import styles from './Card.module.scss';
-import { Button, Card, Form, Input } from 'antd';
-import { observer } from 'mobx-react-lite';
+import Uploads from '../Uploads';
+import { useState } from 'react';
+import FormAlert from '../components/FormAlert';
+import handleFormErrors from '../components/handleFormErrors';
+
+
 
 const CardDetails = observer(() => {
   const { register, handleSubmit, reset } = useForm<TypeUserForm>({
     mode: 'onChange',
   });
-
+  const [formStatus, setFormStatus] = useState({ message: '', type: '' });
+  const { isPending, mutate } = useUpdateSettings();
   useInitDate(reset);
 
-  const { isPending, mutate } = useUpdateSettings();
 
-  const onSubmit: SubmitHandler<TypeUserForm> = async (data) => {
-    const { password, ...rest } = data;
-    console.log('данные изменены')
+
+  const onSubmit = async (data) => {
+    console.log('Data updated');
     try {
       await mutate({
-        
-        ...rest,
-        password: password || undefined,
+        ...data,
+        password: data.password || undefined,
       });
-      reset()
+      setFormStatus({ message: 'Settings updated!', type: 'success' });
     } catch (error) {
-      console.error('Ошибка обновления настроек:', error);
+      console.error('Error updating settings:', error);
+      setFormStatus({ message: 'Error updating settings', type: 'error' });
     }
   };
 
-  
   return (
-    <Card>
-      <Form  className={styles.cardDetailsForm}>
-        {isPending ? (
-          <Skeleton width={400} height={350} baseColor="#d9d9d9" />
-        ) : (
-          <>
+    <>
+      <Card className={styles.cards}>
+
+        <form onSubmit={handleSubmit(onSubmit,
+           (errors) => setFormStatus(handleFormErrors(errors)))}
+            className={styles.cardDetailsForm}>
+                  <FormAlert formStatus={formStatus} />
+
+          {isPending ? (
+            <div style={{ width: 400, height: 350, backgroundColor: '#d9d9d9' }} />
+          ) : (
             <div className={styles.cardDetails}>
               <div className={styles.uploadContainer}>
+                <Uploads />
                 <div className={styles.nameInput}>
-                  <Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true, message: 'Enter a new name' }]}
-                  >
-                    <Input
-                     {...register('name', { required: 'Enter a new name' })} />
-                  </Form.Item>
+                  <label htmlFor="name">Name</label>
+                  <input
+                    className={styles.InputMe}
+                    id="name"
+                    type="text"
+                    {...register('name', { required: 'Enter a new name' })}
+                  />
                 </div>
               </div>
-              <div>
-                <Form.Item
-                  name="email"
-                  label="Email"
-                  rules={[{ required: true, message: 'Enter a new email' }]}
-                >
-                  <Input
-                  {...register('email', { required: 'Enter a new email' })}
-                  type="email" />
-                </Form.Item>
+              <div className={styles.emailInput}>
+                <label htmlFor="email">Email</label>
+                <input
+                  className={styles.InputMe}
+                  id="email"
+                  type="email"
+                  {...register('email', {
+                    required: 'Enter a new email',
+                  })}
+                />
               </div>
               <div className={styles.passwordInput}>
-                <Form.Item
-                  name="password"
-                  label="Password"
-                  rules={[
-                    { required: true, message: 'Enter a new password' },
-                    { min: 8, message: 'should not be less than 8' }
-                  ]}
-                >
-                  <Input.Password
-                    {...register('password', {
-                      required: 'Enter a new password',
-                      minLength: {
-                        value: 8,
-                        message: 'should not be less than 8',
-                      },
-                    })} />
-                </Form.Item>
+                <label htmlFor="password">Password</label>
+                <input
+                  className={styles.InputMe}
+                  id="password"
+                  type="password"
+                  {...register('password', {
+                    required: 'Enter a new password',
+                    minLength: {
+                      value: 8,
+                      message: 'Password must be at least 8 characters long',
+                    },
+                  })}
+                />
               </div>
               <div className={styles.saveButtonContainer}>
-                  <Button
-                  onClick={handleSubmit(onSubmit)}
-                   type="primary"
-                    htmlType="submit"
-                     disabled={isPending}
-                     >
-                    Save
-                  </Button>
+                <button
+                  className={styles.submitButton}
+                  type="submit"
+                  disabled={isPending}
+                >
+                  Save
+                </button>
               </div>
             </div>
-          </>
-        )}
-      </Form>
+          )}
+        </form>
       </Card>
-    );
-  });
-  
-  export default CardDetails;
+    </>
+  );
+});
 
-
-
+export default CardDetails;

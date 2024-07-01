@@ -4,8 +4,6 @@ import CardDetails from './Card/CardDetails';
 import Body from '../../components/Body';
 
 const Me = observer(() => {
-
-
   return (
       <Body selectedKey="sub1" BreadName={'Me'}>
         <div style={{ display: 'flex' }}>
