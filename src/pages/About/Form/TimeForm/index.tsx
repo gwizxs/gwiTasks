@@ -41,7 +41,7 @@ function TimeBlForm() {
   // --------------------------------------------------------------------------------------------
 
   
-  const handleError = (errors) => {
+  const handleError = (errors: any) => {
      if (errors.name?.type === 'required') {
       setErrorBl("Please enter a task name");
     } else if (errors.duration?.type === 'required') {

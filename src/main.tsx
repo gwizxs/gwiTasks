@@ -12,6 +12,8 @@ import { DASHBOARD_PAGES } from './config/pages-url.config.ts';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ConfigProvider } from 'antd';
 import { config } from './_providers/ant-desingn.ts';
+import { ColorProvider } from './_providers/color-Context.tsx';
+import Customize from './pages/Customize/index.tsx'
 
 
 const queryClient = new QueryClient();
@@ -37,6 +39,11 @@ const router = createBrowserRouter([
     element: <TimeBlocking />,
     errorElement: <ErrorPage />
   },
+  {
+    path: DASHBOARD_PAGES.CUSTOMIZE,
+    element: <Customize />,
+    errorElement: <ErrorPage />
+  },
 ]);
 
 export const StoreContext = createContext(store);
@@ -44,6 +51,7 @@ export const StoreContext = createContext(store);
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
+    <ColorProvider>
     <ConfigProvider theme={{ components: config}}>
     <QueryClientProvider client={queryClient}>
       <StoreContext.Provider value={store}>
@@ -51,5 +59,6 @@ root.render(
       </StoreContext.Provider>
     </QueryClientProvider>
     </ConfigProvider>
+    </ColorProvider>
   </React.StrictMode>
 );

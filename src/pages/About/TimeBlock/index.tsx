@@ -5,6 +5,7 @@ import { useDelete } from "../hook/useDelete";
 import { Button, Spin } from "antd";
 import { DeleteOutlined, EditOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import styles from "./TimeBlock.module.scss";
+import StepsComponent from "../../../components/steps";
 
 export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
   const { attributes, listeners, setNodeRef, style } = useSortBl(item.id);
@@ -12,6 +13,7 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
   const { reset } = useFormContext<TypeTimeBlockFormState>();
 
   const { DeleteTimeBl, isDeletePending } = useDelete(item.id);
+
 
   return (
     <div ref={setNodeRef} style={style}>

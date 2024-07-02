@@ -12,11 +12,11 @@ const UserProfile = types.model({
         workInterval: types.number,
         breakInterval: types.number,
         IntervalsCount: types.number,
-        tasks: types.array(types.frozen())  // Assuming tasks is an array of some type
+        tasks: types.array(types.frozen()) 
     }),
     statistics: types.array(types.model({
         label: types.string,
-        value: types.number  // Changed from string to number
+        value: types.number 
     }))
 });
 

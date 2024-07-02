@@ -9,10 +9,12 @@ import Uploads from '../Uploads';
 import { useState } from 'react';
 import FormAlert from '../components/FormAlert';
 import handleFormErrors from '../components/handleFormErrors';
+import { useColor } from '../../../_providers/color-Context';
 
 
 
 const CardDetails = observer(() => {
+  const {color} = useColor
   const { register, handleSubmit, reset } = useForm<TypeUserForm>({
     mode: 'onChange',
   });
@@ -38,7 +40,7 @@ const CardDetails = observer(() => {
 
   return (
     <>
-      <Card className={styles.cards}>
+      <Card className={styles.cards} >
 
         <form onSubmit={handleSubmit(onSubmit,
            (errors) => setFormStatus(handleFormErrors(errors)))}
@@ -46,13 +48,13 @@ const CardDetails = observer(() => {
                   <FormAlert formStatus={formStatus} />
 
           {isPending ? (
-            <div style={{ width: 400, height: 350, backgroundColor: '#d9d9d9' }} />
+            <div style={{ width: '100%', height: '100%', backgroundColor: '#d9d9d9' }} />
           ) : (
             <div className={styles.cardDetails}>
               <div className={styles.uploadContainer}>
                 <Uploads />
                 <div className={styles.nameInput}>
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">new Name</label>
                   <input
                     className={styles.InputMe}
                     id="name"
@@ -62,7 +64,7 @@ const CardDetails = observer(() => {
                 </div>
               </div>
               <div className={styles.emailInput}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">new Email</label>
                 <input
                   className={styles.InputMe}
                   id="email"
@@ -73,7 +75,7 @@ const CardDetails = observer(() => {
                 />
               </div>
               <div className={styles.passwordInput}>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">new Password</label>
                 <input
                   className={styles.InputMe}
                   id="password"

@@ -1,13 +1,19 @@
 import { observer } from 'mobx-react-lite';
-import CardMe from './CardMe';
+
 import CardDetails from './Card/CardDetails';
 import Body from '../../components/Body';
+import StepsComponent from '../../components/steps';
+
 
 const Me = observer(() => {
+
+  const customStepTitles = ['update profile']
+
   return (
-      <Body selectedKey="sub1" BreadName={'Me'}>
+      <Body selectedKey="sub1" BreadName={'Me'} >
+         <StepsComponent stepTitles={customStepTitles}></StepsComponent>
         <div style={{ display: 'flex' }}>
-          <CardMe />
+
           <CardDetails />
         </div>
       </Body>
