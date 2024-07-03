@@ -4,16 +4,15 @@
 + Vite
 + React
 + ant Desing
-+ Scss/Sass
-+ JSON Server
++ Scss
 + MOBX/MOBX-STATE-TREE
 + dnd kit 
-+ material-ui
 + react query
 + tanStack
 + js cookies
 + axios
 + react hook form
++ react-color
 
 стек технологий (backend)
 + Nest
