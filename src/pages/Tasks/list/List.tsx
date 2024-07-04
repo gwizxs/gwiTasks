@@ -3,12 +3,13 @@ import type { Dispatch, SetStateAction } from "react";
 import type { ITaskResponse, TypeTaskFormState } from "../../../types/task.types";
 import { useDebounceTask } from "../hook/useDebounceTask";
 import { Controller, useForm } from 'react-hook-form';
-import {   Button, Input, Select, Checkbox, DatePicker } from "antd";
+import {   Button, Select, Checkbox, Row, Col, DatePicker } from "antd";
 import useDeleteTask from "../hook/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
 import { observer } from "mobx-react-lite";
 import styles from './List.module.scss'
+import dayjs from "dayjs";
 
 
 interface IListRow {
@@ -26,18 +27,17 @@ function List({ item, setItems }: IListRow) {
     },
   });
 
-  useDebounceTask({ watch, itemsId: item.id });
+  useDebounceTask({ watch, itemId: item.id });
 
   const { deleteTask } = useDeleteTask();
 
+  
   return (
-    <div className={cn(styles.row, watch('isCompleted') ? styles.completed : '', 'animation-opacity')}>
-      <div className={styles.column}>
+    <Row className={cn(styles.row, watch('isCompleted') ? styles.completed : '', 'animation-opacity')}>
+      <Col span={6}>
         <span className={styles.inputRow}>
-          <Button>
-            <VerticalAlignMiddleOutlined className={styles.grip} />
-          </Button>
-
+          <Button><VerticalAlignMiddleOutlined className={styles.grip} /></Button>
+  
           <Controller
             control={control}
             name='isCompleted'
@@ -45,25 +45,26 @@ function List({ item, setItems }: IListRow) {
               <Checkbox onChange={onChange} checked={value} />
             )}
           />
-          <Input
-          variant="borderless"
-          className={styles.InputTask}
-           placeholder="add new task"
-          {...register('name')}>
-          </Input>
+          <input
+            className={styles.InputTask}
+            placeholder="add new task"
+            {...register('name')}
+          />
         </span>
-      </div>
-      <div className={styles.column}>
-        <Controller
-          control={control}
-          name='createdAt'
-          render={({ field: { value, onChange } }) => (
-            <DatePicker onChange={onChange}
-            value={value || ''}  />
-          )}
+      </Col>
+      <Col span={6}>
+      <Controller
+      control={control}
+      name="createdAt"
+      render={({ field: { value, onChange } }) => (
+        <DatePicker
+          onChange={(date, dateString) => onChange(dateString)} 
+          value={value ? dayjs(value) : null} 
         />
-      </div>
-      <div className={styles.column}>
+      )}
+    />
+      </Col>
+      <Col span={6}>
         <Controller
           control={control}
           name="priority"
@@ -75,22 +76,29 @@ function List({ item, setItems }: IListRow) {
               }))}
               onChange={onChange}
               value={value || ''}
+              style={{ height: 32,
+                width: 100,
+                padding: '4 11',
+                fontSize: 14,
+                lineHeight: 1.5715}}
             />
           )}
         />
-      </div>
-      <div className={styles.column}>
+      </Col>
+      <Col span={6}>
         <Button
-        className={styles.Btn}
+        style={{color: '#000000'}}
+          className={styles.Btn}
+          type='dashed'
           onClick={() => {
             item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))
           }}
         >
-          { <DeleteOutlined />}
+            { <DeleteOutlined />}
         </Button>
-      </div>
-    </div>
-  );
-}
+      </Col>
+    </Row>
+  )}
+  
 
 export default observer(List);

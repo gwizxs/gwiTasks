@@ -20,6 +20,7 @@
     cursor: pointer; 
     color: #e8e8e8;
     outline: none;
+
   }
   
   .completed {
@@ -90,10 +91,10 @@
   align-items: center;
 }
 
-// List.module.scss
-$primary-color: #1890ff; 
-$success-color: #52c41a; 
-$error-color: #ff4d4f; 
+
+$primary-color: #55adff; 
+$success-color: #78c353; 
+$error-color: #ffadd2;
 $font-family: 'Arial', sans-serif;
 
 .row {
@@ -102,7 +103,6 @@ $font-family: 'Arial', sans-serif;
   padding: 8px;
   border-bottom: 1px solid #f0f0f0;
   background-color: #fff;
-  transition: background-color 0.3s;
 
   &:hover {
     background-color: #f5f5f5;
@@ -111,14 +111,7 @@ $font-family: 'Arial', sans-serif;
   &.completed {
     color: $success-color;
 
-    input[type="checkbox"] {
-      &:checked {
-        + .label {
-          text-decoration: line-through;
-          color: $success-color;
-        }
-      }
-    }
+
   }
 }
 
@@ -127,9 +120,10 @@ $font-family: 'Arial', sans-serif;
   padding: 0 12px;
 
 
-  .select {
+  .Select {
     display: inline-block;
     position: relative;
+    
 
     &:after {
       content: '';
@@ -149,7 +143,6 @@ $font-family: 'Arial', sans-serif;
 
 .Btn {
   background-color: $error-color;
-  color: white;
   border: none;
   border-radius: 4px;
   padding: 8px 16px;
@@ -157,13 +150,12 @@ $font-family: 'Arial', sans-serif;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: darken($error-color, 10%);
+    background-color: darken($error-color, 40%);
   }
 }
 
 .grip {
   cursor: grab;
-  color: #ccc;
 }
 
 .inputRow {
@@ -192,6 +184,20 @@ input[type="date"]:focus {
   border-color: #40a9ff;
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
+
+input {
+  height: 32px;
+  padding: 4px 11px;
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  transition: all 0.3s;
+  border: none;
+  outline: none;
+}
+
 
 
 .skeletonContainer {

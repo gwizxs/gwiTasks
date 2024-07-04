@@ -8,10 +8,10 @@ import { UseFormWatch } from 'react-hook-form';
 
 interface IUseDeb {
   watch: UseFormWatch<TypeTaskFormState>;
-  itemsId: string; 
+  itemId: string; 
 }
 
-export function useDebounceTask({ watch, itemsId }: IUseDeb) {
+export function useDebounceTask({ watch, itemId }: IUseDeb) {
   const { createTask } = UseCreateTask()
   const { updateTask } = useUpdateTask();
 
@@ -24,14 +24,14 @@ export function useDebounceTask({ watch, itemsId }: IUseDeb) {
 
   const debounceUpdateTask = useCallback(
     debounce((formData: TypeTaskFormState) => {
-      updateTask(itemsId, formData); 
+      updateTask(itemId, formData); 
     }, 500),
     []
   );
 
   useEffect(() => {
     const { unsubscribe } = watch(formData => {
-      if (itemsId) { 
+      if (itemId) { 
         debounceUpdateTask({
           ...formData,
           priority: formData.priority || undefined
