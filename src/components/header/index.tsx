@@ -4,13 +4,15 @@ import LogoutBtn from "../Logout/LogoutBtn";
 import Statistic from "../Statistic";
 import { observer } from "mobx-react-lite";
 import User from "../common/User";
-import logo from './assets/Avatar.jpg';
+import logo from './assets/Avatar.png';
+import { useColor } from "../../_providers/color-Context";
 
 const { Title } = Typography;
 
 const Header = observer(() => {
+  const {headerColor} = useColor()
   return (
-    <nav style={{ borderStyle: "double" }}>
+    <nav style={{ borderStyle: "double", backgroundColor: headerColor }}>
       <Row justify="space-between" align="middle" style={{ padding: '10px' }}>
         <Col>
           <Space align="center" >

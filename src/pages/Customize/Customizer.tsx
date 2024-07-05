@@ -9,7 +9,8 @@ import Skeleton from 'react-loading-skeleton';
 const Customizer = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayChromePicker, setDisplayChromePicker] = useState(false);
-  const { color, setColor } = useColor(); 
+  const [displayHeaderColorPicker, setDisplayHeaderColorPicker] = useState(false);
+  const { color, setColor, headerColor, setHeaderColor } = useColor(); 
 
   useEffect(() => {
     setIsLoading(false);
@@ -19,13 +20,16 @@ const Customizer = observer(() => {
     setColor(color.hex);
   };
 
+  const handleHeaderColorChangeComplete = (color) => {
+    setHeaderColor(color.hex);
+  };
+
   const toggleChromePicker = () => {
     setDisplayChromePicker(!displayChromePicker);
   };
 
-  // Функция для изменения цвета при клике на CirclePicker
-  const handleClickColor = (color) => {
-    setColor(color);
+  const toggleHeaderColorPicker = () => {
+    setDisplayHeaderColorPicker(!displayHeaderColorPicker);
   };
 
   const popover = {
@@ -57,34 +61,51 @@ const Customizer = observer(() => {
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
             }}
           >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: 10,
-              }}
-            >
-              <Button onClick={toggleChromePicker}>Color Picker</Button>
-              <div
-                style={{
-                  width: 30,
-                  height: 30,
-                  backgroundColor: color,
-                  border: '1px solid black',
-                }}
-              />
-            </div>
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'row',
+    
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  }}
+>
+  <Button onClick={toggleChromePicker}>Background Color Picker</Button>
+  <div
+    style={{
+      width: 30,
+      height: 30,
+      backgroundColor: color,
+      border: '1px solid black',
+      display: 'block',
+      marginBottom: 10,
+    }}
+  />
+  <Button onClick={toggleHeaderColorPicker}>Header Color Picker</Button>
+  <div
+    style={{
+      width: 30,
+      height: 30,
+      backgroundColor: headerColor,
+      border: '1px solid black',
+      display: 'block',
+      marginBottom: 10,
+    }}
+  />
+</div>
+
 
             {displayChromePicker && (
               <div style={popover}>
-                <div
-                  style={cover}
-                  onClick={() => setDisplayChromePicker(false)}
-                />
-                <ChromePicker
-                  color={color}
-                  onChangeComplete={handleOnChangeComplete}
-                />
+                <div style={cover} onClick={() => setDisplayChromePicker(false)} />
+                <ChromePicker color={color} onChangeComplete={handleOnChangeComplete} />
+              </div>
+            )}
+
+            {displayHeaderColorPicker && (
+              <div style={popover}>
+                <div style={cover} onClick={() => setDisplayHeaderColorPicker(false)} />
+                <ChromePicker color={headerColor} onChangeComplete={handleHeaderColorChangeComplete} />
               </div>
             )}
           </Card>
@@ -101,12 +122,11 @@ const Customizer = observer(() => {
             boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
           }}
         >
-          <ColorCirclePicker onSwatchHover={handleClickColor} /> {/* Изменил на onSwatchClick */}
+          <ColorCirclePicker onSwatchHover={setColor} /> 
         </Card>
       </div>
     </div>
   );
-})
-
+});
 
 export default Customizer;

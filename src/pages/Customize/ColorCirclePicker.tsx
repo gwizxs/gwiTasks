@@ -1,27 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useColor } from '../../_providers/color-Context';
 
 const ColorCirclePicker = ({
   width = '252px',
   colors = [
-    "#ff7875", "#ff9c6e", "#9c27b0", "#fff566",
-    "#3f51b5", "#ffd666", "#69b1ff", "#cddc39",
-    "#d3f261", "#95de64", "#5cdbd3", "#4caf50", 
-    "#85a5ff", "#b37feb", "#ff85c0", "#ff5722",
-    "#d9d9d9", "#391085"
-  ],
+  ["#adc6ff", "#efdbff"],
+  ["#ffadd2", "#b37feb"],
+  ["#e3e2df", "#e3afbc"],
+  ["#c2b9b0", "#c2cad0"],
+  ["#DEBDE8", "#916ED8"],
+  ["#edc7b7", "#eee2dc"],
+  ["#9d8d8f", "#9b786f"],
+],
+
   circleSize = 28,
   circleSpacing = 14,
-  onSwatchHover = (color, event) => console.log(`Hovered over color: ${color}`)
 }) => {
+  const {setHeaderColor, setColor} = useColor();
+
+  const handleColorClick = (color) => {
+    setHeaderColor(color[0]);
+    setColor(color[1])
+  };
+
   return (
     <div style={{ width, display: 'flex', flexWrap: 'wrap', gap: `${circleSpacing}px` }}>
-      {colors.map((color, index) => (
+      {colors.map((pair, index) => (
         <div
           key={index}
           style={{
             width: `${circleSize}px`,
             height: `${circleSize}px`,
-            backgroundColor: color,
+            background: `linear-gradient(100deg, ${pair[0]} 50%, ${pair[1]} 50%)`,
             borderRadius: '50%',
             cursor: 'pointer',
             display: 'flex',
@@ -30,9 +40,9 @@ const ColorCirclePicker = ({
             color: 'white',
             fontSize: 'small'
           }}
-          onMouseOver={(event) => onSwatchHover(color, event)}
-        >
-        </div>
+
+          onClick={() => handleColorClick(pair)}
+        />
       ))}
     </div>
   );
