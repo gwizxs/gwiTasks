@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const { Step } = Steps;
 
-const StepsComponent = ({ childrenStep, stepTitles }: any) => {
+const StepsComponent = ({  stepTitles }: any) => {
   const [current, setCurrent] = useState(0);
 
   const onChange = (value: number) => {

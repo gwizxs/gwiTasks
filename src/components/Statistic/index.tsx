@@ -2,7 +2,6 @@
 import { useProfile } from "../../hooks/useProfile";
 import { observer } from "mobx-react-lite";
 import './Statistic.scss';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Statistic {
@@ -10,7 +9,7 @@ interface Statistic {
   value: string;
 }
 
-export function Statistics() {
+const Statistics = observer(() => {
   const { data, isLoading } = useProfile();
 
   return (
@@ -38,6 +37,6 @@ export function Statistics() {
       )}
     </div>
   );
-}
+})
 
-export default observer(Statistics);
+export default Statistics;
