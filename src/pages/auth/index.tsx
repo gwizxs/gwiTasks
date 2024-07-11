@@ -13,11 +13,9 @@ import { Typography } from 'antd';
 
 const { Title } = Typography;
 
-
 const Auth = observer(() => {
     const [isLoginForm, setIsLoginForm] = useState(true);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [formData, setFormData] = useState<IAuthForm>({ email: '', password: '' });
+    const setFormData = useState<IAuthForm>({ email: '', password: '' })[1] as React.Dispatch<React.SetStateAction<IAuthForm>>;
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -28,7 +26,7 @@ const Auth = observer(() => {
             toast.success("Successfully logged in!");
             navigate(DASHBOARD_PAGES.HOME);
         },
-        onError: (error: any) => {
+        onError: () => {
           setError("Incorrect email or password. Try again");
           toast.error("Incorrect email or password. Try again");
       }
@@ -40,8 +38,7 @@ const Auth = observer(() => {
         mutate({ ...values, method: isLoginForm ? 'login' : 'register' });
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleChange = (value: any, allValues: any) => {
+    const handleChange = (allValues: IAuthForm) => {
         setFormData(allValues);
     };
 
@@ -62,7 +59,7 @@ const Auth = observer(() => {
           hasFeedback
           validateDebounce={1500}
           name="email"
-          rules={[{ required: true, message: 'Введите email' }]}
+          rules={[{ required: true, message: 'enter email' }]}
         >
           <Input prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="Email" />
         </Form.Item>

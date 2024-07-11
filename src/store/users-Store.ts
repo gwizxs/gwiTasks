@@ -1,6 +1,6 @@
-import { types, flow, Instance } from "mobx-state-tree";
+import { types, flow } from "mobx-state-tree";
 import { axiosWithAuth } from "../api/interceptors";
-import { IUser, TypeUserForm } from "../types/auth.types";
+import {  TypeUserForm } from "../types/auth.types";
 
 const UserProfile = types.model({
     user: types.model({
