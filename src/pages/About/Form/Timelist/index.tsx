@@ -44,7 +44,7 @@ export function TimeBlList() {
           </DndContext>
           <Flex  align="center" gap="small" style={{ padding: 20, width: '100%' }}>
           <Progress  percent={Math.round((24 - hoursTime) * 100 / 24)}
-           format={(number) => `hours for sleep:  ${hoursTime > 0 ? hoursTime : 'time to sleep'}`}
+           format={() => `hours for sleep:  ${hoursTime > 0 ? hoursTime : 'time to sleep'}`}
           size={['100%', 20]}>
 </Progress>
 

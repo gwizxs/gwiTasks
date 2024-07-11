@@ -8,7 +8,6 @@ import { TypeTimeBlockFormState } from "../../types/time-block.types";
 import StepsComponent from "../../components/steps";
 
 
-
 const TimeBlocking = observer(() => {
   const methods = useForm<TypeTimeBlockFormState>()
 

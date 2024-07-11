@@ -1,7 +1,6 @@
-
 import { Alert } from 'antd';
 
-const FormAlert = ({ formStatus }) => {
+const FormAlert = ({ formStatus }: { formStatus: any }) => {
   if (!formStatus.message) return null;
 
   return (

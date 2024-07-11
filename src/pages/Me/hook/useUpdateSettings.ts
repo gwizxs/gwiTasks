@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 export function useUpdateSettings() {
     const queryClient =  useQueryClient()
-    const {mutate, isPending} = useMutation({
+    const {mutate, isLoading} = useMutation({
         mutationKey: ['update profile'],
         mutationFn: (data: TypeUserForm) => userService.update(data),
         onSuccess() {
@@ -18,5 +18,5 @@ export function useUpdateSettings() {
         }
     })
 
-    return { mutate, isPending}
+    return { mutate, isLoading}
 }

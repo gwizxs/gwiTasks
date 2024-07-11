@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+
 import { useColor } from '../../_providers/color-Context';
 
 const ColorCirclePicker = ({
@@ -18,7 +18,7 @@ const ColorCirclePicker = ({
 }) => {
   const {setHeaderColor, setColor} = useColor();
 
-  const handleColorClick = (color) => {
+  const handleColorClick = (color: any) => {
     setHeaderColor(color[0]);
     setColor(color[1])
   };

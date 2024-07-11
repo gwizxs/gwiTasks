@@ -16,6 +16,7 @@ const { Title } = Typography;
 
 const Auth = observer(() => {
     const [isLoginForm, setIsLoginForm] = useState(true);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [formData, setFormData] = useState<IAuthForm>({ email: '', password: '' });
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Auth = observer(() => {
             toast.success("Successfully logged in!");
             navigate(DASHBOARD_PAGES.HOME);
         },
-        onError: (error) => {
+        onError: (error: any) => {
           setError("Incorrect email or password. Try again");
           toast.error("Incorrect email or password. Try again");
       }

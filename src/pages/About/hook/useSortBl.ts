@@ -1,5 +1,5 @@
 import {UniqueIdentifier} from '@dnd-kit/core'
-import { CSSProperties } from '@material-ui/core/styles/withStyles'
+import { CSSProperties } from 'react'
 import {CSS} from '@dnd-kit/utilities'
 import {useSortable} from '@dnd-kit/sortable'
 

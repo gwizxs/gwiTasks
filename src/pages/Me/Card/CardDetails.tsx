@@ -9,22 +9,20 @@ import Uploads from '../Uploads';
 import { useState } from 'react';
 import FormAlert from '../components/FormAlert';
 import handleFormErrors from '../components/handleFormErrors';
-import { useColor } from '../../../_providers/color-Context';
 
 
 
 const CardDetails = observer(() => {
-  const {color} = useColor
   const { register, handleSubmit, reset } = useForm<TypeUserForm>({
     mode: 'onChange',
   });
   const [formStatus, setFormStatus] = useState({ message: '', type: '' });
-  const { isPending, mutate } = useUpdateSettings();
+  const { isLoading, mutate } = useUpdateSettings();
   useInitDate(reset);
 
 
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     console.log('Data updated');
     try {
       await mutate({
@@ -47,7 +45,7 @@ const CardDetails = observer(() => {
             className={styles.cardDetailsForm}>
                   <FormAlert formStatus={formStatus} />
 
-          {isPending ? (
+          {isLoading ? (
             <div style={{ width: '100%', height: '100%', backgroundColor: '#d9d9d9' }} />
           ) : (
             <div className={styles.cardDetails}>
@@ -93,7 +91,7 @@ const CardDetails = observer(() => {
                 <button
                   className={styles.submitButton}
                   type="submit"
-                  disabled={isPending}
+                  disabled={isLoading}
                 >
                   Save
                 </button>

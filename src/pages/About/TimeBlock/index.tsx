@@ -2,17 +2,16 @@ import { useFormContext } from "react-hook-form";
 import type { ITimeBlockResponse, TypeTimeBlockFormState } from "../../../types/time-block.types";
 import { useSortBl } from "../hook/useSortBl";
 import { useDelete } from "../hook/useDelete";
-import { Button, Spin } from "antd";
+import { Button } from "antd";
 import { DeleteOutlined, EditOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import styles from "./TimeBlock.module.scss";
-import StepsComponent from "../../../components/steps";
 
 export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
   const { attributes, listeners, setNodeRef, style } = useSortBl(item.id);
 
   const { reset } = useFormContext<TypeTimeBlockFormState>();
 
-  const { DeleteTimeBl, isDeletePending } = useDelete(item.id);
+  const { DeleteTimeBl } = useDelete(item.id);
 
 
   return (
@@ -55,7 +54,7 @@ export function TimeBlock({ item }: { item: ITimeBlockResponse }) {
                   ></Button>
 
                   <Button type="text" onClick={() => DeleteTimeBl()}>
-                    {isDeletePending ? <Spin/> : <DeleteOutlined style={{ color: 'black' }} />}
+                    { <DeleteOutlined style={{ color: 'black' }} />}
                   </Button>
                 </div>
               </div>

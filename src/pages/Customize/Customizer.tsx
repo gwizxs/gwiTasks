@@ -16,11 +16,11 @@ const Customizer = observer(() => {
     setIsLoading(false);
   }, []);
 
-  const handleOnChangeComplete = (color) => {
+  const handleOnChangeComplete = (color: any) => {
     setColor(color.hex);
   };
 
-  const handleHeaderColorChangeComplete = (color) => {
+  const handleHeaderColorChangeComplete = (color: any) => {
     setHeaderColor(color.hex);
   };
 
@@ -32,18 +32,7 @@ const Customizer = observer(() => {
     setDisplayHeaderColorPicker(!displayHeaderColorPicker);
   };
 
-  const popover = {
-    position: 'absolute',
-    zIndex: '2',
-  };
 
-  const cover = {
-    position: 'fixed',
-    top: '0px',
-    right: '0px',
-    bottom: '0px',
-    left: '0px',
-  };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -96,15 +85,17 @@ const Customizer = observer(() => {
 
 
             {displayChromePicker && (
-              <div style={popover}>
-                <div style={cover} onClick={() => setDisplayChromePicker(false)} />
+              <div style={{ position: 'absolute',  zIndex: '2',}}>
+                <div style={{    position: 'fixed', top: '0px', right: '0px', bottom: '0px',left: '0px',}} 
+                onClick={() => setDisplayChromePicker(false)} />
                 <ChromePicker color={color} onChangeComplete={handleOnChangeComplete} />
               </div>
             )}
 
             {displayHeaderColorPicker && (
-              <div style={popover}>
-                <div style={cover} onClick={() => setDisplayHeaderColorPicker(false)} />
+              <div style={{    position: 'absolute', zIndex: '2',}}>
+                <div style={{    position: 'fixed', top: '0px', right: '0px',  bottom: '0px', left: '0px',}}
+                 onClick={() => setDisplayHeaderColorPicker(false)} />
                 <ChromePicker color={headerColor} onChangeComplete={handleHeaderColorChangeComplete} />
               </div>
             )}
@@ -122,7 +113,7 @@ const Customizer = observer(() => {
             boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
           }}
         >
-          <ColorCirclePicker onSwatchHover={setColor} /> 
+          <ColorCirclePicker /> 
         </Card>
       </div>
     </div>

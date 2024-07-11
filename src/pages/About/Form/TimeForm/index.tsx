@@ -14,7 +14,7 @@ function TimeBlForm() {
   const existsId = watch('id');
 
   const { UpdateTimeBl, isLoading } = useUpdateTimeBl(existsId);
-  const { CreateTimeBl, isPending } = useCreateTimeBl();
+  const { CreateTimeBl } = useCreateTimeBl();
   const [errorBl, setErrorBl] = useState('');
 
   const onSubmit: SubmitHandler<TypeTimeBlockFormState> = (data) => {
@@ -46,7 +46,7 @@ function TimeBlForm() {
       setErrorBl("Please enter a task name");
     } else if (errors.duration?.type === 'required') {
       setErrorBl("Please enter time");
-    }  else if (!existsId && !isPending) { 
+    }  else if (!existsId) { 
       setErrorBl('');
     } if (errors.name?.type === 'required' && errors.duration?.type === 'required') {
       setErrorBl("Please enter time and task name");
@@ -102,7 +102,6 @@ function TimeBlForm() {
         onClick={handleSubmit(onSubmit, handleError)}
         className={styles.submitBtn}
         type="submit"
-        disabled={isPending}
       >
         {existsId ? 'Update' : 'Create'}
       </button>

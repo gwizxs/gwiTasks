@@ -1,4 +1,7 @@
-const handleFormErrors = (errors) => {
+import { FieldErrors } from "react-hook-form";
+import { TypeUserForm } from "../../../types/auth.types";
+
+const handleFormErrors = (errors: FieldErrors<TypeUserForm>) => {
     let errorMessage = '';
     if (errors.name?.type === 'required') {
       errorMessage += "Please enter a name. ";

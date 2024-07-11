@@ -14,7 +14,6 @@ interface BodyIn {
   children: React.ReactNode,
   selectedKey: string,
   BreadName: string,
-  CardStyle: React.CSSProperties
 }
 
 
