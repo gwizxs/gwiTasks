@@ -58,7 +58,7 @@ function List({ item, setItems }: IListRow) {
       name="createdAt"
       render={({ field: { value, onChange } }) => (
         <DatePicker
-          onChange={(date, dateString) => onChange(dateString)} 
+          onChange={(_date, dateString) => onChange(dateString)} 
           value={value ? dayjs(value) : null} 
         />
       )}
