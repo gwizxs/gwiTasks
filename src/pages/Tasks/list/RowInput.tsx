@@ -7,7 +7,7 @@ import { Button } from "antd"
 
 
 interface IRowInput {
-    filterDate?: string
+    filterDate?: string,
     setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>
 }
 

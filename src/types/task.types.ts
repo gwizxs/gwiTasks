@@ -7,12 +7,11 @@ export enum EnumTaskPriority {
 }
 
 export interface ITaskResponse extends IBase {
-    slice(arg0: number, arg1: number): ITaskResponse
     id: string
     createdAt?: string
     updatedAt?: string
     name: string
-    priority: EnumTaskPriority
+    priority?: EnumTaskPriority
     isCompleted: boolean
 }
 

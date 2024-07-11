@@ -19,12 +19,13 @@ export function useDebounceTask({ watch, itemId }: IUseDeb) {
     debounce((formData: TypeTaskFormState) => {
       createTask(formData);
     }, 500), 
+    
     []
   );
 
   const debounceUpdateTask = useCallback(
-    debounce((formData: TypeTaskFormState) => {
-      updateTask(itemId, formData); 
+    debounce(( formData: TypeTaskFormState) => {
+      updateTask({id: itemId, data: formData}); 
     }, 500),
     []
   );
@@ -34,7 +35,7 @@ export function useDebounceTask({ watch, itemId }: IUseDeb) {
       if (itemId) { 
         debounceUpdateTask({
           ...formData,
-          priority: formData.priority || undefined
+          priority: formData.priority || undefined,
         })
       } else { 
         debouncedCreateTask(formData);
