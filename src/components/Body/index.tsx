@@ -8,6 +8,7 @@ import {  useState } from "react";
 import items from "../../pages/MenuItem";
 import '../../App.css'
 import { useColor } from "../../_providers/color-Context";
+import styles from './Bode.module.scss'
 
 
 interface BodyIn {
@@ -34,9 +35,9 @@ const Body = observer(({children, selectedKey, BreadName, }: BodyIn) => {
                   <Menu theme="dark" defaultSelectedKeys={[selectedKey]} mode="inline" items={items}  />
                 </Sider>
                 <Layout style={{backgroundColor: color}}>
-                  <Content style={{ margin: '0 16px'}}>
-                    <Breadcrumb style={{ margin: '16px 0', backgroundColor: "#f0f0f0", width: '10%', borderRadius: '20px'  }}>
-                      <Breadcrumb.Item className="breadStyle">{BreadName}</Breadcrumb.Item>
+                  <Content style={{ margin: '16px 16px'}}>
+                    <Breadcrumb style={{ margin: '16px 0px', backgroundColor: "#f0f0f0", width: '10%', borderRadius: '5px'  }}>
+                      <Breadcrumb.Item className={styles.breadCrStyle}>{BreadName}</Breadcrumb.Item>
                     </Breadcrumb>
                     <div
                       style={{

@@ -2,10 +2,6 @@
     min-height: '100vh';
   }
   
-  .body-sider {
-
-  }
-  
   .body-content {
     margin: '0 16px';
   }
@@ -19,6 +15,10 @@
     min-height: 360px;
     background: var(--colorBgContainer); 
     border-radius: var(--borderRadiusLG); 
+  }
+
+  .breadCrStyle {
+    text-align: center;
   }
 
 

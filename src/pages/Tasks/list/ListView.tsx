@@ -32,7 +32,6 @@ function ListView() {
               <div key={index} className={styles.skeletonContainer}>
                 <Skeleton height={70} />
                 <Skeleton height={70} />
-                <Skeleton height={70}/>
               </div>
             ))}
           </>
