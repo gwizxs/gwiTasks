@@ -7,9 +7,10 @@ import {
     useSensors
 } from '@dnd-kit/core'
 import { useMutation, useQueryClient } from "react-query";
-import { ITimeBlockResponse } from "../../../types/time-block.types";
-import { timeBlockService } from "../../../service/time-block.service";
+
 import {arrayMove} from '@dnd-kit/sortable'
+import type { ITimeBlockResponse } from "shared/types/time-block.types";
+import { timeBlockService } from "shared/service/time-block.service";
 
 
 export function useTimeBlockDnd(

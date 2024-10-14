@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { authService } from "../../service/auth.service";
-import { IAuthForm } from "../../types/auth.types";
-import { DASHBOARD_PAGES } from "../../config/pages-url.config";
+import { authService } from "shared/service/auth.service";
+import { IAuthForm } from "shared/types/auth.types";
+import { DASHBOARD_PAGES } from "app/config/pages-url.config";
 import { toast } from 'sonner';  
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";

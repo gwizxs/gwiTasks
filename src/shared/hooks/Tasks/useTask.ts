@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
-import {taskService} from "../../../service/task.service";
+
 import { useEffect, useState } from "react";
-import type { ITaskResponse } from "../../../types/task.types";
+import type { ITaskResponse } from "shared/types/task.types";
+import { taskService } from "shared/service/task.service";
 
 
 export function useTasks() {

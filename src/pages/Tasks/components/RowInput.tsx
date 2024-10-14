@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-refresh/only-export-components */
+
 import { Dispatch, SetStateAction,  } from "react"
-import type { ITaskResponse } from "../../../types/task.types"
 import styles from './List.module.scss'
 import { Button } from "antd"
+import type { ITaskResponse } from "shared/types/task.types"
 
 
 interface IRowInput {

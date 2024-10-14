@@ -1,5 +1,5 @@
 import { types, flow, cast } from "mobx-state-tree";
-import { axiosWithAuth } from "../api/interceptors";
+import { axiosWithAuth } from "shared/api/interceptors";
 
 const TaskModel = types.model("Task", {
   id: types.identifier,

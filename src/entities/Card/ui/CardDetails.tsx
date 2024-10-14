@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { observer } from 'mobx-react-lite';
-import { useInitDate } from '../hook/UseInitDate';
-import { useUpdateSettings } from '../hook/useUpdateSettings';
-import type { TypeUserForm } from '../../../types/auth.types';
+import { useInitDate } from 'shared/hooks/Me/UseInitDate';
+import { useUpdateSettings } from 'shared/hooks/Me/useUpdateSettings';
+import type { TypeUserForm } from 'shared/types/auth.types';
 import { Card} from 'antd';
 import styles from './Card.module.scss';
-import Uploads from '../Uploads';
+import Uploads from 'pages/Me/Uploads';
 import { useState } from 'react';
-import FormAlert from '../components/FormAlert';
-import handleFormErrors from '../components/handleFormErrors';
+import FormAlert from 'features/Form-alert/ui/FormAlert';
+import handleFormErrors from 'features/Form-alert/components/handleFormErrors';
 
 
 

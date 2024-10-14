@@ -1,6 +1,6 @@
 import {  Avatar, Space } from "antd";
 import './Avatar.scss';
-import { useProfile } from "../../hooks/useProfile";
+import { useProfile } from "shared/hooks/useProfile";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 

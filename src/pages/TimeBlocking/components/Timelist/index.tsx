@@ -1,12 +1,12 @@
 import { DndContext, closestCenter } from "@dnd-kit/core";
-import { useTimeBlockDnd } from "../../hook/useTimeBlockDnd";
-import { useTimeBlocks } from "../../hook/useTimeBlocks";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { TimeBlock } from "../../TimeBlock";
-import {CalcTime} from '../../calc-time'
 import Skeleton from "react-loading-skeleton";
 import styles from './TimeList.module.scss'
 import { Flex, Progress } from "antd";
+import { CalcTime } from "features/Time-Block/calc-time";
+import { useTimeBlocks } from "shared/hooks/Time-Blocking/useTimeBlocks";
+import { useTimeBlockDnd } from "shared/hooks/Time-Blocking/useTimeBlockDnd";
+import TimeBlocking from "../TimeBlock/TimeBlocking";
 
 export function TimeBlList() {
   const { items, setItems, isLoading } = useTimeBlocks();
@@ -32,7 +32,7 @@ export function TimeBlList() {
               >
                 {items?.length ? (
                   items?.map((item) => (
-                    <TimeBlock key={item.id} item={item} />
+                    <TimeBlocking key={item.id} item={item} />
                   ))
                 ) : (
                   <h3 className={styles.emptyState}> 

@@ -1,6 +1,7 @@
 import { DropResult } from "@hello-pangea/dnd";
 import { useUpdateTask } from "./useUpdateTask";
-import { FILTERS } from "../list/columns.data";
+import { FILTERS } from "features/Tasks/columns.data";
+
 
 
 export function useTaskDnd() {

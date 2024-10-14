@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
-import { timeBlockService } from "../../../service/time-block.service";
+import { timeBlockService } from "shared/service/time-block.service";
+
 
 
 export function useDelete(itemId: string) {

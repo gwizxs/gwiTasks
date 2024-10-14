@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import type { ITaskResponse } from "../../../types/task.types";
+import type { ITaskResponse } from "shared/types/task.types";
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { FILTERS } from "./columns.data";

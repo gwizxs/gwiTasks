@@ -1,11 +1,11 @@
+import StepsComponent from "entities/steps/ui/Steps";
 import { observer } from "mobx-react-lite";
-import { TimeBlList } from "./Form/Timelist";
 import { FormProvider, useForm} from "react-hook-form";
-import TimeBlForm from "./Form/TimeForm";
-import styles from './TimeBlocking.module.scss'
-import Body from "../../components/Body";
-import { TypeTimeBlockFormState } from "../../types/time-block.types";
-import StepsComponent from "../../components/steps";
+import Body from "widgets/Body/ui/Body";
+import TimeBlForm from "../TimeForm";
+import { TimeBlList } from "../Timelist";
+import cl from './TimeBlocking.module.scss'
+import type { TypeTimeBlockFormState } from "shared/types/time-block.types";
 
 
 const TimeBlocking = observer(() => {
@@ -18,7 +18,7 @@ const TimeBlocking = observer(() => {
         <Body  selectedKey="sub3" BreadName={'Time-block'}>
         <StepsComponent stepTitles={customStepTitles}></StepsComponent>
         <FormProvider {...methods}>
-                     <div className={styles.DivBlock}>
+                     <div className={cl.DivBlock}>
                          <TimeBlList/>
                          <TimeBlForm/>
                      </div>

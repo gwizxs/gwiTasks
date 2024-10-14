@@ -1,10 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { Dispatch, SetStateAction } from "react";
-import type { ITaskResponse, TypeTaskFormState } from "../../../types/task.types";
-import { useDebounceTask } from "../hook/useDebounceTask";
+import type { ITaskResponse, TypeTaskFormState } from "shared/types/task.types";
+import { useDebounceTask } from "shared/hooks/Tasks/useDebounceTask";
 import { Controller, useForm } from 'react-hook-form';
 import {   Button, Select, Checkbox, Row, Col, DatePicker } from "antd";
-import useDeleteTask from "../hook/useDeleteTask";
+import useDeleteTask from "shared/hooks/Tasks/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
 import { observer } from "mobx-react-lite";
@@ -17,7 +17,7 @@ interface IListRow {
   setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>;
 }
 
-function List({ item, setItems }: IListRow) {
+const  List = observer(({ item, setItems }: IListRow) => {
   const { register, control, watch } = useForm<TypeTaskFormState>({
     defaultValues: {
       name: item.name,
@@ -98,7 +98,7 @@ function List({ item, setItems }: IListRow) {
         </Button>
       </Col>
     </Row>
-  )}
+  )})
   
 
-export default observer(List);
+export default List;

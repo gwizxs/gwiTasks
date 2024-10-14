@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
-import { TypeUserForm } from "../../../types/auth.types";
-import { userService } from "../../../service/user.service";
+import { userService } from "shared/service/user.service";
 import { toast } from "sonner";
+import type { TypeUserForm } from "shared/types/auth.types";
 
 export function useUpdateSettings() {
     const queryClient =  useQueryClient()

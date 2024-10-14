@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { DASHBOARD_PAGES } from '../config/pages-url.config';
 import Auth from 'pages/auth';
 import Me from 'pages/Me';
-import TimeBlocking from 'pages/About/TimeBlocking';
+import TimeBlocking from 'pages/TimeBlocking/ui/TimeBlocking';
 import Customize from 'pages/Customize';
 import ErrorPage from 'pages/ErrorPage';
 import App from 'app/App';

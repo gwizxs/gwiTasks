@@ -1,6 +1,6 @@
-import Body from "./components/Body"
-import StepsComponent from "./components/steps";
-import ListView from "../pages/Tasks/list/ListView"
+import Body from "widgets/Body/ui/Body";
+import StepsComponent from "entities/steps/ui/Steps";
+import ListView from "pages/Tasks/ui/ListView";
 
 
 const App = () => {

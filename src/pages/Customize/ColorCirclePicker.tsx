@@ -1,5 +1,5 @@
 
-import { useColor } from '../../_providers/color-Context';
+import { useColor } from "app/_providers/color-Context";
 
 const ColorCirclePicker = ({
   width = '252px',

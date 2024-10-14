@@ -1,7 +1,9 @@
 import { useQuery } from "react-query"
-import { timeBlockService } from "../../../service/time-block.service"
+
 import { useEffect, useState } from "react"
-import { ITimeBlockResponse } from "../../../types/time-block.types"
+import type { ITimeBlockResponse } from "shared/types/time-block.types"
+import { timeBlockService } from "shared/service/time-block.service"
+
 
 
 export const useTimeBlocks = () => {

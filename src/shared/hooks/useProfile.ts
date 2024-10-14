@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import {userService} from '../service/user.service';
+import { userService } from 'shared/service/user.service';
 
 export function useProfile() {
     const {data, isLoading, isSuccess} = useQuery({

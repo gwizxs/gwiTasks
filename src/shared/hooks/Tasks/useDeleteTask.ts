@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
-import {taskService} from "../../../service/task.service";
+import { taskService } from "shared/service/task.service";
+
 
 
 export default function useDeleteTask() {

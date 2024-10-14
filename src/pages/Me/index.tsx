@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 
-import CardDetails from './Card/CardDetails';
-import Body from '../../components/Body';
-import StepsComponent from '../../components/steps';
+import CardDetails from 'entities/Card/ui/CardDetails';
+import Body from 'widgets/Body/ui/Body';
+import StepsComponent from 'entities/steps/ui/Steps';
 
 
 const Me = observer(() => {

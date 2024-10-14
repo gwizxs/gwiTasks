@@ -1,14 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { Dispatch, SetStateAction } from "react"
-import type { ITaskResponse } from "../../../types/task.types"
 import { Draggable, Droppable } from "@hello-pangea/dnd"
-import { FILTERS } from "./columns.data"
 import { observer } from "mobx-react-lite"
-import { filterTasks } from "./filter-tasks"
+import { filterTasks } from "features/Tasks/filter-tasks"
 import styles from './List.module.scss'
 import { RowInput } from "./RowInput"
 import List from "./List"
 import { Typography } from "antd"
+import { FILTERS } from "features/Tasks/columns.data"
+import { ITaskResponse } from "shared/types/task.types"
 
 
 

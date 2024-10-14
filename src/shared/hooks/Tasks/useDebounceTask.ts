@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect } from "react";
-import { TypeTaskFormState } from "../../../types/task.types";
+
 import { useUpdateTask } from "./useUpdateTask";
 import { UseCreateTask } from "./useCreateTask";
 import { UseFormWatch } from 'react-hook-form';
+import type { TypeTaskFormState } from 'shared/types/task.types';
 
 interface IUseDeb {
   watch: UseFormWatch<TypeTaskFormState>;

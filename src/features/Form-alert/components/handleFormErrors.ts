@@ -1,5 +1,5 @@
 import { FieldErrors } from "react-hook-form";
-import { TypeUserForm } from "../../../types/auth.types";
+import { TypeUserForm } from "shared/types/auth.types";
 
 const handleFormErrors = (errors: FieldErrors<TypeUserForm>) => {
     let errorMessage = '';

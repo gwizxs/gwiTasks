@@ -1,5 +1,5 @@
 
-import { useProfile } from "../../hooks/useProfile";
+import { useProfile } from "shared/hooks/useProfile";
 import { observer } from "mobx-react-lite";
 import './Statistic.scss';
 import 'react-loading-skeleton/dist/skeleton.css';

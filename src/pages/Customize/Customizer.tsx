@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Card } from "antd";
 import { ChromePicker } from 'react-color';
-import { useColor } from "../../_providers/color-Context";
+import { useColor } from 'app/_providers/color-Context';
 import ColorCirclePicker from './ColorCirclePicker';
 import Skeleton from 'react-loading-skeleton';
 

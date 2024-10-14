@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { imageFile } from '../../../service/image.service';
+import { imageFile } from 'shared/service/image.service';
 
 export function useFileQuery(fileName: string) {
   return useQuery(['image', fileName],  () => getFile(fileName), {

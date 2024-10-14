@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query"
-import { TypeTaskFormState } from "../../../types/task.types"
-import {taskService} from "../../../service/task.service"
+import { taskService } from "shared/service/task.service"
+import { TypeTaskFormState } from "shared/types/task.types"
+
 
 export function UseCreateTask() {
     const queryClient = useQueryClient()

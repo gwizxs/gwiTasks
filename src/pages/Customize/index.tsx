@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
-import Body from '../../components/Body';
+import Body from 'widgets/Body/ui/Body';
 import Customizer from './Customizer';
-import StepsComponent from '../../components/steps';
+import StepsComponent from 'entities/steps/ui/Steps';
 
 
 

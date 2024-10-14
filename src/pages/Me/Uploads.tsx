@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-import { imageFile } from '../../service/image.service'; 
+import { imageFile } from 'shared/service/image.service';
 import { observer } from 'mobx-react-lite';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];

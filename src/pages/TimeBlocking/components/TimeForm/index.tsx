@@ -1,11 +1,11 @@
 import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
-import type { TypeTimeBlockFormState } from "../../../../types/time-block.types";
-import { useUpdateTimeBl } from "../../hook/useUpdateTimeBl";
-import { useCreateTimeBl } from "../../hook/useCreateTimeBl";
-import { COLORS } from "../../colors.date";
 import { Select } from "antd";
 import styles from './TimeBl.module.scss'
 import {  useState } from "react";
+import { useUpdateTimeBl } from "shared/hooks/Time-Blocking/useUpdateTimeBl";
+import { useCreateTimeBl } from "shared/hooks/Time-Blocking/useCreateTimeBl";
+import { COLORS } from "features/Time-Block/colors.date";
+import type { TypeTimeBlockFormState } from "shared/types/time-block.types";
 
 function TimeBlForm() {
   const { register, control, watch, reset, handleSubmit, formState: { errors } } =
