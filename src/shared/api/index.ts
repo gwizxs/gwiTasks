@@ -1,6 +1,7 @@
 import qs from 'query-string';
+import { BASE_DOMAIN } from 'shared/constants/urls';
 
- export const DOMAIN = 'http://localhost:5000'
+ export const DOMAIN = BASE_DOMAIN
 
  interface requestData extends Record<string, string | number | boolean> {
  }
@@ -20,7 +21,6 @@ class ApiCall {
         this.domain = domain;
     }
 
-  // метод perform
   async perform<T>(url: string, data?: requestData, config?: requestConfig): ApiResponse<T> {
     const request = await fetch(`${this.domain}/${url}`, {
       body: data ? JSON.stringify(data) : undefined, 

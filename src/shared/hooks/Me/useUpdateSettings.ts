@@ -3,20 +3,23 @@ import { userService } from "shared/service/user.service";
 import { toast } from "sonner";
 import type { TypeUserForm } from "shared/types/auth.types";
 
+interface Errors {
+    message: string; 
+}
+
 export function useUpdateSettings() {
-    const queryClient =  useQueryClient()
-    const {mutate, isLoading} = useMutation({
+    const queryClient = useQueryClient();
+    const { mutate, isLoading } = useMutation({
         mutationKey: ['update profile'],
         mutationFn: (data: TypeUserForm) => userService.update(data),
         onSuccess() {
-            toast.success('success')
-            queryClient.invalidateQueries({ queryKey: ['profile']})
+            toast.success('Success');
+            queryClient.invalidateQueries({ queryKey: ['profile'] });
         },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onError: (error: any) => {
-            toast.error(`update failed: ${error.message}`)
+        onError: (error: Errors) => {
+            toast.error(`Update failed: ${error.message}`); 
         }
-    })
+    });
 
-    return { mutate, isLoading}
+    return { mutate, isLoading };
 }
