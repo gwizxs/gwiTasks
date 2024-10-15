@@ -29,20 +29,19 @@ const Body = observer(({children, selectedKey, BreadName, }: BodyIn) => {
       return (
             <>
               <Header />
-              <Layout style={{ minHeight: '100vh'  }}>
+              <Layout className={cl.layout}>
                 <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                  <div className="demo-logo-vertical" style={{backgroundColor: color   }}/>
+                  <div className="demo-logo-vertical" style={{backgroundColor: color }}/>
                   <Menu theme="dark" defaultSelectedKeys={[selectedKey]} mode="inline" items={items}  />
                 </Sider>
                 <Layout style={{backgroundColor: color}}>
-                  <Content style={{ margin: '16px 16px'}}>
-                    <Breadcrumb style={{ margin: '16px 0px', backgroundColor: "#f0f0f0", width: '10%', borderRadius: '5px'  }}>
+                  <Content className={cl.content} >
+                    <Breadcrumb className={cl.Breadcrumb}>
                       <Breadcrumb.Item className={cl.breadCrStyle}>{BreadName}</Breadcrumb.Item>
                     </Breadcrumb>
                     <div
+                    className={cl.contentChild}
                       style={{
-                        padding: 24,
-                        minHeight: 360,
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                       

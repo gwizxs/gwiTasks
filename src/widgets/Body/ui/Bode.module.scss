@@ -22,4 +22,23 @@
   }
 
 
-  
+  .layout {
+    min-height: 100vh;
+  }
+
+  .content {
+    margin: 16px 16px;
+  }
+
+  .Breadcrumb {
+    margin: 1rem 0;
+    background-color: #f0f0f0;
+    width: 10%;
+    border-radius: 0.3125em;
+  }
+
+  .contentChild {
+    padding: 0.0625em;
+    min-height: 50rem;
+
+  }
