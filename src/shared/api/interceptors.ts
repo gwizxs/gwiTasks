@@ -3,11 +3,12 @@ import { getAccessToken, removeFromStorage } from "../service/auth-token.service
 import { errorCatch } from "./errors";
 import { authService } from "../service/auth.service";
 import { Bounce, toast } from "react-toastify";
+import { REACT_APP_BASE_URL } from "shared/constants/urls";
 
-
+const BaseUrl = REACT_APP_BASE_URL
 
 const options: CreateAxiosDefaults = {
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: BaseUrl,
     headers: {
         'Content-Type': 'application/json'
     },

@@ -1,6 +1,6 @@
 
 import { Dispatch, SetStateAction,  } from "react"
-import styles from './List.module.scss'
+import styles from '../ui/List.module.scss'
 import { Button } from "antd"
 import type { ITaskResponse } from "shared/types/task.types"
 

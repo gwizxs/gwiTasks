@@ -3,7 +3,7 @@ import type { Dispatch, SetStateAction } from "react"
 import { Draggable, Droppable } from "@hello-pangea/dnd"
 import { observer } from "mobx-react-lite"
 import { filterTasks } from "features/Tasks/filter-tasks"
-import styles from './List.module.scss'
+import styles from '../ui/List.module.scss'
 import { RowInput } from "./RowInput"
 import List from "./List"
 import { Typography } from "antd"

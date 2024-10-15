@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { authService } from "shared/service/auth.service";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { DASHBOARD_PAGES } from "app/config/pages-url.config";
 import { RxExit } from "react-icons/rx";
 import { Button, Tooltip } from "antd";

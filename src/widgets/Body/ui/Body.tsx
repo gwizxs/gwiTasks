@@ -6,8 +6,8 @@ import { Content } from "antd/es/layout/layout";
 import Footers from "../../footer/ui/Footer";
 import {  useState } from "react";
 import items from "../../../pages/MenuItem";
-import '../../App.css'
-import { useColor } from "../../_providers/color-Context";
+import 'app/App.css'
+import { useColor } from "app/_providers/color-Context";
 import cl from './Bode.module.scss'
 
 

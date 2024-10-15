@@ -1,11 +1,11 @@
 import { Typography, Row, Col, Space, Card } from "antd";
 import './header.module.scss';
-import LogoutBtn from "../Logout/LogoutBtn";
-import Statistic from "../Statistic";
+import LogoutBtn from "features/Logout/ui/LogoutBtn";
+import Statistics from "features/Statistic/ui/Statistic";
 import { observer } from "mobx-react-lite";
-import User from "../common/User";
-import logo from './assets/Avatar.png';
-import { useColor } from "../../_providers/color-Context";
+import User from "entities/common/ui/User";
+import logo from 'shared/assets/icon/Avatar.webp'
+import { useColor } from "app/_providers/color-Context";
 import cl from './header.module.scss'
 
 const { Title } = Typography;
@@ -23,7 +23,7 @@ const Navbar = observer(() => {
           </Space>
         </Col>
         <Col>
-          <Statistic />
+          <Statistics />
         </Col>
         <Col>
           <Card>

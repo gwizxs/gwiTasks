@@ -20,7 +20,7 @@ const StepsComponent = ({  stepTitles }: any) => {
         className="site-navigation-steps"
       >
         {stepTitles.map((title: string) => (
-          <Step title={title} />
+          <Step title={title} key={title}/>
         ))}
       </Steps>
 

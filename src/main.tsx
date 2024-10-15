@@ -1,10 +1,9 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import RootStore from './store/index-Store.ts';
+import RootStore from 'shared/store/index-Store.ts';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ConfigProvider } from 'antd';
-import { config } from './_providers/ant-desingn.ts';
+import { config } from 'app/_providers/ant-desingn.ts';
 import { ColorProvider } from './app/_providers/color-Context.tsx';
 import { AppRouter } from './app/router/AppRouter.tsx';
 

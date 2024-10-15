@@ -8,7 +8,7 @@ import useDeleteTask from "shared/hooks/Tasks/useDeleteTask";
 import { DeleteOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 import cn from 'clsx';
 import { observer } from "mobx-react-lite";
-import styles from './List.module.scss'
+import styles from '../ui/List.module.scss'
 import dayjs from "dayjs";
 
 
