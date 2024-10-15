@@ -10,6 +10,7 @@ import cn from 'clsx';
 import { observer } from "mobx-react-lite";
 import styles from '../ui/List.module.scss'
 import dayjs from "dayjs";
+import cl from './List.module.scss'
 
 
 interface IListRow {
@@ -76,18 +77,13 @@ const  List = observer(({ item, setItems }: IListRow) => {
               }))}
               onChange={onChange}
               value={value || ''}
-              style={{ height: 32,
-                width: 100,
-                padding: '4 11',
-                fontSize: 14,
-                lineHeight: 1.5715}}
+              className={cl.select}
             />
           )}
         />
       </Col>
       <Col span={6}>
         <Button
-        style={{color: '#000000'}}
           className={styles.Btn}
           type='dashed'
           onClick={() => {

@@ -1,11 +1,22 @@
 import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
 import { Select } from "antd";
 import styles from './TimeBl.module.scss'
-import {  useState } from "react";
+import { useState } from "react";
 import { useUpdateTimeBl } from "shared/hooks/Time-Blocking/useUpdateTimeBl";
 import { useCreateTimeBl } from "shared/hooks/Time-Blocking/useCreateTimeBl";
 import { COLORS } from "features/Time-Block/colors.date";
 import type { TypeTimeBlockFormState } from "shared/types/time-block.types";
+import { Bounce, toast } from "react-toastify";
+import cl from './TimeBl.module.scss'
+
+interface FormError {
+  type: string;
+}
+interface FormErrors {
+  name?: FormError;
+  duration?: FormError;
+}
+
 
 function TimeBlForm() {
   const { register, control, watch, reset, handleSubmit, formState: { errors } } =
@@ -37,16 +48,16 @@ function TimeBlForm() {
       order: 1,
     });
   };
-    // ----------убираем красный текст если пользователь сделал все правильно ------------------
+  // ----------убираем красный текст если пользователь сделал все правильно ------------------
   // --------------------------------------------------------------------------------------------
 
-  
-  const handleError = (errors: any) => {
-     if (errors.name?.type === 'required') {
+
+  const handleError = (errors: FormErrors) => {
+    if (errors.name?.type === 'required') {
       setErrorBl("Please enter a task name");
     } else if (errors.duration?.type === 'required') {
       setErrorBl("Please enter time");
-    }  else if (!existsId) { 
+    } else if (!existsId) {
       setErrorBl('');
     } if (errors.name?.type === 'required' && errors.duration?.type === 'required') {
       setErrorBl("Please enter time and task name");
@@ -55,7 +66,18 @@ function TimeBlForm() {
 
   return (
     <form >
-          {errorBl && <div style={{ color: 'red', marginBottom: '10px' }}>{errorBl}</div>} 
+      {errorBl && (
+        toast.error(errorBl, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "light",
+          transition: Bounce
+        })
+      )}
       <input
         className={styles.timeBlInput}
         {...register('name', {
@@ -77,12 +99,23 @@ function TimeBlForm() {
         placeholder="Enter time"
         disabled={isLoading}
       />
-      {errors.duration && <h3 style={{ color: 'red', marginBottom: '10px' }} className={styles.error}>{errors.duration.message}</h3>}
+      {errors.duration && (
+        toast.error(errors.duration.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "light",
+          transition: Bounce
+        })
+      )}
 
-      <div style={{ marginTop: 30 }}>
-        <span style={{  marginRight: 9 }}>color:</span>
+      <div className={cl.color}>
+        <span className={cl.colorSpan}>color:</span>
 
-        
+
         <Controller
           control={control}
           name="color"
