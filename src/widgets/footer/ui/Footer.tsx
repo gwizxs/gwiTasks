@@ -1,8 +1,8 @@
 import { Layout } from "antd";
-import { GitlabOutlined, GithubFilled } from '@ant-design/icons'
-import { BsTelegram } from "react-icons/bs";
 import { useColor } from "app/_providers/color-Context";
 import cl from './Footer.module.scss'
+import { Link } from "react-router-dom";
+import { menu } from 'shared/constants/footerMenu'
 
 
 
@@ -14,9 +14,13 @@ const Footers = () => {
             <div className={cl.footerDetails}>
                 Blockify ©{new Date().getFullYear()}
                 <ul className="socials">
-                    <li><a href="https://github.com/gwizxs"> <GithubFilled /></a></li>
-                    <li><a href="https://gitlab.com/gwizxs"> <GitlabOutlined /> </a></li>
-                    <li><a href="https://t.me/gwizxs"> <BsTelegram /> </a></li>
+                    {menu.map((item, index) => (
+                        <li key={index}>
+                            <Link to={item.url}>
+                                <span>{item.icon}</span>
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </Footer>
