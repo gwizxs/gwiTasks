@@ -1,8 +1,8 @@
 
 import { useColor } from "app/_providers/color-Context";
+import cl from './ColorPick.module.scss'
 
 const ColorCirclePicker = ({
-  width = '252px',
   colors = [
   ["#adc6ff", "#efdbff"],
   ["#ffadd2", "#b37feb"],
@@ -13,39 +13,29 @@ const ColorCirclePicker = ({
   ["#9d8d8f", "#9b786f"],
 ],
 
-  circleSize = 28,
-  circleSpacing = 14,
 }) => {
   const {setHeaderColor, setColor} = useColor();
 
-  const handleColorClick = (color: any) => {
+  const handleColorClick = (color: string[]) => {
     setHeaderColor(color[0]);
     setColor(color[1])
   };
 
   return (
-    <div style={{ width, display: 'flex', flexWrap: 'wrap', gap: `${circleSpacing}px` }}>
-      {colors.map((pair, index) => (
-        <div
-          key={index}
-          style={{
-            width: `${circleSize}px`,
-            height: `${circleSize}px`,
-            background: `linear-gradient(100deg, ${pair[0]} 50%, ${pair[1]} 50%)`,
-            borderRadius: '50%',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontSize: 'small'
-          }}
-
-          onClick={() => handleColorClick(pair)}
-        />
-      ))}
-    </div>
-  );
+    <div className={cl.container}>
+    {colors.map((pair, index) => (
+      <div
+        key={index}
+        className={cl.colorBox} 
+        style={{
+          background: `linear-gradient(100deg, ${pair[0]} 50%, ${pair[1]} 50%`
+        }}
+        onClick={() => handleColorClick(pair)} 
+      >
+      </div>
+    ))}
+  </div>
+);
 };
 
 export default ColorCirclePicker;

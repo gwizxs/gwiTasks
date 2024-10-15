@@ -47,7 +47,6 @@ const Input = {
 
  const config = {
     Button,
-
     DatePicker,
     Input,
 }

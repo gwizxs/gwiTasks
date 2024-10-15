@@ -1,13 +1,19 @@
 import { Alert } from 'antd';
+import cl from './FormAlert.module.scss'
 
-const FormAlert = ({ formStatus }: { formStatus: any }) => {
+interface FormStatus {
+  message?: string; 
+  type: 'success' | 'info' | 'warning' | 'error'; 
+}
+
+const FormAlert = ({ formStatus }: { formStatus: FormStatus }) => {
   if (!formStatus.message) return null;
 
   return (
     <Alert
       message={formStatus.message}
       type={formStatus.type}
-      style={{ marginBottom: '10px' }}
+      className={cl.Alert}
       showIcon
       banner
     />

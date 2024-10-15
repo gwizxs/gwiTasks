@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: 0.3125em; 
+  padding: 0.625rem; 
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); 
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.625rem;
+}
+
+.colorPicker {
+  width: 1.875rem; 
+  height: 1.875rem; 
+  border: 0.0625rem solid black; 
+  display: block;
+  margin-bottom: 0.625rem; 
+}
+
+.absolutePicker {
+  position: absolute;
+}
+
+.content {
+  margin-right: 1.25rem; 
+}
+
+.root {
+  display: flex;
+}

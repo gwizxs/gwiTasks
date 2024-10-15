@@ -3,6 +3,7 @@ import { useProfile } from "shared/hooks/useProfile";
 import { observer } from "mobx-react-lite";
 import 'react-loading-skeleton/dist/skeleton.css';
 import cl from './Statistic.module.scss'
+import { Bounce, toast } from "react-toastify";
 
 interface Statistic {
   label: string;
@@ -17,7 +18,7 @@ const Statistics = observer(() => {
 
       {isLoading ? (
         <>
-          {[...Array(4)].map((_, index) => ( 
+          {[...Array(4)].map((_, index) => (
             <div key={index} className="statistic-card">
             </div>
           ))}
@@ -33,7 +34,17 @@ const Statistics = observer(() => {
           </div>
         ))
       ) : (
-        <p>Ошибка загрузки данных!</p>
+        toast.warning('Сессия истекла. Пожалуйста, авторизуйтесь снова.', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "light",
+          transition: Bounce
+        }
+        )
       )}
     </div>
   );

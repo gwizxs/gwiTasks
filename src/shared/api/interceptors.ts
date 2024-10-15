@@ -51,7 +51,7 @@ axiosWithAuth.interceptors.response.use(
             } catch (error) {
                 if (errorCatch(error) === 'jwt expired') {
                     removeFromStorage();
-                    toast.error('Сессия истекла. Пожалуйста, авторизуйтесь снова.', {
+                    toast.warning('Сессия истекла. Пожалуйста, авторизуйтесь снова.', {
                         position: "top-right",
                         autoClose: 3000,
                         hideProgressBar: false,

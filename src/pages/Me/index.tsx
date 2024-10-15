@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import CardDetails from 'entities/Card/ui/CardDetails';
 import Body from 'widgets/Body/ui/Body';
 import StepsComponent from 'entities/steps/ui/Steps';
+import cl from '../Customize/Customizer.module.scss'
 
 
 const Me = observer(() => {
@@ -12,7 +13,7 @@ const Me = observer(() => {
   return (
       <Body selectedKey="sub1" BreadName={'Me'} >
          <StepsComponent stepTitles={customStepTitles}></StepsComponent>
-        <div style={{ display: 'flex' }}>
+        <div className={cl.root}>
 
           <CardDetails />
         </div>
