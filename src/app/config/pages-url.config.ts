@@ -1,5 +1,5 @@
 class DASHBOARD {
-    private root = 'https://gwi-tasks.vercel.app';
+    private root = '/vite-project';
 
     AUTH = this.root;
     HOME = `${this.root}/Home`;

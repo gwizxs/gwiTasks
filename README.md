@@ -1,5 +1,3 @@
-# делаю аналог Trello
-
 ## стек технологий (frontend)
 + Vite
 + React
