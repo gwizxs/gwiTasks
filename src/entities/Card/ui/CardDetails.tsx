@@ -43,7 +43,7 @@ const CardDetails = observer(() => {
         <form onSubmit={handleSubmit(onSubmit,
            (errors) => setFormStatus(handleFormErrors(errors)))}
             className={styles.cardDetailsForm}>
-                  <FormAlert formStatus={formStatus} />
+                  <FormAlert message={formStatus.message} type={formStatus.type as 'error' | 'success' | 'info' | 'warning'} />
 
           {isLoading ? (
             <div style={{ width: '100%', height: '100%', backgroundColor: '#d9d9d9' }} />

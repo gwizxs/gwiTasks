@@ -7,7 +7,6 @@ import { CalcTime } from "features/Time-Block/calc-time";
 import { useTimeBlocks } from "shared/hooks/Time-Blocking/useTimeBlocks";
 import { useTimeBlockDnd } from "shared/hooks/Time-Blocking/useTimeBlockDnd";
 import { observer } from "mobx-react-lite";
-import TimeBlocking from "../TimeBlock/TimeBlocking";
 import { TimeBlock } from "./timeBlock";
 
 export const TimeBlList = observer(() => { 

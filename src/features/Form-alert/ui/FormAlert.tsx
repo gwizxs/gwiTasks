@@ -1,18 +1,18 @@
 import { Alert } from 'antd';
-import cl from './FormAlert.module.scss'
+import cl from './FormAlert.module.scss';
 
 interface FormStatus {
-  message?: string; 
-  type: 'success' | 'info' | 'warning' | 'error'; 
+  message?: string;
+  type: 'success' | 'info' | 'warning' | 'error';
 }
 
-const FormAlert = ({ formStatus }: { formStatus: FormStatus }) => {
-  if (!formStatus.message) return null;
+const FormAlert: React.FC<FormStatus> = ({ message, type }) => {
+  if (!message || !type) return null;
 
   return (
     <Alert
-      message={formStatus.message}
-      type={formStatus.type}
+      message={message}
+      type={type}
       className={cl.Alert}
       showIcon
       banner
@@ -21,3 +21,4 @@ const FormAlert = ({ formStatus }: { formStatus: FormStatus }) => {
 };
 
 export default FormAlert;
+
