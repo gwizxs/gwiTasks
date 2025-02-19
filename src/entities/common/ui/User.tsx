@@ -1,5 +1,5 @@
 import {  Avatar, Space } from "antd";
-import './Avatar.scss';
+import s from './User.module.scss';
 import { useProfile } from "shared/hooks/useProfile";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -13,7 +13,7 @@ const User = () => {
   const { data, isLoading } = useProfile();
 
   return (
-    <Space className="spaceAvatar"> 
+    <Space className={s.spaceAvatar}> 
       {isLoading ? (
         <>
           <Skeleton height={34} width={34} borderRadius="4px" /> 
@@ -29,7 +29,7 @@ const User = () => {
       ) : (
         <>
           <Avatar shape="square" size={34} icon={data?.user.email?.charAt(0) || 'A'} />
-          <span className="spanAvatar" >
+          <span className={s.spanAvatar} >
             <h4>{data?.user.name}</h4>
             <p>{data?.user.email}</p>
           </span>

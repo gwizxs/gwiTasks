@@ -1,13 +1,13 @@
-import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
-import { Select } from "antd";
+
+import { Bounce, toast } from "react-toastify";
 import styles from './TimeBl.module.scss'
-import { useState } from "react";
+import { TypeTimeBlockFormState } from "shared/types/time-block.types";
+import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
 import { useUpdateTimeBl } from "shared/hooks/Time-Blocking/useUpdateTimeBl";
 import { useCreateTimeBl } from "shared/hooks/Time-Blocking/useCreateTimeBl";
+import { useState } from "react";
 import { COLORS } from "features/Time-Block/colors.date";
-import type { TypeTimeBlockFormState } from "shared/types/time-block.types";
-import { Bounce, toast } from "react-toastify";
-import cl from './TimeBl.module.scss'
+import { Select } from "antd";
 
 interface FormError {
   type: string;
@@ -112,8 +112,8 @@ function TimeBlForm() {
         })
       )}
 
-      <div className={cl.color}>
-        <span className={cl.colorSpan}>color:</span>
+      <div className={styles.color}>
+        <span className={styles.colorSpan}>color:</span>
 
 
         <Controller

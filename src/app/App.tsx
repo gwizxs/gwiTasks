@@ -8,8 +8,8 @@ const App = () => {
   const customStepTitles = ['add a task']
   return (
     <Body selectedKey="sub0" BreadName={'Home'}>
-              <StepsComponent stepTitles={customStepTitles}></StepsComponent>
-       <ListView/>
+      <StepsComponent stepTitles={customStepTitles}></StepsComponent>
+      <ListView />
     </Body>
   )
 }

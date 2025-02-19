@@ -6,12 +6,14 @@ import { Flex, Progress } from "antd";
 import { CalcTime } from "features/Time-Block/calc-time";
 import { useTimeBlocks } from "shared/hooks/Time-Blocking/useTimeBlocks";
 import { useTimeBlockDnd } from "shared/hooks/Time-Blocking/useTimeBlockDnd";
+import { observer } from "mobx-react-lite";
 import TimeBlocking from "../TimeBlock/TimeBlocking";
+import { TimeBlock } from "./timeBlock";
 
-export function TimeBlList() {
+export const TimeBlList = observer(() => { 
   const { items, setItems, isLoading } = useTimeBlocks();
   const { handleDragEnd, sensors } = useTimeBlockDnd(items, setItems);
-  
+
   const { hoursTime } = CalcTime(items);
 
   return (
@@ -32,28 +34,27 @@ export function TimeBlList() {
               >
                 {items?.length ? (
                   items?.map((item) => (
-                    <TimeBlocking key={item.id} item={item} />
+                    <TimeBlock
+                    key={item.id}
+                    item={item}
+                    />
                   ))
                 ) : (
-                  <h3 className={styles.emptyState}> 
+                  <h3 className={styles.emptyState}>
                     add first time-block
                   </h3>
                 )}
               </SortableContext>
             </div>
           </DndContext>
-          <Flex  align="center" gap="small" style={{ padding: 20, width: '100%' }}>
-          <Progress  percent={Math.round((24 - hoursTime) * 100 / 24)}
-           format={() => `hours for sleep:  ${hoursTime > 0 ? hoursTime : 'time to sleep'}`}
-          size={['100%', 20]}>
-</Progress>
-
-</Flex>
-
-
-
+          <Flex align="center" gap="small" style={{ padding: 20, width: '100%' }}>
+            <Progress percent={Math.round((24 - hoursTime) * 100 / 24)}
+              format={() => `hours for sleep:  ${hoursTime > 0 ? hoursTime : 'time to sleep'}`}
+              size={['100%', 20]}>
+            </Progress>
+          </Flex>
         </>
       )}
     </div>
   );
-}
+})
