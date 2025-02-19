@@ -25,10 +25,10 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem(<Link to="/vite-project/Home">Home</Link>, 'sub0', <HomeOutlined />),
-  getItem(<Link to="/vite-project/Me">Me</Link>, 'sub1', <UserOutlined />),
-  getItem(<Link to="/vite-project/time-blocking">Time-block</Link>, 'sub3', <BuildOutlined />),
-  getItem(<Link to="/vite-project/customize">customize</Link>, 'sub4', <SettingOutlined spin />),
+  getItem(<Link to="/Home">Home</Link>, 'sub0', <HomeOutlined />),
+  getItem(<Link to="/Me">Me</Link>, 'sub1', <UserOutlined />),
+  getItem(<Link to="/time-blocking">Time-block</Link>, 'sub3', <BuildOutlined />),
+  getItem(<Link to="/customize">customize</Link>, 'sub4', <SettingOutlined spin />),
 ];
 
 export default items;
