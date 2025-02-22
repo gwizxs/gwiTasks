@@ -1,7 +1,7 @@
 
 import { useColor } from "app/_providers/color-Context";
 import cl from './ColorPick.module.scss'
-import { DeleteColumnOutlined, DeleteFilled } from "@ant-design/icons";
+import { DeleteFilled } from "@ant-design/icons";
 
 const ColorCirclePicker = ({
   colors = [

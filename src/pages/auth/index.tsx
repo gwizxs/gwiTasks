@@ -24,7 +24,7 @@ const Auth = observer(() => {
     mutationFn: (data: IAuthForm) => authService.main(isLoginForm ? 'login' : 'register', data),
     onSuccess: () => {
       toast.success("Successfully logged in!");
-      navigate(DASHBOARD_PAGES.HOME);
+      navigate('https://gwi-tasks.vercel.app/Home');
     },
     onError: () => {
       setError("Incorrect email or password. Try again");
