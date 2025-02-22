@@ -5,9 +5,7 @@ import { Button } from "antd";
 import styles from '../TimeBlock/TimeBlocking.module.scss'
 
 import { useSortBl } from "shared/hooks/Time-Blocking/useSortBl";
-import VerticalAlignMiddleOutlined from "@ant-design/icons/lib/icons/VerticalAlignMiddleOutlined";
-import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
-import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
+import { DeleteOutlined, EditOutlined, VerticalAlignMiddleOutlined } from "@ant-design/icons";
 
 
 
@@ -26,7 +24,7 @@ export function TimeBlock({item}: {item: ITimeBlockResponse}) {
     <div>
       <Button
         type="text"
-        icon={<VerticalAlignMiddleOutlined />}
+        icon={<VerticalAlignMiddleOutlined color="#000" />}
         {...attributes}
         {...listeners}
         aria-describedby="time-block"
@@ -54,7 +52,7 @@ export function TimeBlock({item}: {item: ITimeBlockResponse}) {
             <div style={{ display: 'flex' }}>
               <Button
                 type="text"
-                icon={<EditOutlined />}
+                icon={<EditOutlined color="#000" />}
                 onClick={() => {
                   reset({
                     id: item.id,
@@ -66,7 +64,7 @@ export function TimeBlock({item}: {item: ITimeBlockResponse}) {
                 }}
               ></Button>
               <Button type="text" onClick={() => DeleteTimeBl()} >
-               <DeleteOutlined />
+               <DeleteOutlined color="#000" />
               </Button>
             </div>
           </div>
