@@ -1,5 +1,5 @@
 class DASHBOARD {
-    private root = '/';
+    private root = '';
 
     AUTH = this.root;
     HOME = `${this.root}/Home`;

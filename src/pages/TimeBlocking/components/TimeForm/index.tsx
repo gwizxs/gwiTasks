@@ -1,5 +1,5 @@
 
-import { Bounce, toast } from "react-toastify";
+
 import styles from './TimeBl.module.scss'
 import { TypeTimeBlockFormState } from "shared/types/time-block.types";
 import { Controller, SubmitHandler, useFormContext } from "react-hook-form";
@@ -8,6 +8,7 @@ import { useCreateTimeBl } from "shared/hooks/Time-Blocking/useCreateTimeBl";
 import { useState } from "react";
 import { COLORS } from "features/Time-Block/colors.date";
 import { Select } from "antd";
+import { Bounce, toast } from 'react-toastify';
 
 interface FormError {
   type: string;
@@ -66,18 +67,16 @@ function TimeBlForm() {
 
   return (
     <form >
-      {errorBl && (
-        toast.error(errorBl, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "light",
-          transition: Bounce
-        })
-      )}
+      {errorBl && toast.error(errorBl, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+        transition: Bounce
+      })}
       <input
         className={styles.timeBlInput}
         {...register('name', {

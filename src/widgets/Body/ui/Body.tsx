@@ -44,7 +44,7 @@ const Body = observer(({children, selectedKey, BreadName, }: BodyIn) => {
                       style={{
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
-                      
+                      padding: '16px',
                       }}
                     >
                       {children}
