@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { authService } from "shared/service/auth.service";
 import { IAuthForm } from "shared/types/auth.types";
-import { DASHBOARD_PAGES } from "app/config/pages-url.config";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
