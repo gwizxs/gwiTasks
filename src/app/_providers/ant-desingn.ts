@@ -6,10 +6,9 @@ const Button =  {
     colorPrimary: 'linear-gradient(135deg, #d3adf7 35%, #ffadd2 100% )',
     colorPrimaryActive: 'linear-gradient(135deg, #b37feb 35%, #ff85c0 100% )',
     colorPrimaryHover: 'linear-gradient(135deg, #efdbff 35%, #adc6ff 100% )',
-    colorText: '#FDFDFD1F',
+    colorText: '#d5d5d5',
     borderRadius: 5,
     textTextColor: '#000000',
-    
 }
 
 
