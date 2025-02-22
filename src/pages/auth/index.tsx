@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { authService } from "shared/service/auth.service";
 import { IAuthForm } from "shared/types/auth.types";
-import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
@@ -16,14 +15,13 @@ const Auth = observer(() => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const setFormData = useState<IAuthForm>({ email: '', password: '' })[1] as React.Dispatch<React.SetStateAction<IAuthForm>>;
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationKey: ['auth'],
     mutationFn: (data: IAuthForm) => authService.main(isLoginForm ? 'login' : 'register', data),
     onSuccess: () => {
       toast.success("Successfully logged in!");
-      navigate('https://gwi-tasks.vercel.app/Home');
+      window.open("https://gwi-tasks.vercel.app/Home", "_self");
     },
     onError: () => {
       setError("Incorrect email or password. Try again");

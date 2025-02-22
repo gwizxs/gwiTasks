@@ -1,7 +1,6 @@
 import { useMutation } from "react-query";
 import { authService } from "shared/service/auth.service";
 import { useNavigate } from "react-router-dom";
-import { DASHBOARD_PAGES } from "app/config/pages-url.config";
 import { RxExit } from "react-icons/rx";
 import { Button, Tooltip } from "antd";
 import { observer } from "mobx-react-lite";
@@ -12,7 +11,7 @@ const LogoutBtn = observer(() => {
   const { mutate } = useMutation({
     mutationKey: ['logout'],
     mutationFn: () => authService.logout(),
-    onSuccess: () => navigate(DASHBOARD_PAGES.AUTH),
+    onSuccess: () => navigate('/'),
   });
 
   const handleLogout = () => {
