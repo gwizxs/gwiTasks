@@ -24,10 +24,11 @@ export function TimeBlock({item}: {item: ITimeBlockResponse}) {
     <div>
       <Button
         type="text"
+        icon={<VerticalAlignMiddleOutlined color="#000" />}
         {...attributes}
         {...listeners}
         aria-describedby="time-block"
-      ><VerticalAlignMiddleOutlined /></Button>
+      ></Button>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div
           style={{
@@ -49,17 +50,22 @@ export function TimeBlock({item}: {item: ITimeBlockResponse}) {
               {item.name}
             </div>
             <div style={{ display: 'flex' }}>
-            <EditOutlined color="#000"
-              onClick={() => {
-                reset({
-                  id: item.id,
-                  color: item.color,
-                  duration: item.duration,
-                  name: item.name,
-                  order: item.order,
-                });
-              }} />
+              <Button
+                type="text"
+                icon={<EditOutlined color="#000" />}
+                onClick={() => {
+                  reset({
+                    id: item.id,
+                    color: item.color,
+                    duration: item.duration,
+                    name: item.name,
+                    order: item.order,
+                  });
+                }}
+              ></Button>
+              <Button type="text" onClick={() => DeleteTimeBl()} >
                <DeleteOutlined onClick={() => DeleteTimeBl() } color="#000" />
+              </Button>
             </div>
           </div>
           <div style={{ backgroundColor: '#e6f7ff', marginTop: '5px', padding: '2px' }}>{item.duration} min</div>

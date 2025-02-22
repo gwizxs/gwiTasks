@@ -8,6 +8,7 @@ const Button =  {
     colorPrimaryHover: 'linear-gradient(135deg, #efdbff 35%, #adc6ff 100% )',
     colorText: '#FDFDFD1F',
     borderRadius: 5,
+    textTextColor: '#000000',
     
 }
 
